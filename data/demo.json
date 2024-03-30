@@ -1,0 +1,75 @@
+[
+  {
+    "active": true,
+    "billing_date": "2021-01-01",
+    "cost": 14.99,
+    "id": 1,
+    "name": "Netflix",
+    "payment_cycle": "monthly",
+    "url": "https://netflix.com",
+    "user_id": 1,
+    "notify": true,
+    "notes": "test notes"
+  },
+  {
+    "active": true,
+    "billing_date": "2021-01-01",
+    "cost": 9.99,
+    "id": 2,
+    "name": "Prime",
+    "payment_cycle": "monthly",
+    "url": "https://primevideo.com",
+    "user_id": 2,
+    "notify": false,
+    "notes": ""
+  },
+  {
+    "active": true,
+    "billing_date": "2021-01-01",
+    "color": "blue",
+    "cost": 4.99,
+    "id": 3,
+    "name": "Disney +",
+    "payment_cycle": "quarterly",
+    "url": "",
+    "user_id": 3,
+    "notify": false,
+    "notes": ""
+  },
+  {
+    "active": true,
+    "billing_date": "2021-01-01",
+    "cost": 14.99,
+    "id": 4,
+    "name": "Open AI",
+    "payment_cycle": "monthly",
+    "url": "https://openai.com",
+    "user_id": 4,
+    "notify": false,
+    "notes": ""
+  },
+  {
+    "active": true,
+    "billing_date": "2021-01-01",
+    "cost": 14.99,
+    "id": 5,
+    "name": "Spotify",
+    "payment_cycle": "yearly",
+    "url": "https://spotify.com",
+    "user_id": 5,
+    "notify": false,
+    "notes": "Spotify Premium for family"
+  },
+  {
+    "active": false,
+    "billing_date": "2021-01-01",
+    "cost": 12.99,
+    "id": 5,
+    "name": "Test non-active",
+    "payment_cycle": "yearly",
+    "url": "https://tests.com",
+    "user_id": 6,
+    "notify": false,
+    "notes": ""
+  }
+]
