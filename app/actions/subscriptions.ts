@@ -3,6 +3,7 @@
 import { revalidateTag } from 'next/cache';
 
 import messages from 'config/messages';
+import demoSubscriptions from 'data/demo.json';
 import { createClient } from 'lib/supabase/server';
 import { Subscriptions, SubscriptionsInsert } from 'types/data';
 

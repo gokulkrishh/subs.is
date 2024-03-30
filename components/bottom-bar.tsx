@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { Home, Settings } from 'lucide-react';
 
-import Add from './add';
 import { useUser } from './context/user';
+import Add from './modal/add';
 import SignupModal from './modal/signup';
 import NavLink from './nav-link';
 

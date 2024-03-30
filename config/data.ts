@@ -12,3 +12,24 @@ export const summaryFilter = {
     label: 'year',
   },
 } as const;
+
+export const navFilter = {
+  upcoming: { key: 'upcoming', label: 'Upcoming' },
+  paid: { key: 'paid', label: 'Paid' },
+  all: { key: 'all', label: 'All' },
+} as const;
+
+export const paymentCycle = {
+  monthly: {
+    key: 'monthly',
+    label: 'month',
+  },
+  quarterly: {
+    key: 'quarterly',
+    label: 'quater',
+  },
+  yearly: {
+    key: 'yearly',
+    label: 'year',
+  },
+} as const;
