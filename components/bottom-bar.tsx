@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { Home, Settings } from 'lucide-react';
 
+import Add from './add';
 import { useUser } from './context/user';
-// import Add from './modal/add';
 import SignupModal from './modal/signup';
 import NavLink from './nav-link';
 
@@ -24,7 +24,7 @@ export default function BottomBar() {
             shortcut="s"
             title="Settings"
             onClick={(event: React.SyntheticEvent) => {
-              if (!user.email) {
+              if (!user?.email) {
                 event?.preventDefault();
                 setOpen(true);
               }
@@ -38,7 +38,9 @@ export default function BottomBar() {
         <div className="flex items-center justify-center w-full">
           <div className="h-6 border-r"></div>
         </div>
-        <div className="flex items-center w-fit">{/* <Add openSignup={setOpen} user={user} /> */}</div>
+        <div className="flex items-center w-fit">
+          <Add showSignup={setOpen} user={user} />
+        </div>
       </div>
       {open && !user?.email ? <SignupModal open={open} onHide={setOpen} /> : null}
     </>

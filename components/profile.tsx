@@ -21,25 +21,6 @@ export default function Profile() {
     window.location.href = '/';
   };
 
-  if (!user) {
-    return (
-      <button className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-        <Image
-          priority
-          className="h-8 w-8 rounded-full border border-input"
-          src={`/images/avatar.svg`}
-          alt={'Demo account'}
-          width={100}
-          height={100}
-          style={{
-            maxWidth: '100%',
-            objectFit: 'fill',
-          }}
-        />
-      </button>
-    );
-  }
-
   return (
     <>
       <DropdownMenu>
@@ -51,10 +32,7 @@ export default function Profile() {
             alt={user?.user_metadata?.full_name ?? 'Demo account'}
             width={100}
             height={100}
-            style={{
-              maxWidth: '100%',
-              objectFit: 'fill',
-            }}
+            style={{ maxWidth: '100%', objectFit: 'fill' }}
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

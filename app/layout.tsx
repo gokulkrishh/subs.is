@@ -7,6 +7,7 @@ import { AuthProvider } from 'components/context/auth';
 import { ThemeProvider } from 'components/context/theme';
 import { UserProvider } from 'components/context/user';
 import Header from 'components/header';
+import { Toaster } from 'components/ui/sonner';
 import NextTopLoader from 'nextjs-toploader';
 
 import { getAuthUser, getUser } from './actions/user';
@@ -90,6 +91,7 @@ export default async function RootLayout({
               <BottomBar />
             </UserProvider>
           </AuthProvider>
+          <Toaster />
         </ThemeProvider>
 
         {/* <!-- Google tag (gtag.js) --> */}

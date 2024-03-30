@@ -1,4 +1,4 @@
-import { Number } from 'components/number';
+import { SummaryNumber } from 'components/summary-number';
 import { Subscriptions, User } from 'types/data';
 
 import SummaryDropdown from './summary-dropdown';
@@ -12,9 +12,7 @@ export default async function Summary({ subscriptions }: SummaryProps) {
   return (
     <div className="flex flex-col">
       <SummaryDropdown />
-      <div className="text-5xl mt-2 font-black tabular-nums">
-        <Number from={0} to={totalCost} />
-      </div>
+      <SummaryNumber from={0} to={200} />
     </div>
   );
 }

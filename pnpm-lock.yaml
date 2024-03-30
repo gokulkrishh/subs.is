@@ -89,7 +89,7 @@ devDependencies:
     specifier: ^18
     version: 18.2.23
   autoprefixer:
-    specifier: ^10.0.1
+    specifier: ^10.4.19
     version: 10.4.19(postcss@8.4.38)
   eslint:
     specifier: ^8
@@ -107,7 +107,7 @@ devDependencies:
     specifier: ^0.5.13
     version: 0.5.13(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.5)
   tailwindcss:
-    specifier: ^3.3.0
+    specifier: ^3.4.3
     version: 3.4.3
   typescript:
     specifier: ^5

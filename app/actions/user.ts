@@ -1,15 +1,18 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
+
 import { User as AuthUser } from '@supabase/supabase-js';
+import messages from 'config/messages';
 import { createClient } from 'lib/supabase/server';
 import { User } from 'types/data';
 
 export const getAuthUser = async () => {
-  const supabase = await createClient();
   try {
+    const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
     if (error) {
-      throw new Error(error?.toString() || 'Error while fetching auth user');
+      throw new Error(error?.toString() || messages.user.fetchError);
     }
     const { user } = data;
     return user as AuthUser | null;
@@ -19,15 +22,33 @@ export const getAuthUser = async () => {
 };
 
 export const getUser = async () => {
-  const supabase = await createClient();
-  const user = await getAuthUser();
-  if (!user) {
-    return null;
-  }
   try {
+    const user = await getAuthUser();
+    if (!user) {
+      return null;
+    }
+    const supabase = await createClient();
     const { data } = await supabase.from('users').select('*').eq('id', user?.id).single();
+
     return data as User | null;
   } catch {
     return null;
+  }
+};
+
+export const updateUserCurrency = async (currency_code: User['currency_code']) => {
+  try {
+    const userData = await getUser();
+    if (!userData) {
+      throw new Error('User not found');
+    }
+    const supabase = await createClient();
+    const { error } = await supabase.from('users').update({ currency_code }).eq('id', userData.id);
+    if (error) {
+      throw new Error(error.toString() || messages.user.update.error);
+    }
+    revalidateTag('supabase');
+  } catch (error) {
+    throw new Error((error as Error).toString() || messages.user.update.error);
   }
 };

@@ -13,7 +13,7 @@ type NumberProps = {
   duration?: number;
 };
 
-export function Number({ from, to, duration = 0.2 }: NumberProps) {
+export function SummaryNumber({ from, to, duration = 0.2 }: NumberProps) {
   const { user } = useUser();
   const count = useMotionValue(from);
   const rounded = useTransform(count, (latest) => latest.toFixed(2));
@@ -23,9 +23,9 @@ export function Number({ from, to, duration = 0.2 }: NumberProps) {
   }, [duration, count, to]);
 
   return (
-    <>
-      <span className="mr-1 font-sans">{getCurrencySymbol(user?.currency_code)}</span>
-      <motion.span>{rounded}</motion.span>
-    </>
+    <div className="text-5xl mt-2">
+      <span className="mr-1 font-sans font-bold">{getCurrencySymbol(user?.currency_code)}</span>
+      <motion.span className="font-black">{rounded}</motion.span>
+    </div>
   );
 }

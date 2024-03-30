@@ -46,20 +46,18 @@ export default function SignupModal({ open, onHide }: SignupModalProps) {
 
   if (user) return null;
 
-  const onClick = async () => {
+  const onClickHandler = async () => {
     setLoading(true);
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: urls.authCallback,
-      },
+      options: { redirectTo: urls.authCallback },
     });
 
     setTimeout(() => {
       setLoading(false);
       onHide?.(false);
-    }, 1200);
+    }, 2000);
   };
 
   return (
@@ -73,13 +71,13 @@ export default function SignupModal({ open, onHide }: SignupModalProps) {
             <div className="font-black flex items-center gap-2 text-pink-600 text-2xl tracking-tight">
               <span className="mt-0.5">Subs Tracker</span>
             </div>
-            <DialogDescription className="mt-0.5 text-sm font-normal text-muted-foreground">
-              Welcome back, Sign in below.
+            <DialogDescription className="mt-0.5 text-sm text-muted-foreground">
+              Welcome, Sign in below.
             </DialogDescription>
           </DialogTitle>
         </DialogHeader>
-        <Button loading={loading} onClick={onClick} />
-        <p className="text-muted-foreground mt-1.5 text-xs max-w-sm w-full leading-5 text-left">
+        <Button loading={loading} onClick={onClickHandler} />
+        <p className="text-muted-foreground font-medium mt-1.5 text-xs max-w-sm w-full leading-5 text-left">
           By clicking continue, you acknowledge that you have read and agree to{' '}
           <Link
             className="underline hover:text-primary active:text-primary transition-colors"

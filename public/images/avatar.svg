@@ -1,0 +1,15 @@
+<svg
+      viewBox="-350 -150 1500 1500"
+      style="width: 487.5px; height: 487.5px; justify-content: center; align-self: center; transform: scale(1, 1);"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        x="-350"
+        y="-150"
+        width="100%"
+        height="100%"
+        fill="#FFD55A"
+        rx="30"
+      ></rect>
+
+    </svg>
