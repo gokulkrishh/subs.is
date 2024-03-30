@@ -39,7 +39,7 @@ export default function SummaryDropdown({ user }: { user: User | null }) {
           className={cn(
             `appearance-none border-b rounded-none border-input bg-transparent w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`,
             {
-              'w-[35px]': filterBy === summaryFilter.yearly.key,
+              'w-[50px]': filterBy === summaryFilter.yearly.key,
               'w-[20px]': filterBy === summaryFilter.all.key,
             },
           )}
