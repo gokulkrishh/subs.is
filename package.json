@@ -1,0 +1,38 @@
+{
+  "name": "subs.is",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\""
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.0.24",
+    "lucide-react": "^0.363.0",
+    "next": "14.2.0-canary.49",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "postcss": "^8",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.13",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
