@@ -4,29 +4,51 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'components/ui/dropdown-menu';
-import { socialUrls } from 'config/urls';
-import { HelpCircleIcon, LogOut } from 'lucide-react';
+import { socialUrls, urls } from 'config/urls';
+import { Bug, Github, HelpCircleIcon, LogOut } from 'lucide-react';
 
 import { useAuth } from './context/auth';
 import { GithubIcon } from './icons';
 
+// https://stackoverflow.com/a/33919020/266535
+const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
+
 export default function Profile() {
   const { user, supabase } = useAuth();
+  const avatarUrl = user?.user_metadata?.avatar_url ?? `/images/avatar.svg`;
+  const avatarAlt = user?.user_metadata?.full_name ?? 'Demo account';
 
   const logout = async () => {
     await supabase.auth.signOut();
     window.location.href = '/';
   };
 
+  if (!user) {
+    return (
+      <button className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <Image
+          priority
+          className="h-8 w-8 rounded-full border border-input"
+          src={`/images/avatar.svg`}
+          alt={'Demo account'}
+          width={100}
+          height={100}
+          style={{ maxWidth: '100%', objectFit: 'fill' }}
+        />
+      </button>
+    );
+  }
+
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Image
+            key={avatarAlt}
             priority
             className="h-8 w-8 rounded-full border border-input"
-            src={user?.user_metadata?.avatar_url ?? `/images/avatar.svg`}
-            alt={user?.user_metadata?.full_name ?? 'Demo account'}
+            src={avatarUrl}
+            alt={avatarAlt}
             width={100}
             height={100}
             style={{ maxWidth: '100%', objectFit: 'fill' }}
