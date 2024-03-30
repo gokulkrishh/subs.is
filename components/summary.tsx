@@ -1,15 +1,14 @@
 'use client';
 
-import { SummaryNumber } from 'components/summary-number';
-import { Subscriptions, User } from 'types/data';
+import { use } from 'react';
 
+import { SummaryNumber } from 'components/summary-number';
+
+import { useData } from './context/data';
 import SummaryDropdown from './summary-dropdown';
 
-type SummaryProps = {
-  subscriptions: Subscriptions[];
-};
-
-export default function Summary({ subscriptions }: SummaryProps) {
+export default function Summary() {
+  const { subscriptions } = useData();
   const totalCost = subscriptions.reduce((acc, curr) => acc + parseFloat(curr.cost), 0);
   return (
     <div className="flex flex-col">

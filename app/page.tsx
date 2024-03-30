@@ -1,13 +1,20 @@
 import Card from 'components/card';
+import { DataProvider } from 'components/context/data';
+import Summary from 'components/summary';
 
 import { getSubscriptions } from './actions/subscriptions';
 import { getUser } from './actions/user';
 
 export default async function Page() {
-  const [user, subscriptions] = await Promise.all([await getUser(), await getSubscriptions()]);
+  const [user, data] = await Promise.all([await getUser(), await getSubscriptions()]);
   return (
     <main className="flex flex-col mt-10">
-      <Card user={user} subscriptions={subscriptions} />
+      <DataProvider data={data}>
+        <Summary />
+        <div className="flex flex-col my-10 mb-12">
+          <Card user={user} />
+        </div>
+      </DataProvider>
     </main>
   );
 }

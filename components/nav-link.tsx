@@ -47,15 +47,15 @@ export default function NavLink(props: NavLinkProps) {
             {children}
             {pathname === href && (
               <motion.div
-                layoutId="nav-link"
+                layoutId={`nav-link`}
                 style={{
                   backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
                 }}
                 animate={{
                   backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
                 }}
-                transition={{ type: 'spring', duration: 0.3 }}
-                className="rounded-full p-4 left-0 right-0 bottom-0 top-0 absolute border border-input/50"
+                transition={{ type: 'spring', duration: 0.25 }}
+                className="rounded-full p-4 inset-0 absolute border border-input/50"
               />
             )}
           </Link>
