@@ -2,9 +2,14 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
+import BottomBar from 'components/bottom-bar';
+import { AuthProvider } from 'components/context/auth';
 import { ThemeProvider } from 'components/context/theme';
+import { UserProvider } from 'components/context/user';
+import Header from 'components/header';
 import NextTopLoader from 'nextjs-toploader';
 
+import { getAuthUser, getUser } from './actions/user';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -64,17 +69,27 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [authUser, userData] = await Promise.all([await getAuthUser(), await getUser()]);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiased ${inter.className}`}>
         <NextTopLoader height={2} shadow={false} color="#db2777" showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <AuthProvider user={authUser}>
+            <UserProvider user={userData}>
+              <div className="px-4 py-2 flex flex-col w-full md:max-w-lg m-auto">
+                <Header />
+                {children}
+              </div>
+              <BottomBar />
+            </UserProvider>
+          </AuthProvider>
         </ThemeProvider>
 
         {/* <!-- Google tag (gtag.js) --> */}
