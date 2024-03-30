@@ -4,14 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'components/ui/dropdown-menu';
-import { socialUrls, urls } from 'config/urls';
-import { Bug, Github, HelpCircleIcon, LogOut } from 'lucide-react';
+import { socialUrls } from 'config/urls';
+import { HelpCircleIcon, LogOut } from 'lucide-react';
 
 import { useAuth } from './context/auth';
 import { GithubIcon } from './icons';
-
-// https://stackoverflow.com/a/33919020/266535
-const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default function Profile() {
   const { user, supabase } = useAuth();
