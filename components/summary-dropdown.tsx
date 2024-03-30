@@ -6,19 +6,18 @@ import { updateSummaryFilter } from 'app/actions/user';
 import { summaryFilter } from 'config/data';
 import { cn } from 'lib/utils';
 import { toast } from 'sonner';
+import { User } from 'types/data';
 
-import { useUser } from './context/user';
 import { ArrowDownIcon } from './icons';
 
-export default function SummaryDropdown() {
-  const { user } = useUser();
+export default function SummaryDropdown({ user }: { user: User | null }) {
   const [filterBy, setFilterBy] = useState<keyof typeof summaryFilter>(
-    (user.filter_by as keyof typeof summaryFilter) || summaryFilter.monthly.key,
+    (user?.filter_by as keyof typeof summaryFilter) || summaryFilter.monthly.key,
   );
 
   useEffect(() => {
-    setFilterBy(user.filter_by as keyof typeof summaryFilter);
-  }, [user.filter_by]);
+    setFilterBy(user?.filter_by as keyof typeof summaryFilter);
+  }, [user?.filter_by]);
 
   const onChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as keyof typeof summaryFilter;

@@ -7,13 +7,14 @@ import SummaryDropdown from './summary-dropdown';
 
 type SummaryProps = {
   subscriptions: Subscriptions[];
+  user: User | null;
 };
 
-export default function Summary({ subscriptions }: SummaryProps) {
+export default function Summary({ subscriptions, user }: SummaryProps) {
   const totalCost = subscriptions.reduce((acc, curr) => acc + parseFloat(curr.cost), 0);
   return (
     <div className="flex flex-col">
-      <SummaryDropdown />
+      <SummaryDropdown user={user} />
       <SummaryNumber from={0} to={totalCost} />
     </div>
   );

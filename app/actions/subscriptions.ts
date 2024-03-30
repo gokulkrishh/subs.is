@@ -10,13 +10,12 @@ import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/d
 
 import { getAuthUser, getUser } from './user';
 
-export const getSubscriptions = async () => {
-  const user = await getUser();
+export const getSubscriptions = async (filterBy: keyof typeof summaryFilter) => {
+  const user = await getAuthUser();
   if (!user) {
     return [];
   }
   const supabase = await createClient();
-  const filterBy = user.filter_by as keyof typeof summaryFilter;
 
   if (filterBy === summaryFilter.all.key) {
     const { data, error } = await supabase

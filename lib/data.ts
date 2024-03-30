@@ -76,7 +76,7 @@ export const filterDataBySummary = (data: Subscriptions[], filterBy: keyof typeo
       endDate = endOfYear(today);
     }
 
-    return isWithinInterval(new Date(sub.renewal_date), { start: startDate, end: endDate });
+    return isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate });
   });
 };
 
