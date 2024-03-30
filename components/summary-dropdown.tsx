@@ -1,17 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { updateSummaryFilter } from 'app/actions/user';
 import { summaryFilter } from 'config/data';
 import { cn } from 'lib/utils';
 import { toast } from 'sonner';
-import { User } from 'types/data';
 
+import { useUser } from './context/user';
 import { ArrowDownIcon } from './icons';
 
 export default function SummaryDropdown() {
-  const [filterBy, setFilterBy] = useState<keyof typeof summaryFilter>(summaryFilter.monthly.key);
+  const { user } = useUser();
+  const [filterBy, setFilterBy] = useState<keyof typeof summaryFilter>(
+    (user.filter_by as keyof typeof summaryFilter) || summaryFilter.monthly.key,
+  );
+
+  useEffect(() => {
+    setFilterBy(user.filter_by as keyof typeof summaryFilter);
+  }, [user.filter_by]);
 
   const onChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as keyof typeof summaryFilter;
@@ -25,9 +32,8 @@ export default function SummaryDropdown() {
 
   return (
     <h2 className="font-medium tracking-wide flex items-center gap-1">
-      <label>Total costs</label>
+      <label>Total cost</label>
       <div className={cn(`flex mt-[1px] w-fit relative items-center`)}>
-        <span className="mr-1">{filterBy === summaryFilter.all.key ? 'for' : 'this'}</span>
         <select
           value={filterBy}
           onChange={onChange}
@@ -40,7 +46,7 @@ export default function SummaryDropdown() {
           )}
         >
           {Object.values(summaryFilter).map(({ key, label }) => (
-            <option key={key} value={key}>
+            <option key={label} value={key}>
               {label}
             </option>
           ))}

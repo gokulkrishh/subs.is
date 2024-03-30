@@ -2,34 +2,51 @@
 
 import { revalidateTag } from 'next/cache';
 
+import { navFilter, summaryFilter } from 'config/data';
 import messages from 'config/messages';
-import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
+import { getDatesForFilter } from 'lib/date';
 import { createClient } from 'lib/supabase/server';
-import { Subscriptions, SubscriptionsInsert, SubscriptionsModified, SubscriptionsUpdate } from 'types/data';
+import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/data';
 
-import { getAuthUser } from './user';
+import { getAuthUser, getUser } from './user';
 
 export const getSubscriptions = async () => {
-  const user = await getAuthUser();
+  const user = await getUser();
   if (!user) {
     return [];
   }
   const supabase = await createClient();
+  const filterBy = user.filter_by as keyof typeof summaryFilter;
+
+  if (filterBy === summaryFilter.all.key) {
+    const { data, error } = await supabase
+      .from('subscriptions')
+      .select(`*`)
+      .eq('user_id', user.id)
+      .order('renewal_date', { ascending: false })
+      .returns<Subscriptions[]>();
+    if (error) {
+      return [];
+    }
+    return data;
+  }
+
+  const { startDate, endDate } = getDatesForFilter(filterBy);
+
   const { data, error } = await supabase
     .from('subscriptions')
     .select(`*`)
     .eq('user_id', user.id)
+    .gte('renewal_date', startDate.toISOString().split('T')[0])
+    .lte('renewal_date', endDate.toISOString().split('T')[0])
+    .order('renewal_date', { ascending: true })
     .returns<Subscriptions[]>();
 
   if (error) {
     return [];
   }
 
-  return data.map((sub) => {
-    const renewal_date = calculateRenewalDate(sub.billing_date, sub.payment_cycle);
-    const prev_renewal_date = calculatePrevRenewalDate(sub.billing_date, renewal_date, sub.payment_cycle);
-    return { ...sub, renewal_date, prev_renewal_date };
-  }) as SubscriptionsModified[];
+  return data;
 };
 
 export const createSubscription = async (subscription: SubscriptionsInsert) => {

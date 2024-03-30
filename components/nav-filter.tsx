@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { navFilter } from 'config/data';
 import { motion } from 'framer-motion';
 import { cn } from 'lib/utils';
@@ -24,7 +22,9 @@ export default function NavFilter({ onChange, selected, count }: NavFilterProps)
       <div className="flex border border-input bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }, i) => (
           <motion.button
-            onClick={() => onChange(key)}
+            onClick={() => {
+              onChange(key);
+            }}
             key={key}
             className={cn(
               `py-1.5 m-0.5 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-3 capitalize w-fit text-[13px] tracking-wide relative rounded-md`,

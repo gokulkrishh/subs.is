@@ -9,9 +9,8 @@ export default function Loader() {
     <main className="flex flex-col mt-10">
       <div className="flex flex-col">
         <h2 className="font-medium tracking-wide flex items-center gap-1">
-          <label>Total costs</label>
+          <label>Total cost</label>
           <div className={`flex border-b border-input relative items-center w-fit`}>
-            <span className="mr-1">this</span>
             <Skeleton className="w-10 rounded h-5 bg-accent" />
             <ArrowDownIcon className="ml-0.5 absolute -right-5 h-4 w-4 text-primary" />
           </div>

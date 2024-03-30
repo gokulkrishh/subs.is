@@ -2,17 +2,17 @@
 
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { SubscriptionsModified, User } from 'types/data';
+import { Subscriptions, User } from 'types/data';
 
 type DataContextType = {
-  subscriptions: SubscriptionsModified[];
+  subscriptions: Subscriptions[];
 } | null;
 
 const DataContext = createContext<DataContextType>(null);
 
 type DataProviderProps = {
   children: React.ReactNode;
-  data: SubscriptionsModified[];
+  data: Subscriptions[];
 };
 
 export const DataProvider = (props: DataProviderProps) => {
@@ -20,7 +20,7 @@ export const DataProvider = (props: DataProviderProps) => {
   const [subscriptions, setSubscriptions] = useState(data);
 
   const setData = useCallback(
-    (modifiedSubscriptions: SubscriptionsModified[], isReset?: boolean) => {
+    (modifiedSubscriptions: Subscriptions[], isReset?: boolean) => {
       if (isReset) {
         setSubscriptions(data);
       } else {
@@ -44,7 +44,7 @@ export const useData = () => {
   }
 
   return context as {
-    subscriptions: SubscriptionsModified[];
-    setSubscriptions: (modifiedSubscriptions: SubscriptionsModified[], isReset?: boolean) => void;
+    subscriptions: Subscriptions[];
+    setSubscriptions: (modifiedSubscriptions: Subscriptions[], isReset?: boolean) => void;
   };
 };

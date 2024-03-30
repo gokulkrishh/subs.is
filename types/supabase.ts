@@ -18,9 +18,11 @@ export type Database = {
           created_at: string | null
           id: string
           name: string
+          next_renewal_date: string | null
           notes: string | null
           notify: boolean
           payment_cycle: string
+          renewal_date: string | null
           updated_at: string | null
           url: string | null
           user_id: string
@@ -33,9 +35,11 @@ export type Database = {
           created_at?: string | null
           id?: string
           name: string
+          next_renewal_date?: string | null
           notes?: string | null
           notify?: boolean
           payment_cycle: string
+          renewal_date?: string | null
           updated_at?: string | null
           url?: string | null
           user_id: string
@@ -48,9 +52,11 @@ export type Database = {
           created_at?: string | null
           id?: string
           name?: string
+          next_renewal_date?: string | null
           notes?: string | null
           notify?: boolean
           payment_cycle?: string
+          renewal_date?: string | null
           updated_at?: string | null
           url?: string | null
           user_id?: string

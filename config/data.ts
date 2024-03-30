@@ -5,11 +5,11 @@ export const summaryFilter = {
   },
   monthly: {
     key: 'monthly',
-    label: 'month',
+    label: 'monthly',
   },
   yearly: {
     key: 'yearly',
-    label: 'year',
+    label: 'yearly',
   },
 } as const;
 

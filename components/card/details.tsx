@@ -11,7 +11,7 @@ import { Input } from 'components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { paymentCycle } from 'config/data';
 import messages from 'config/messages';
-import { calculateRenewalDate } from 'lib/data';
+import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
 import { Bell, BellOff, Share, Trash2Icon } from 'lucide-react';
@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { Subscriptions } from 'types/data';
 
 type CardDetailsProps = {
-  subscription: any;
+  subscription: Subscriptions;
   open: boolean;
   setOpen: (open: boolean) => void;
 };
@@ -33,9 +33,9 @@ export default function CardDetails(props: CardDetailsProps) {
   const share = async () => {
     try {
       const shareData = {
-        text: `${getCurrencySymbol()} ${subscription.cost} per ${subscription.payment_cycle}`,
+        text: `${getCurrencySymbol()} ${subscription} per ${subscription.payment_cycle}`,
         title: subscription.name,
-        url: subscription.url,
+        url: subscription.url || undefined,
       };
       await navigator?.share(shareData);
     } catch (error) {
@@ -46,7 +46,12 @@ export default function CardDetails(props: CardDetailsProps) {
   const onSubmit = async (subs: Subscriptions) => {
     try {
       setLoading(true);
-      await updateSubscription(subs);
+      const next_renewal_date = calculateRenewalDate(subs.billing_date, subs.payment_cycle);
+      await updateSubscription({
+        ...subs,
+        next_renewal_date,
+        renewal_date: calculatePrevRenewalDate(subs.billing_date, next_renewal_date, subs.payment_cycle),
+      });
       toast.success(messages.subscriptions.update.success);
     } catch (error: any) {
       toast.error(error.toString() || messages.subscriptions.update.error);
@@ -126,7 +131,7 @@ export default function CardDetails(props: CardDetailsProps) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="mb-2 px-2">
-                  {subscription.notify ? 'Disable email reminder' : 'Enable email reminder one-day before'}
+                  {subscription.notify ? 'Disable email reminder' : 'Enable email reminder 1 day before renewal.'}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

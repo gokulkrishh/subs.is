@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters } from 'lib/utils';
-import { Subscriptions, SubscriptionsModified, User } from 'types/data';
+import { Subscriptions, User } from 'types/data';
 
 import CardDetails from './details';
 
@@ -26,7 +26,7 @@ export const itemVariants = {
 
 type InfoProps = {
   selected: keyof typeof navFilter;
-  subscription: SubscriptionsModified;
+  subscription: Subscriptions;
   user: User | null;
 };
 
@@ -39,7 +39,8 @@ export default function CardInfo(props: InfoProps) {
 
   const isUpcoming = selected === navFilter.upcoming.key;
   const isPaid = selected === navFilter.paid.key;
-  const isDue = isUpcoming && isWithInSevenDays(subscription.renewal_date);
+  const isAll = selected === navFilter.all.key;
+  const isDue = isUpcoming && isWithInSevenDays(subscription.next_renewal_date ?? '');
 
   return (
     <>
@@ -109,9 +110,9 @@ export default function CardInfo(props: InfoProps) {
                 'text-red-500': isDue,
               })}
             >
-              {isPaid
-                ? formatDate(subscription?.prev_renewal_date ?? '')
-                : formatDate(subscription?.renewal_date ?? '')}
+              {isPaid || isAll
+                ? formatDate(subscription?.renewal_date ?? '')
+                : formatDate(subscription?.next_renewal_date ?? '')}
             </span>
           </div>
         </div>

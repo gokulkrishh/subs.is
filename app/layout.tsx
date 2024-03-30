@@ -79,7 +79,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiased ${inter.className}`}>
+      <body className={`antialiased h-full ${inter.className}`}>
         <NextTopLoader height={2} shadow={false} color="#db2777" showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider user={authUser}>

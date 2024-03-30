@@ -9,27 +9,25 @@ import {
   isBefore,
   isSameDay,
   isWithinInterval,
-  previousDay,
   set,
   startOfMonth,
-  startOfQuarter,
   startOfYear,
   subDays,
   subMonths,
   subQuarters,
   subYears,
 } from 'date-fns';
-import { Subscriptions, SubscriptionsModified } from 'types/data';
+import { Subscriptions } from 'types/data';
 
 import { formatDate } from './date';
 
-export const filterDataBySearch = (data: SubscriptionsModified[], search: string) => {
-  if (!search.length) return data;
-  return data.filter((sub) => sub.name.toLowerCase().includes(search.toLowerCase()));
+export const filterDataBySearch = (data: Subscriptions[], searchText: string) => {
+  if (!searchText.length) return data;
+  return data.filter((sub) => sub.name.toLowerCase().includes(searchText.toLowerCase()));
 };
 
 export const filterDataByNav = (
-  data: SubscriptionsModified[],
+  data: Subscriptions[],
   summarFilterBy: keyof typeof summaryFilter,
   navFilterBy: keyof typeof navFilter,
 ) => {
@@ -37,7 +35,7 @@ export const filterDataByNav = (
     let startDate = new Date();
     let endDate = new Date();
     const today = new Date();
-    const renewalDate = new Date(sub.renewal_date);
+    const renewalDate = new Date(sub.renewal_date ?? '');
 
     if (summarFilterBy === summaryFilter.all.key) {
       return true;
@@ -49,19 +47,11 @@ export const filterDataByNav = (
       endDate = subDays(today, -1);
     }
 
-    console.log(
-      'sub',
-      sub.name,
-      sub.prev_renewal_date,
-      summarFilterBy,
-      isWithinInterval(new Date(sub.prev_renewal_date), { start: startDate, end: endDate }),
-    );
-
     switch (navFilterBy) {
       case navFilter.upcoming.key:
         return isWithinInterval(renewalDate, { start: startDate, end: endDate });
       case navFilter.paid.key:
-        return isWithinInterval(new Date(sub.prev_renewal_date), { start: startDate, end: endDate });
+        return isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate });
       case navFilter.all.key:
         return true;
       default:
@@ -70,7 +60,7 @@ export const filterDataByNav = (
   });
 };
 
-export const filterDataBySummary = (data: SubscriptionsModified[], filterBy: keyof typeof summaryFilter) => {
+export const filterDataBySummary = (data: Subscriptions[], filterBy: keyof typeof summaryFilter) => {
   return data.filter((sub) => {
     const today = new Date();
     let startDate = new Date();

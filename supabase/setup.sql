@@ -47,6 +47,8 @@ CREATE TABLE subscriptions (
   url text,
   payment_cycle text not null,
   active boolean not null default true,
+  renewal_date date not null,
+  next_renewal_date date not null,
   color text,
   notes text,
   notify boolean not null default false,
