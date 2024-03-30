@@ -8,20 +8,23 @@ import { cn } from 'lib/utils';
 import { useTheme } from 'next-themes';
 
 type NavFilterProps = {
-  setSelection: (key: keyof typeof navFilter) => void;
+  onChange: (key: keyof typeof navFilter) => void;
   selected: keyof typeof navFilter;
+  count: number;
 };
 
-export default function NavFilter({ setSelection, selected }: NavFilterProps) {
+export default function NavFilter({ onChange, selected, count }: NavFilterProps) {
   const { resolvedTheme: theme } = useTheme();
 
   return (
     <div className="flex justify-between items-center">
-      <h2 className="md:text-lg font-semibold">Subscriptions</h2>
+      <h2 className="md:text-lg font-semibold">
+        Subscriptions <span className="text-sm">({count})</span>
+      </h2>
       <div className="flex border border-input bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }, i) => (
           <motion.button
-            onClick={() => setSelection(key)}
+            onClick={() => onChange(key)}
             key={key}
             className={cn(
               `py-1.5 m-0.5 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-3 capitalize w-fit text-[13px] tracking-wide relative rounded-md`,

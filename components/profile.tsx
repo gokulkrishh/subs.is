@@ -29,8 +29,6 @@ export default function Profile() {
         <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Image
             priority
-            placeholder="blur"
-            blurDataURL={blurDataURL}
             className="h-9 w-9 rounded-full border border-input"
             src={avatarUrl}
             alt={avatarAlt}

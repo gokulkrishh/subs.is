@@ -7,7 +7,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const SearchInput = React.forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center mb-6">
       <SearchIcon className="ml-3 h-4 w-4 absolute shrink-0 opacity-50" />
       <input
         type={type}

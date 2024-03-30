@@ -6,11 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
+import { navFilter } from 'config/data';
 import { motion } from 'framer-motion';
-import { formatDate } from 'lib/date';
+import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters } from 'lib/utils';
-import { Subscriptions, User } from 'types/data';
+import { Subscriptions, SubscriptionsModified, User } from 'types/data';
+
+import CardDetails from './details';
 
 export const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -22,7 +25,8 @@ export const itemVariants = {
 };
 
 type InfoProps = {
-  subscription: Subscriptions;
+  selected: keyof typeof navFilter;
+  subscription: SubscriptionsModified;
   user: User | null;
 };
 
@@ -30,8 +34,12 @@ type InfoProps = {
 const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default function CardInfo(props: InfoProps) {
-  const { subscription, user } = props;
+  const { subscription, user, selected } = props;
   const [open, setOpen] = useState(false);
+
+  const isUpcoming = selected === navFilter.upcoming.key;
+  const isPaid = selected === navFilter.paid.key;
+  const isDue = isUpcoming && isWithInSevenDays(subscription.renewal_date);
 
   return (
     <>
@@ -98,10 +106,12 @@ export default function CardInfo(props: InfoProps) {
             <h3 className="font-medium">{subscription.name}</h3>
             <span
               className={cn(`text-[13px] mt-0.5 text-muted-foreground`, {
-                'text-red-500': false,
+                'text-red-500': isDue,
               })}
             >
-              {formatDate(subscription.billing_date ?? '')}
+              {isPaid
+                ? formatDate(subscription?.prev_renewal_date ?? '')
+                : formatDate(subscription?.renewal_date ?? '')}
             </span>
           </div>
         </div>
@@ -116,7 +126,7 @@ export default function CardInfo(props: InfoProps) {
           </p>
         </div>
       </motion.button>
-      {/* {open ? <CardDetails open={open} setOpen={setOpen} subscription={subscription} /> : null} */}
+      {open ? <CardDetails open={open} setOpen={setOpen} subscription={subscription} /> : null}
     </>
   );
 }

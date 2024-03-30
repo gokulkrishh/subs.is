@@ -3,6 +3,7 @@
 import { revalidateTag } from 'next/cache';
 
 import { User as AuthUser } from '@supabase/supabase-js';
+import { summaryFilter } from 'config/data';
 import messages from 'config/messages';
 import { createClient } from 'lib/supabase/server';
 import { User } from 'types/data';
@@ -51,4 +52,20 @@ export const updateUserCurrency = async (currency_code: User['currency_code']) =
   } catch (error) {
     throw new Error((error as Error).toString() || messages.user.update.error);
   }
+};
+
+export const updateSummaryFilter = async (filterKey: keyof typeof summaryFilter) => {
+  const user = await getUser();
+  if (!user) {
+    return;
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase.from('users').update({ filter_by: filterKey }).eq('id', user.id);
+
+  if (error) {
+    throw new Error(messages.user.filter.error);
+  }
+
+  revalidateTag('supabase');
 };

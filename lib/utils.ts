@@ -27,3 +27,12 @@ export const randomColor = () => {
     return (~~(Math.random() * 16)).toString(16);
   });
 };
+
+export const isValidUrl = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};

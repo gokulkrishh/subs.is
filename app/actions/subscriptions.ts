@@ -3,9 +3,9 @@
 import { revalidateTag } from 'next/cache';
 
 import messages from 'config/messages';
-import demoSubscriptions from 'data/demo.json';
+import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
 import { createClient } from 'lib/supabase/server';
-import { Subscriptions, SubscriptionsInsert } from 'types/data';
+import { Subscriptions, SubscriptionsInsert, SubscriptionsModified, SubscriptionsUpdate } from 'types/data';
 
 import { getAuthUser } from './user';
 
@@ -19,14 +19,17 @@ export const getSubscriptions = async () => {
     .from('subscriptions')
     .select(`*`)
     .eq('user_id', user.id)
-    .order('renewal_date', { ascending: true })
     .returns<Subscriptions[]>();
 
   if (error) {
     return [];
   }
 
-  return data;
+  return data.map((sub) => {
+    const renewal_date = calculateRenewalDate(sub.billing_date, sub.payment_cycle);
+    const prev_renewal_date = calculatePrevRenewalDate(sub.billing_date, renewal_date, sub.payment_cycle);
+    return { ...sub, renewal_date, prev_renewal_date };
+  }) as SubscriptionsModified[];
 };
 
 export const createSubscription = async (subscription: SubscriptionsInsert) => {
@@ -54,7 +57,7 @@ export const exportSubscriptions = async () => {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('subscriptions')
-    .select(`name,price,billing_date,renewal_date,url,notes,created_at`)
+    .select(`name,cost,billing_date,url,notes,created_at`)
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .returns<string>()
@@ -63,4 +66,41 @@ export const exportSubscriptions = async () => {
     throw new Error(messages.export.error);
   }
   return data;
+};
+
+export const updateSubscription = async (subscription: SubscriptionsUpdate) => {
+  const user = await getAuthUser();
+  if (!user) {
+    throw new Error('User is not authenticated.');
+  }
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from('subscriptions')
+    .update({ ...subscription })
+    .eq('user_id', user.id)
+    .eq('id', subscription.id);
+
+  if (error) {
+    throw new Error('Unable to update the subscription.');
+  }
+
+  revalidateTag('supabase');
+};
+
+export const deleteSubscription = async (id: Subscriptions['id']) => {
+  const user = await getAuthUser();
+  if (!user) {
+    throw new Error('User is not authenticated.');
+  }
+
+  const supabase = await createClient();
+
+  const { error } = await supabase.from('subscriptions').delete().eq('user_id', user.id).eq('id', id);
+
+  if (error) {
+    throw new Error('Unable to delete the subscription.');
+  }
+
+  revalidateTag('supabase');
 };

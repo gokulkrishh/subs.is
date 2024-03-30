@@ -6,6 +6,11 @@ export type SubscriptionsUpdate = Database['public']['Tables']['subscriptions'][
 
 export type User = Database['public']['Tables']['users']['Row'];
 
+export type SubscriptionsModified = Subscriptions & {
+  renewal_date: string;
+  prev_renewal_date: string;
+};
+
 export type Currency = {
   symbol: string;
   name_plural: string;

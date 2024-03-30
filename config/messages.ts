@@ -6,12 +6,30 @@ const messages = {
       success: 'Account has been deleted successfully',
     },
   },
-
+  subscriptions: {
+    update: {
+      success: 'Subscription updated successfully',
+      error: 'Unable to update, try again',
+    },
+    reminderSuccess: (notify: boolean, name: string) => {
+      return `Email reminder is ${!notify ? 'enabled' : 'disabled'} for ${name}`;
+    },
+    reminderError: (notify: boolean) => {
+      return `Unable to ${!notify ? 'enable' : 'disable'} reminder`;
+    },
+    delete: {
+      success: 'Subscription deleted successfully',
+      error: 'Unable to delete, try again',
+    },
+  },
   user: {
     notAuth: 'User is not authenticated',
     fetchError: 'Error while fetching auth user',
     update: {
       error: 'Unable to update, try again',
+    },
+    filter: {
+      error: 'Unable to save summary filter.',
     },
     currrency: {
       update: {
@@ -21,6 +39,9 @@ const messages = {
   },
   export: {
     error: 'Unable to export, try again',
+  },
+  share: {
+    error: 'Failed to share subscription',
   },
 };
 

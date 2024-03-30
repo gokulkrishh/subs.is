@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 
+import { updateSummaryFilter } from 'app/actions/user';
 import { summaryFilter } from 'config/data';
 import { cn } from 'lib/utils';
+import { toast } from 'sonner';
 import { User } from 'types/data';
 
 import { ArrowDownIcon } from './icons';
@@ -13,7 +15,12 @@ export default function SummaryDropdown() {
 
   const onChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as keyof typeof summaryFilter;
-    setFilterBy(value);
+    try {
+      setFilterBy(value);
+      await updateSummaryFilter(value);
+    } catch (error) {
+      toast.error(error?.toString());
+    }
   };
 
   return (

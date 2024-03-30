@@ -11,6 +11,7 @@ CREATE TABLE users (
   avatar_url text,
   updated_at timestamp with time zone default current_timestamp,
   created_at timestamp with time zone default current_timestamp,
+  filter_by text not null default 'monthly'
   plan_status text default 'free',
   currency_code text not null default 'INR'
 );
