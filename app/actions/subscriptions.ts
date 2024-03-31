@@ -56,7 +56,7 @@ export const exportSubscriptions = async () => {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('subscriptions')
-    .select(`name,cost,billing_date,url,notes,created_at`)
+    .select(`name,cost,payment_cycle,renewal_date,billing_date,url,notes,active,notify,color,created_at,updated_at`)
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .returns<string>()

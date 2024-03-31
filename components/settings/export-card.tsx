@@ -20,6 +20,7 @@ export default function ExportCard({ user }: { user: User | null }) {
   const onClickHandler = async () => {
     try {
       setLoading(true);
+      toast.info('Your subscriptions will be exported shortly.');
       const data = await exportSubscriptions();
       exportAsCSV(data, `subs-is-subscriptions`);
     } catch (error) {
