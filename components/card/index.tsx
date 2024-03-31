@@ -60,9 +60,7 @@ export default function Card(props: CardProps) {
         />
         <div className="flex mt-6 mb-10 flex-col gap-3">
           {data.length ? (
-            data.map((subscription) => (
-              <CardInfo selected={selected} user={user} key={subscription.id} subscription={subscription} />
-            ))
+            data.map((subscription) => <CardInfo user={user} key={subscription.id} subscription={subscription} />)
           ) : (
             <div className="text-center mt-10 text-muted-foreground">
               No {selected !== navFilter.all.key ? selected : ''} subscriptions.
