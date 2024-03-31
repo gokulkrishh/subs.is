@@ -1,6 +1,7 @@
 'use client';
 
 import { SummaryNumber } from 'components/summary-number';
+import { getCurrencySymbol } from 'lib/numbers';
 import { Subscriptions, User } from 'types/data';
 
 import SummaryDropdown from './summary-dropdown';
@@ -15,7 +16,10 @@ export default function Summary({ subscriptions, user }: SummaryProps) {
   return (
     <div className="flex flex-col">
       <h2 className="font-medium tracking-wide flex items-center gap-1">Total cost for subscriptions</h2>
-      <SummaryNumber from={0} to={totalCost} />
+      <div className="text-5xl mt-2">
+        <span className="mr-1 font-sans font-bold">{getCurrencySymbol(user?.currency_code)}</span>
+        <SummaryNumber from={0} to={totalCost} />
+      </div>
     </div>
   );
 }
