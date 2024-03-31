@@ -15,8 +15,6 @@ const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAAL
 
 export default function Profile() {
   const { user, supabase } = useAuth();
-  const avatarUrl = user?.user_metadata?.avatar_url ?? `/images/avatar.svg`;
-  const avatarAlt = user?.user_metadata?.full_name ?? 'Demo account';
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -27,15 +25,27 @@ export default function Profile() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          <Image
-            priority
-            className="h-9 w-9 rounded-full border border-input"
-            src={avatarUrl}
-            alt={avatarAlt}
-            width={36}
-            height={36}
-            style={{ maxWidth: '100%', objectFit: 'cover' }}
-          />
+          {user?.user_metadata?.avatar_url ? (
+            <Image
+              priority
+              className="h-9 w-9 rounded-full border border-input"
+              src={user?.user_metadata?.avatar_url}
+              alt={user?.user_metadata?.full_name}
+              width={36}
+              height={36}
+              style={{ maxWidth: '100%', objectFit: 'cover' }}
+            />
+          ) : (
+            <Image
+              priority
+              className="h-9 w-9 rounded-full border border-input"
+              src={`/images/avatar.svg`}
+              alt={'Demo account'}
+              width={36}
+              height={36}
+              style={{ maxWidth: '100%', objectFit: 'cover' }}
+            />
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>

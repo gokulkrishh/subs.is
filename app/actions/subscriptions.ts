@@ -2,9 +2,8 @@
 
 import { revalidateTag } from 'next/cache';
 
-import { navFilter, summaryFilter } from 'config/data';
 import messages from 'config/messages';
-import { getDatesForFilter } from 'lib/date';
+import demoData from 'data/demo.json';
 import { createClient } from 'lib/supabase/server';
 import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/data';
 
@@ -13,7 +12,8 @@ import { getAuthUser } from './user';
 export const getSubscriptions = async () => {
   const user = await getAuthUser();
   if (!user) {
-    return [];
+    // Show demo data for when not logged in
+    return demoData;
   }
   const supabase = await createClient();
 
@@ -61,6 +61,7 @@ export const exportSubscriptions = async () => {
     .order('created_at', { ascending: false })
     .returns<string>()
     .csv();
+
   if (error) {
     throw new Error(messages.export.error);
   }
