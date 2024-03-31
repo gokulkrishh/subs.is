@@ -42,17 +42,9 @@ export default function Add({ user, showSignup }: AddProps) {
   const onSubmit = async (subscription: SubscriptionsInsert) => {
     try {
       setLoading(true);
-      const next_renewal_date = calculateRenewalDate(subscription.billing_date, subscription.payment_cycle);
-      const updatedSubscription = {
-        ...subscription,
-        next_renewal_date,
-        renewal_date: calculatePrevRenewalDate(
-          subscription.billing_date,
-          next_renewal_date,
-          subscription.payment_cycle,
-        ),
-      };
-      await createSubscription({ ...updatedSubscription });
+      const renewal_date = calculateRenewalDate(subscription.billing_date, subscription.payment_cycle);
+      const updatedSubscription = { ...subscription, renewal_date };
+      await createSubscription(updatedSubscription);
       toast.success('Subscription is added successfully');
       setOpen(false);
     } catch (error) {

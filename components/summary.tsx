@@ -14,7 +14,7 @@ export default function Summary({ subscriptions, user }: SummaryProps) {
   const totalCost = subscriptions.reduce((acc, curr) => acc + parseFloat(curr.cost), 0);
   return (
     <div className="flex flex-col">
-      <SummaryDropdown user={user} />
+      <h2 className="font-medium tracking-wide flex items-center gap-1">Total cost for subscriptions</h2>
       <SummaryNumber from={0} to={totalCost} />
     </div>
   );

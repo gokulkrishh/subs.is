@@ -7,16 +7,11 @@ import { getUser } from './actions/user';
 
 export default async function Page() {
   const user = await getUser();
-  const subscriptions = await getSubscriptions(
-    (user?.filter_by as keyof typeof summaryFilter) || summaryFilter.all.key,
-  );
+  const subscriptions = await getSubscriptions();
 
   return (
     <main className="flex flex-col mt-10">
-      <Summary user={user} subscriptions={subscriptions} />
-      <div className="flex flex-col my-10 mb-12">
-        <Card user={user} subscriptions={subscriptions} />
-      </div>
+      <Card user={user} subscriptions={subscriptions} />
     </main>
   );
 }

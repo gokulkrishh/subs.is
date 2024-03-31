@@ -25,7 +25,6 @@ export const itemVariants = {
 };
 
 type InfoProps = {
-  selected: keyof typeof navFilter;
   subscription: Subscriptions;
   user: User | null;
 };
@@ -34,10 +33,10 @@ type InfoProps = {
 const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default function CardInfo(props: InfoProps) {
-  const { subscription, user, selected } = props;
+  const { subscription, user } = props;
   const [open, setOpen] = useState(false);
 
-  const isUpcoming = selected === navFilter.upcoming.key;
+  const isDue = isWithInSevenDays(subscription.renewal_date ?? '');
 
   return (
     <>
@@ -103,10 +102,13 @@ export default function CardInfo(props: InfoProps) {
 
           <div className="flex flex-col items-start justify-center">
             <h3 className="font-medium">{subscription.name}</h3>
-            <span className={cn(`text-[13px] mt-0.5 text-muted-foreground`)}>
-              {isUpcoming
-                ? formatDate(subscription?.next_renewal_date ?? '')
-                : formatDate(subscription?.renewal_date ?? '')}
+            <span
+              title="Due within 7 days"
+              className={cn(`text-[13px] mt-0.5 text-muted-foreground`, {
+                'text-red-500': isDue,
+              })}
+            >
+              {formatDate(subscription?.renewal_date ?? '')}
             </span>
           </div>
         </div>

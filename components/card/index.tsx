@@ -6,7 +6,7 @@ import NavFilter from 'components/nav-filter';
 import Summary from 'components/summary';
 import { SearchInput } from 'components/ui/search-input';
 import { navFilter, summaryFilter } from 'config/data';
-import { filterDataByNav, filterDataBySearch, filterDataBySummary } from 'lib/data';
+import { filterDataByNav, filterDataBySearch } from 'lib/data';
 import { Subscriptions, User } from 'types/data';
 
 import CardInfo from './info';
@@ -15,19 +15,14 @@ type CardProps = { subscriptions: Subscriptions[]; user: User | null };
 
 export default function Card(props: CardProps) {
   const { subscriptions, user } = props;
-  const summaryFilterBy = (user?.filter_by as keyof typeof summaryFilter) || summaryFilter.monthly.key;
   const [search, setSearch] = useState('');
+  const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.monthly.key);
   const filterData = useCallback(
-    (navFilterBy: keyof typeof navFilter, searchText: string) => {
-      const filteredSubscriptions = filterDataBySummary(subscriptions, summaryFilterBy, navFilterBy);
-      const filteredByNav = filterDataByNav(filteredSubscriptions, summaryFilterBy, navFilterBy);
-      return filterDataBySearch(filteredByNav, searchText);
+    (selected: keyof typeof navFilter, searchText: string) => {
+      const filtered = filterDataByNav(subscriptions, selected);
+      return filterDataBySearch(filtered, searchText);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [subscriptions],
-  );
-  const [selected, setSelection] = useState<keyof typeof navFilter>(
-    user?.filter_by !== summaryFilter.all.key ? navFilter.upcoming.key : navFilter.all.key,
   );
   const [data, setData] = useState<Subscriptions[]>(filterData(selected, search));
 
@@ -54,23 +49,26 @@ export default function Card(props: CardProps) {
 
   return (
     <>
-      <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
-      <NavFilter
-        filterBy={user?.filter_by as keyof typeof summaryFilter}
-        count={data.length}
-        selected={selected}
-        onChange={onNavChangeHandler}
-      />
-      <div className="flex mt-6 mb-10 flex-col gap-3">
-        {data.length ? (
-          data.map((subscription) => (
-            <CardInfo selected={selected} user={user} key={subscription.id} subscription={subscription} />
-          ))
-        ) : (
-          <div className="text-center mt-10 text-muted-foreground">
-            No {selected !== navFilter.all.key ? selected : ''} subscriptions.
-          </div>
-        )}
+      <Summary user={user} subscriptions={data} />
+      <div className="flex flex-col my-10 mb-12">
+        <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
+        <NavFilter
+          filterBy={user?.filter_by as keyof typeof summaryFilter}
+          count={data.length}
+          selected={selected}
+          onChange={onNavChangeHandler}
+        />
+        <div className="flex mt-6 mb-10 flex-col gap-3">
+          {data.length ? (
+            data.map((subscription) => (
+              <CardInfo selected={selected} user={user} key={subscription.id} subscription={subscription} />
+            ))
+          ) : (
+            <div className="text-center mt-10 text-muted-foreground">
+              No {selected !== navFilter.all.key ? selected : ''} subscriptions.
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

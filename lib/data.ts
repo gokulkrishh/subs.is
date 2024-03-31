@@ -1,98 +1,29 @@
-import { navFilter, paymentCycle, summaryFilter } from 'config/data';
+import { navFilter, paymentCycle } from 'config/data';
 import {
   addMonths,
   addQuarters,
   addYears,
-  endOfMonth,
-  endOfYear,
   format,
   isBefore,
-  isLastDayOfMonth,
   isSameDay,
-  isWithinInterval,
   set,
-  startOfMonth,
-  startOfYear,
-  subDays,
   subMonths,
   subQuarters,
   subYears,
 } from 'date-fns';
 import { Subscriptions } from 'types/data';
 
-import { formatDate } from './date';
-
 export const filterDataBySearch = (data: Subscriptions[], searchText: string) => {
   if (!searchText.length) return data;
   return data.filter((sub) => sub.name.toLowerCase().includes(searchText.toLowerCase()));
 };
 
-export const filterDataByNav = (
-  data: Subscriptions[],
-  summarFilterBy: keyof typeof summaryFilter,
-  navFilterBy: keyof typeof navFilter,
-) => {
+export const filterDataByNav = (data: Subscriptions[], filterBy: keyof typeof navFilter) => {
   return data
-    .filter((sub) => {
-      if (navFilterBy === navFilter.all.key) return true;
-      let startDate = new Date();
-      let endDate = new Date();
-      const today = new Date();
-      const renewalDate = new Date(sub.renewal_date ?? '');
-      const nextRenewalDate = new Date(sub.next_renewal_date ?? '');
-
-      if (summarFilterBy === summaryFilter.all.key) {
-        return true;
-      } else if (summarFilterBy === summaryFilter.monthly.key) {
-        startDate = startOfMonth(today);
-        endDate = endOfMonth(startDate);
-      } else if (summarFilterBy === summaryFilter.yearly.key) {
-        startDate = startOfYear(today);
-        endDate = endOfYear(today);
-      }
-
-      switch (navFilterBy) {
-        case navFilter.upcoming.key:
-          return isWithinInterval(nextRenewalDate, { start: startDate, end: endDate });
-        case navFilter.paid.key:
-          return isWithinInterval(renewalDate, { start: startDate, end: endDate });
-        default:
-          throw new Error('Unsupported filter');
-      }
-    })
-    .sort((a, b) => a?.next_renewal_date?.localeCompare(b?.next_renewal_date ?? '') ?? 0);
-};
-
-export const filterDataBySummary = (
-  data: Subscriptions[],
-  filterBy: keyof typeof summaryFilter,
-  navFilterBy: keyof typeof navFilter,
-) => {
-  return data.filter((sub) => {
-    const today = new Date();
-    let startDate = new Date();
-    let endDate = new Date();
-
-    if (filterBy === summaryFilter.all.key) {
-      return true;
-    } else if (filterBy === summaryFilter.monthly.key) {
-      startDate = startOfMonth(today);
-      endDate = endOfMonth(today);
-    } else if (filterBy === summaryFilter.yearly.key) {
-      startDate = startOfYear(today);
-      endDate = endOfYear(today);
-    }
-
-    if (navFilterBy === navFilter.upcoming.key) {
-      return isWithinInterval(new Date(sub.next_renewal_date ?? ''), { start: startDate, end: endDate });
-    } else if (navFilterBy === navFilter.all.key) {
-      return (
-        isWithinInterval(new Date(sub.next_renewal_date ?? ''), { start: startDate, end: endDate }) ||
-        isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate })
-      );
-    }
-    return isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate });
-  });
+    .filter((sub) => filterBy === navFilter.all.key || sub.payment_cycle === filterBy)
+    .sort((a, b) => {
+      return a?.renewal_date?.localeCompare(b?.renewal_date ?? '') ?? 0;
+    });
 };
 
 export const calculateRenewalDate = (start_date: string, payment_cycle: string): string => {

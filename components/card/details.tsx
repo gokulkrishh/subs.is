@@ -11,7 +11,7 @@ import { Input } from 'components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { paymentCycle } from 'config/data';
 import messages from 'config/messages';
-import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
+import { calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
 import { Bell, BellOff, Share, Trash2Icon } from 'lucide-react';
@@ -46,11 +46,9 @@ export default function CardDetails(props: CardDetailsProps) {
   const onSubmit = async (subs: Subscriptions) => {
     try {
       setLoading(true);
-      const next_renewal_date = calculateRenewalDate(subs.billing_date, subs.payment_cycle);
       await updateSubscription({
         ...subs,
-        next_renewal_date,
-        renewal_date: calculatePrevRenewalDate(subs.billing_date, next_renewal_date, subs.payment_cycle),
+        renewal_date: calculateRenewalDate(subs.billing_date, subs.payment_cycle),
       });
       toast.success(messages.subscriptions.update.success);
     } catch (error: any) {

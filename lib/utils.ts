@@ -1,3 +1,5 @@
+import { NextRequest } from 'next/server';
+
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -35,4 +37,9 @@ export const isValidUrl = (url: string) => {
   } catch (e) {
     return false;
   }
+};
+
+export const verifyCronAuthorization = async (request: NextRequest) => {
+  const authHeader = request.headers.get('authorization');
+  return authHeader === `Bearer ${process.env.CRON_SECRET}`;
 };

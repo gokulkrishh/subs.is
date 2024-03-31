@@ -10,50 +10,17 @@ import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/d
 
 import { getAuthUser } from './user';
 
-export const getSubscriptions = async (filterBy: keyof typeof summaryFilter) => {
+export const getSubscriptions = async () => {
   const user = await getAuthUser();
   if (!user) {
     return [];
   }
   const supabase = await createClient();
-  const { startDate, endDate } = getDatesForFilter(filterBy);
-
-  if (filterBy === summaryFilter.all.key) {
-    const { data, error } = await supabase
-      .from('subscriptions')
-      .select(`*`)
-      .eq('user_id', user.id)
-      .order('renewal_date', { ascending: false })
-      .returns<Subscriptions[]>();
-    if (error) {
-      return [];
-    }
-    return data;
-  } else if (filterBy === summaryFilter.yearly.key) {
-    const { data, error } = await supabase
-      .from('subscriptions')
-      .select(`*`)
-      .eq('user_id', user.id)
-      .eq('payment_cycle', filterBy)
-      .gte('next_renewal_date', startDate.toISOString().split('T')[0])
-      .lte('next_renewal_date', endDate.toISOString().split('T')[0])
-      .order('next_renewal_date', { ascending: true })
-      .returns<Subscriptions[]>();
-
-    if (error) {
-      return [];
-    }
-
-    return data;
-  }
 
   const { data, error } = await supabase
     .from('subscriptions')
     .select(`*`)
     .eq('user_id', user.id)
-    .eq('payment_cycle', filterBy)
-    .gte('renewal_date', startDate.toISOString().split('T')[0])
-    .lte('renewal_date', endDate.toISOString().split('T')[0])
     .order('renewal_date', { ascending: true })
     .returns<Subscriptions[]>();
 
