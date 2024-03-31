@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { navFilter } from 'config/data';
+import { isSameMonth } from 'date-fns';
 import { motion } from 'framer-motion';
 import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
@@ -37,25 +38,21 @@ export default function CardInfo(props: InfoProps) {
   const { subscription, user, selected } = props;
   const [open, setOpen] = useState(false);
 
-  const isUpcoming = selected === navFilter.upcoming.key;
-  const isPaid = selected === navFilter.paid.key;
-  const isAll = selected === navFilter.all.key;
-  const isDue = isUpcoming && isWithInSevenDays(subscription.next_renewal_date ?? '');
-
   return (
     <>
       <motion.button
+        layout
         key={subscription.id}
         variants={itemVariants}
         initial={['hidden', 'visible']}
         animate={['hidden', 'visible']}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
+        transition={{ type: 'easeInOut', duration: 0.2 }}
         onClick={() => {
           setOpen(!open);
         }}
-        whileTap={{ scale: 1.01 }}
+        whileTap={{ scale: 1.02 }}
         whileHover={{ scale: 1.01 }}
-        className="flex select-none shadow-sm items-center transition-all relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between bg-card-background p-3 px-4 rounded-xl border border-input"
+        className="flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between bg-card-background p-3 px-4 rounded-xl border border-input"
       >
         <div className="flex gap-3">
           {subscription.url?.length ? (
@@ -105,14 +102,8 @@ export default function CardInfo(props: InfoProps) {
 
           <div className="flex flex-col items-start justify-center">
             <h3 className="font-medium">{subscription.name}</h3>
-            <span
-              className={cn(`text-[13px] mt-0.5 text-muted-foreground`, {
-                'text-red-500': isDue,
-              })}
-            >
-              {isPaid || isAll
-                ? formatDate(subscription?.renewal_date ?? '')
-                : formatDate(subscription?.next_renewal_date ?? '')}
+            <span className={cn(`text-[13px] mt-0.5 text-muted-foreground`)}>
+              {formatDate(subscription?.renewal_date ?? '')}
             </span>
           </div>
         </div>

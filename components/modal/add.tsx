@@ -11,6 +11,7 @@ import { Drawer, DrawerContent } from 'components/ui/drawer';
 import { Input } from 'components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { paymentCycle } from 'config/data';
+import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
 import { Plus } from 'lucide-react';
@@ -41,7 +42,17 @@ export default function Add({ user, showSignup }: AddProps) {
   const onSubmit = async (subscription: SubscriptionsInsert) => {
     try {
       setLoading(true);
-      await createSubscription({ ...subscription });
+      const next_renewal_date = calculateRenewalDate(subscription.billing_date, subscription.payment_cycle);
+      const updatedSubscription = {
+        ...subscription,
+        next_renewal_date,
+        renewal_date: calculatePrevRenewalDate(
+          subscription.billing_date,
+          next_renewal_date,
+          subscription.payment_cycle,
+        ),
+      };
+      await createSubscription({ ...updatedSubscription });
       toast.success('Subscription is added successfully');
       setOpen(false);
     } catch (error) {

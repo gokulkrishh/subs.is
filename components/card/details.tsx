@@ -135,7 +135,6 @@ export default function CardDetails(props: CardDetailsProps) {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-
             <Button
               variant={'destructive'}
               size={'icon'}

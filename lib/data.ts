@@ -7,6 +7,7 @@ import {
   endOfYear,
   format,
   isBefore,
+  isLastDayOfMonth,
   isSameDay,
   isWithinInterval,
   set,
@@ -31,36 +32,43 @@ export const filterDataByNav = (
   summarFilterBy: keyof typeof summaryFilter,
   navFilterBy: keyof typeof navFilter,
 ) => {
-  return data.filter((sub) => {
-    let startDate = new Date();
-    let endDate = new Date();
-    const today = new Date();
-    const renewalDate = new Date(sub.renewal_date ?? '');
+  return data
+    .filter((sub) => {
+      let startDate = new Date();
+      let endDate = new Date();
+      const today = new Date();
+      const renewalDate = new Date(sub.renewal_date ?? '');
+      const nextRenewalDate = new Date(sub.next_renewal_date ?? '');
 
-    if (summarFilterBy === summaryFilter.all.key) {
-      return true;
-    } else if (summarFilterBy === summaryFilter.monthly.key) {
-      startDate = startOfMonth(new Date());
-      endDate = endOfMonth(startDate);
-    } else if (summarFilterBy === summaryFilter.yearly.key) {
-      startDate = startOfYear(new Date());
-      endDate = subDays(today, -1);
-    }
-
-    switch (navFilterBy) {
-      case navFilter.upcoming.key:
-        return isWithinInterval(renewalDate, { start: startDate, end: endDate });
-      case navFilter.paid.key:
-        return isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate });
-      case navFilter.all.key:
+      if (summarFilterBy === summaryFilter.all.key) {
         return true;
-      default:
-        throw new Error('Unsupported filter');
-    }
-  });
+      } else if (summarFilterBy === summaryFilter.monthly.key) {
+        startDate = startOfMonth(new Date());
+        endDate = endOfMonth(startDate);
+      } else if (summarFilterBy === summaryFilter.yearly.key) {
+        startDate = startOfYear(new Date());
+        endDate = subDays(today, -1);
+      }
+
+      switch (navFilterBy) {
+        case navFilter.upcoming.key:
+          return isWithinInterval(nextRenewalDate, { start: startDate, end: endDate });
+        case navFilter.paid.key:
+          return isWithinInterval(renewalDate, { start: startDate, end: endDate });
+        case navFilter.all.key:
+          return true;
+        default:
+          throw new Error('Unsupported filter');
+      }
+    })
+    .sort((a, b) => a?.next_renewal_date?.localeCompare(b?.next_renewal_date ?? '') ?? 0);
 };
 
-export const filterDataBySummary = (data: Subscriptions[], filterBy: keyof typeof summaryFilter) => {
+export const filterDataBySummary = (
+  data: Subscriptions[],
+  filterBy: keyof typeof summaryFilter,
+  navFilterBy: keyof typeof navFilter,
+) => {
   return data.filter((sub) => {
     const today = new Date();
     let startDate = new Date();
@@ -76,6 +84,14 @@ export const filterDataBySummary = (data: Subscriptions[], filterBy: keyof typeo
       endDate = endOfYear(today);
     }
 
+    if (navFilterBy === navFilter.upcoming.key) {
+      return isWithinInterval(new Date(sub.next_renewal_date ?? ''), { start: startDate, end: endDate });
+    } else if (navFilterBy === navFilter.all.key) {
+      return (
+        isWithinInterval(new Date(sub.next_renewal_date ?? ''), { start: startDate, end: endDate }) ||
+        isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate })
+      );
+    }
     return isWithinInterval(new Date(sub.renewal_date ?? ''), { start: startDate, end: endDate });
   });
 };
@@ -84,7 +100,6 @@ export const calculateRenewalDate = (start_date: string, payment_cycle: string):
   const startDate = new Date(start_date);
   const today = new Date();
   let renewalDate;
-
   switch (payment_cycle) {
     case paymentCycle.monthly.key:
       renewalDate = set(startDate, { month: today.getMonth(), year: today.getFullYear() });
@@ -108,7 +123,7 @@ export const calculateRenewalDate = (start_date: string, payment_cycle: string):
       throw new Error('Unsupported payment cycle');
   }
 
-  return formatDate(renewalDate.toISOString());
+  return format(renewalDate, 'yyyy-MM-dd');
 };
 
 export const calculatePrevRenewalDate = (billing_date: string, renewal_date: string, payment_cycle: string): string => {

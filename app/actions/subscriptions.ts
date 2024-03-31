@@ -8,7 +8,7 @@ import { getDatesForFilter } from 'lib/date';
 import { createClient } from 'lib/supabase/server';
 import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/data';
 
-import { getAuthUser, getUser } from './user';
+import { getAuthUser } from './user';
 
 export const getSubscriptions = async (filterBy: keyof typeof summaryFilter) => {
   const user = await getAuthUser();
@@ -17,28 +17,10 @@ export const getSubscriptions = async (filterBy: keyof typeof summaryFilter) => 
   }
   const supabase = await createClient();
 
-  if (filterBy === summaryFilter.all.key) {
-    const { data, error } = await supabase
-      .from('subscriptions')
-      .select(`*`)
-      .eq('user_id', user.id)
-      .order('renewal_date', { ascending: false })
-      .returns<Subscriptions[]>();
-    if (error) {
-      return [];
-    }
-    return data;
-  }
-
-  const { startDate, endDate } = getDatesForFilter(filterBy);
-
   const { data, error } = await supabase
     .from('subscriptions')
     .select(`*`)
     .eq('user_id', user.id)
-    .gte('renewal_date', startDate.toISOString().split('T')[0])
-    .lte('renewal_date', endDate.toISOString().split('T')[0])
-    .order('renewal_date', { ascending: true })
     .returns<Subscriptions[]>();
 
   if (error) {
