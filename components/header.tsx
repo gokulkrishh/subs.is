@@ -18,7 +18,7 @@ export default async function Header({ user }: { user: User | null }) {
           <Icon /> <span className="mt-0.5">Subs Tracker</span>
         </h1>
         {!user?.email ? (
-          <div className="absolute -right-11 top-0 font-medium text-xs p-0.5 rounded bg-pink-600">demo</div>
+          <div className="absolute -right-11 text-white top-0 font-medium text-xs p-0.5 rounded bg-pink-600">demo</div>
         ) : null}
       </Link>
       <div className="flex items-center gap-3">
