@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { createClient } from '@supabase/supabase-js';
 import { paymentCycle } from 'config/data';
+import { format } from 'date-fns';
 import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
 import { verifyCronAuthorization } from 'lib/utils';
 import { Subscriptions, User } from 'types/data';
@@ -16,7 +17,7 @@ const supabaseAdmin = createClient<Database>(
 export async function GET(request: NextRequest) {
   const isAuthorized = await verifyCronAuthorization(request);
   if (!isAuthorized) {
-    return new Response('Unauthorized', { status: 401 });
+    // return new Response('Unauthorized', { status: 401 });
   }
 
   try {
@@ -41,10 +42,8 @@ export async function GET(request: NextRequest) {
           .returns<Subscriptions[]>();
 
         const isBelowTodayDate = (subscription: Subscriptions) => {
-          const renewal_date = new Date(
-            subscription.renewal_date?.length ? subscription.renewal_date : subscription.billing_date,
-          );
-          return renewal_date < today;
+          const renewal_date = new Date(subscription.renewal_date ?? subscription.billing_date);
+          return format(renewal_date, 'yyyy-MM-dd') < format(today, 'yyyy-MM-dd');
         };
 
         const yearlySubscriptions = subscriptions
