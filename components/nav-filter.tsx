@@ -17,7 +17,7 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
 
   return (
     <div className="flex justify-between sm:items-center flex-col gap-3 sm:flex-row">
-      <h2 className="md:text-lg font-semibold">
+      <h2 className="text-lg font-semibold">
         Subscriptions <span className="text-sm">({count})</span>
       </h2>
       <div className="flex border max-sm:self-end border-input max-w-fit bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
