@@ -34,6 +34,7 @@ export const filterDataByNav = (
 ) => {
   return data
     .filter((sub) => {
+      if (navFilterBy === navFilter.all.key) return true;
       let startDate = new Date();
       let endDate = new Date();
       const today = new Date();
@@ -43,11 +44,11 @@ export const filterDataByNav = (
       if (summarFilterBy === summaryFilter.all.key) {
         return true;
       } else if (summarFilterBy === summaryFilter.monthly.key) {
-        startDate = startOfMonth(new Date());
+        startDate = startOfMonth(today);
         endDate = endOfMonth(startDate);
       } else if (summarFilterBy === summaryFilter.yearly.key) {
-        startDate = startOfYear(new Date());
-        endDate = subDays(today, -1);
+        startDate = startOfYear(today);
+        endDate = endOfYear(today);
       }
 
       switch (navFilterBy) {
@@ -55,8 +56,6 @@ export const filterDataByNav = (
           return isWithinInterval(nextRenewalDate, { start: startDate, end: endDate });
         case navFilter.paid.key:
           return isWithinInterval(renewalDate, { start: startDate, end: endDate });
-        case navFilter.all.key:
-          return true;
         default:
           throw new Error('Unsupported filter');
       }

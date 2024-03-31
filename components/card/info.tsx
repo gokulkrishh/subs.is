@@ -6,8 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
-import { navFilter } from 'config/data';
-import { isSameMonth } from 'date-fns';
+import { navFilter, summaryFilter } from 'config/data';
 import { motion } from 'framer-motion';
 import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
@@ -37,6 +36,8 @@ const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAAL
 export default function CardInfo(props: InfoProps) {
   const { subscription, user, selected } = props;
   const [open, setOpen] = useState(false);
+
+  const isUpcoming = selected === navFilter.upcoming.key;
 
   return (
     <>
@@ -103,7 +104,9 @@ export default function CardInfo(props: InfoProps) {
           <div className="flex flex-col items-start justify-center">
             <h3 className="font-medium">{subscription.name}</h3>
             <span className={cn(`text-[13px] mt-0.5 text-muted-foreground`)}>
-              {formatDate(subscription?.renewal_date ?? '')}
+              {isUpcoming
+                ? formatDate(subscription?.next_renewal_date ?? '')
+                : formatDate(subscription?.renewal_date ?? '')}
             </span>
           </div>
         </div>
