@@ -25,12 +25,12 @@ export default function Profile() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          {user?.user_metadata?.avatar_url ? (
+          {!user?.email ? (
             <Image
               priority
               className="h-9 w-9 rounded-full border border-input"
-              src={user?.user_metadata?.avatar_url}
-              alt={user?.user_metadata?.full_name}
+              src={`/images/avatar.svg`}
+              alt={'Demo account'}
               width={36}
               height={36}
               style={{ maxWidth: '100%', objectFit: 'cover' }}
@@ -39,8 +39,8 @@ export default function Profile() {
             <Image
               priority
               className="h-9 w-9 rounded-full border border-input"
-              src={`/images/avatar.svg`}
-              alt={'Demo account'}
+              src={user?.user_metadata?.avatar_url}
+              alt={user?.user_metadata?.full_name}
               width={36}
               height={36}
               style={{ maxWidth: '100%', objectFit: 'cover' }}
