@@ -17,9 +17,14 @@ export default async function Header({ user }: { user: User | null }) {
         <h1 className="font-black flex items-center gap-2 text-pink-600 text-2xl">
           <Icon /> <span className="mt-0.5">Subs Tracker</span>
         </h1>
-        {!user?.email ? (
-          <div className="absolute -right-11 text-white top-0 font-medium text-xs p-0.5 rounded bg-pink-600">demo</div>
-        ) : null}
+        <div
+          className={cn('absolute text-white top-0 font-medium text-xs p-0.5 rounded bg-pink-600', {
+            '-right-11': !user?.email,
+            '-right-9': user?.email,
+          })}
+        >
+          {!user?.email ? 'demo' : 'beta'}
+        </div>
       </Link>
       <div className="flex items-center gap-3">
         <Profile user={user} />
