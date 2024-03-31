@@ -7,16 +7,14 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { socialUrls } from 'config/urls';
 import { createClient } from 'lib/supabase/client';
 import { HelpCircleIcon, LogOut } from 'lucide-react';
+import { User } from 'types/data';
 
-import { useUser } from './context/user';
 import { GithubIcon } from './icons';
 
 // https://stackoverflow.com/a/33919020/266535
 const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
-export default function Profile() {
-  const { user } = useUser();
-
+export default function Profile({ user }: { user: User | null }) {
   const logout = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
@@ -27,27 +25,15 @@ export default function Profile() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          {!user?.email ? (
-            <Image
-              priority
-              className="h-9 w-9 rounded-full border border-input"
-              src={`/images/avatar.svg`}
-              alt={'Demo account'}
-              width={36}
-              height={36}
-              style={{ maxWidth: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <Image
-              priority
-              className="h-9 w-9 rounded-full border border-input"
-              src={user.avatar_url}
-              alt={user.full_name}
-              width={36}
-              height={36}
-              style={{ maxWidth: '100%', objectFit: 'cover' }}
-            />
-          )}
+          <Image
+            priority
+            className="h-9 w-9 rounded-full border border-input"
+            src={user?.avatar_url ?? `/images/avatar.svg`}
+            alt={user?.full_name ?? 'Demo account'}
+            width={36}
+            height={36}
+            style={{ maxWidth: '100%', objectFit: 'cover' }}
+          />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>

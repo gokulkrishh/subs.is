@@ -2,11 +2,12 @@ import Link from 'next/link';
 
 import { ThemeToggle } from 'components/theme-toggle';
 import { cn } from 'lib/utils';
+import { User } from 'types/data';
 
 import { Icon } from './icons';
 import Profile from './profile';
 
-export default function Header() {
+export default async function Header({ user }: { user: User | null }) {
   return (
     <header className={cn(`flex relative justify-between items-center`)}>
       <Link
@@ -18,7 +19,7 @@ export default function Header() {
         </h1>
       </Link>
       <div className="flex items-center gap-3">
-        <Profile />
+        <Profile user={user} />
         <ThemeToggle />
       </div>
     </header>

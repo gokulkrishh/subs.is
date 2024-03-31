@@ -85,7 +85,7 @@ export default async function RootLayout({
           <AuthProvider user={authUser}>
             <UserProvider user={userData}>
               <div className="px-4 py-2 flex flex-col w-full md:max-w-lg m-auto">
-                <Header />
+                <Header user={userData} />
                 {children}
               </div>
               <BottomBar />
