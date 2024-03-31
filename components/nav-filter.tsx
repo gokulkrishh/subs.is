@@ -16,7 +16,7 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
   const { resolvedTheme: theme } = useTheme();
 
   return (
-    <div className="flex justify-between sm:items-center flex-col gap-3 sm:flex-row">
+    <div className="flex justify-between sm:items-center flex-col gap-4 sm:flex-row">
       <h2 className="text-lg font-semibold">
         Subscriptions <span className="text-sm">({count})</span>
       </h2>
