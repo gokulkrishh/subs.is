@@ -16,11 +16,11 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
   const { resolvedTheme: theme } = useTheme();
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between sm:items-center flex-col gap-3 sm:flex-row">
       <h2 className="md:text-lg font-semibold">
         Subscriptions <span className="text-sm">({count})</span>
       </h2>
-      <div className="flex border border-input bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
+      <div className="flex border max-sm:self-end border-input max-w-fit bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }) => {
           const isDisabled = filterBy === summaryFilter.all.key && key !== navFilter.all.key;
           return (
@@ -31,7 +31,7 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
               disabled={isDisabled}
               key={key}
               className={cn(
-                `py-1.5 m-0.5 font-medium disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-3 capitalize w-fit text-[13px] tracking-wide relative rounded-md`,
+                `py-2 sm:py-1.5 m-0.5 font-medium disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-3 capitalize w-fit text-[13px] tracking-wide relative rounded-md`,
               )}
             >
               {label}
