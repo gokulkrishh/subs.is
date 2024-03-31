@@ -27,6 +27,10 @@ export const AuthProvider = (props: AuthProviderProps) => {
   const router = useRouter();
 
   useEffect(() => {
+    setUser(props.user);
+  }, [props.user]);
+
+  useEffect(() => {
     const {
       data: { subscription: authListener },
     } = supabase.auth.onAuthStateChange((event, currentSession: Session | null) => {

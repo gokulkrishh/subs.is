@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'components/ui/dropdown-menu';
-import { socialUrls, urls } from 'config/urls';
-import { Bug, Github, HelpCircleIcon, LogOut } from 'lucide-react';
+import { socialUrls } from 'config/urls';
+import { HelpCircleIcon, LogOut } from 'lucide-react';
 
 import { useAuth } from './context/auth';
 import { GithubIcon } from './icons';
