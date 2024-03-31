@@ -7,8 +7,8 @@ drop table if exists users cascade;
 CREATE TABLE users (
   id uuid references auth.users on delete cascade not null primary key,
   email text unique not null,
-  full_name text,
-  avatar_url text,
+  full_name text not null,
+  avatar_url text not null,
   updated_at timestamp with time zone default current_timestamp,
   created_at timestamp with time zone default current_timestamp,
   filter_by text not null default 'monthly'

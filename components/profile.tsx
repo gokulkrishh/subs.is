@@ -5,18 +5,20 @@ import Link from 'next/link';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'components/ui/dropdown-menu';
 import { socialUrls } from 'config/urls';
+import { createClient } from 'lib/supabase/client';
 import { HelpCircleIcon, LogOut } from 'lucide-react';
 
-import { useAuth } from './context/auth';
+import { useUser } from './context/user';
 import { GithubIcon } from './icons';
 
 // https://stackoverflow.com/a/33919020/266535
 const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default function Profile() {
-  const { user, supabase } = useAuth();
+  const { user } = useUser();
 
   const logout = async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
     window.location.href = '/';
   };
@@ -39,8 +41,8 @@ export default function Profile() {
             <Image
               priority
               className="h-9 w-9 rounded-full border border-input"
-              src={user?.user_metadata?.avatar_url}
-              alt={user?.user_metadata?.full_name}
+              src={user.avatar_url}
+              alt={user.full_name}
               width={36}
               height={36}
               style={{ maxWidth: '100%', objectFit: 'cover' }}

@@ -70,34 +70,34 @@ export type Database = {
       }
       users: {
         Row: {
-          avatar_url: string | null
+          avatar_url: string
           created_at: string | null
           currency_code: string
           email: string
           filter_by: string
-          full_name: string | null
+          full_name: string
           id: string
           plan_status: string | null
           updated_at: string | null
         }
         Insert: {
-          avatar_url?: string | null
+          avatar_url: string
           created_at?: string | null
           currency_code?: string
           email: string
           filter_by?: string
-          full_name?: string | null
+          full_name: string
           id: string
           plan_status?: string | null
           updated_at?: string | null
         }
         Update: {
-          avatar_url?: string | null
+          avatar_url?: string
           created_at?: string | null
           currency_code?: string
           email?: string
           filter_by?: string
-          full_name?: string | null
+          full_name?: string
           id?: string
           plan_status?: string | null
           updated_at?: string | null
