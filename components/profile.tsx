@@ -15,6 +15,8 @@ import { GithubIcon } from './icons';
 const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export default function Profile({ user }: { user: User | null }) {
+  if (!user?.email) return null;
+
   const logout = async () => {
     const supabase = createClient();
     await supabase.auth.signOut();
