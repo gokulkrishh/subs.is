@@ -17,7 +17,7 @@ const supabaseAdmin = createClient<Database>(
 export async function GET(request: NextRequest) {
   const isAuthorized = await verifyCronAuthorization(request);
   if (!isAuthorized) {
-    // return new Response('Unauthorized', { status: 401 });
+    return new Response('Unauthorized', { status: 401 });
   }
 
   try {

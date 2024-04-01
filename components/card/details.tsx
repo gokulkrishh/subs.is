@@ -111,7 +111,7 @@ export default function CardDetails(props: CardDetailsProps) {
                       await notifyMe();
                     }}
                     className={cn(`h-9 w-9 rounded-full text-primary transition-all`, {
-                      'bg-blue-600 !text-white border-blue-600 hover:bg-blue-500 active:bg-blue-500 hover:border-blue-500 active:border-blue-500':
+                      'bg-blue-600 !text-white border-blue-600 hover:bg-blue-700 active:bg-blue-700 hover:border-blue-700 active:border-blue-700':
                         subscription.notify,
                     })}
                   >
@@ -129,7 +129,7 @@ export default function CardDetails(props: CardDetailsProps) {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="mb-2 px-2">
-                  {subscription.notify ? 'Disable email reminder' : 'Enable email reminder 1 day before renewal.'}
+                  {subscription.notify ? 'Disable email reminder' : 'Get email reminder 1 day before renewal.'}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
