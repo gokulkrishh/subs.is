@@ -12,7 +12,7 @@ type NumberProps = {
   duration?: number;
 };
 
-export function SummaryNumber({ from, to, duration = 0.2 }: NumberProps) {
+export function SummaryNumber({ from, to, duration = 0.25 }: NumberProps) {
   const count = useMotionValue(from);
   const rounded = useTransform(count, (latest) => latest.toFixed(2));
 
@@ -21,5 +21,5 @@ export function SummaryNumber({ from, to, duration = 0.2 }: NumberProps) {
     return () => controls.stop();
   }, [duration, count, to]);
 
-  return <motion.span className="font-black">{rounded}</motion.span>;
+  return <motion.span className="font-black tabular-nums">{rounded}</motion.span>;
 }
