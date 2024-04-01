@@ -2,11 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 const title = 'Subs Tracker | Not Found';
-const description = 'Track and manage all your subscriptions from one app, without any hassle.';
 
 export const metadata: Metadata = {
   title,
-  description,
 };
 
 export default function NotFound() {

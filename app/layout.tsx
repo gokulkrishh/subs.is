@@ -16,7 +16,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 const title = 'Subs Tracker';
-const description = 'Track and manage all your subscriptions from one app, without any hassle.';
+const description = 'Track and organise all your subscriptions from one app, without any hassle.';
 
 const GOOGLE_ANALYTICS_ID = process.env.GA4_ANALYTICS_ID;
 

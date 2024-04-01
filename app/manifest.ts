@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    short_name: 'Subs',
+    short_name: 'Subs Tracker',
     name: 'Subs Tracker',
-    description: 'Track and manage all your subscriptions from one app, without any hassle.',
+    description: 'Track and organise all your subscriptions from one app, without any hassle.',
     display: 'standalone',
     orientation: 'portrait',
     icons: [
