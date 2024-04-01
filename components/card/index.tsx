@@ -50,7 +50,7 @@ export default function Card(props: CardProps) {
   return (
     <>
       <Summary user={user} subscriptions={data} />
-      <div className="flex flex-col my-10 mb-12">
+      <div className="flex flex-col my-8 mb-12">
         <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
         <NavFilter
           filterBy={user?.filter_by as keyof typeof summaryFilter}

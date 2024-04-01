@@ -15,7 +15,7 @@ export default function Loader() {
           <Skeleton className="w-48 h-[50px] bg-accent" />
         </div>
       </div>
-      <div className="flex flex-col my-10 mb-12">
+      <div className="flex flex-col my-8 mb-12">
         <SearchInput disabled />
         <NavSkeleton />
         <div className="flex gap-3 flex-col w-full my-6">

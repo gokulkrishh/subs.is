@@ -3,7 +3,7 @@ import { Skeleton } from 'components/ui/skeleton';
 
 export default async function Loader() {
   return (
-    <div className="flex flex-col my-10 mb-12">
+    <div className="flex flex-col my-8 mb-12">
       <div className="border-border pb-24 flex flex-col">
         <h2 className="font-medium mb-2">General</h2>
         <div className="flex gap-4 flex-col">

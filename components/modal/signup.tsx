@@ -80,6 +80,7 @@ export default function SignupModal({ open, onHide }: SignupModalProps) {
         <p className="text-muted-foreground font-medium mt-1 text-xs max-w-sm w-full leading-5 text-center">
           By clicking continue, you acknowledge that you have read and agree to{' '}
           <Link
+            onClick={() => onHide(false)}
             className="underline hover:text-primary active:text-primary transition-colors"
             href={`${urls.home}/terms`}
           >
@@ -87,6 +88,7 @@ export default function SignupModal({ open, onHide }: SignupModalProps) {
           </Link>{' '}
           &{' '}
           <Link
+            onClick={() => onHide(false)}
             className="underline hover:text-primary active:text-primary transition-colors"
             href={`${urls.home}/privacy`}
           >
