@@ -20,3 +20,7 @@ export const socialUrls = {
   help: 'mailto:support@subs.is',
   twitter: 'https://twitter.com/gokul_i',
 };
+
+export const reminder = {
+  from: 'support@subs.is',
+};

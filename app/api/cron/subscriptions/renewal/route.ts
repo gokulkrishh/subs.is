@@ -2,11 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { createClient } from '@supabase/supabase-js';
 import { paymentCycle } from 'config/data';
-import { format } from 'date-fns';
-import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
+import { reminder } from 'config/urls';
+import { format, sub } from 'date-fns';
+import ReminderEmail from 'emails/reminder';
+import { calculateRenewalDate } from 'lib/data';
+import { formatNumber } from 'lib/numbers';
 import { verifyCronAuthorization } from 'lib/utils';
+import { Resend } from 'resend';
 import { Subscriptions, User } from 'types/data';
 import { Database } from 'types/supabase';
+
+const resend = new Resend(process.env.RESEND_API_KEY ?? '');
 
 const supabaseAdmin = createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL ?? '',
@@ -33,6 +39,66 @@ export async function GET(request: NextRequest) {
 
     const today = new Date();
 
+    // To send email reminders to users for their subscriptions renewal
+    await Promise.allSettled(
+      users?.map(async (user: User) => {
+        const { data: subscriptions, error } = await supabaseAdmin
+          .from('subscriptions')
+          .select('user_id,id,name,cost,billing_date,payment_cycle,renewal_date')
+          .eq('user_id', user.id)
+          .eq('notify', true)
+          .returns<Subscriptions[]>();
+
+        const isRenewalToday = (subscription: Subscriptions) => {
+          const renewal_date = new Date(subscription.renewal_date ?? '');
+          return format(sub(renewal_date, { days: 1 }), 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
+        };
+
+        const yearlySubscriptions = subscriptions
+          ?.filter((sub) => sub.payment_cycle === paymentCycle.yearly.key)
+          ?.filter(isRenewalToday) as Subscriptions[];
+
+        const quarterlySubscriptions = subscriptions
+          ?.filter((sub) => sub.payment_cycle === paymentCycle.quarterly.key)
+          ?.filter(isRenewalToday) as Subscriptions[];
+
+        const monthlySubscriptions = subscriptions
+          ?.filter((sub) => sub.payment_cycle === paymentCycle.monthly.key)
+          ?.filter(isRenewalToday) as Subscriptions[];
+
+        if (error) {
+          throw new Error(`Unable to get subscriptions for email reminder: ${error.message}`);
+        }
+
+        const subscriptionsRenewals = [...yearlySubscriptions, ...quarterlySubscriptions, ...monthlySubscriptions];
+
+        await Promise.allSettled(
+          subscriptionsRenewals.map(async (sub: Subscriptions) => {
+            const { name, renewal_date, cost } = sub;
+            try {
+              await resend.emails.send({
+                from: reminder.from,
+                to: user.email,
+                subject: `🔔 Reminder: ${name} subscription will renew soon`,
+                react: ReminderEmail({
+                  name,
+                  cost: `${formatNumber({
+                    value: Number(parseFloat(cost).toFixed(2)),
+                    currency: user.currency_code,
+                  })}`,
+                  fullName: user.full_name,
+                  date: format(new Date(renewal_date ?? ''), 'dd MMM yyyy'),
+                }),
+              });
+            } catch (error: any) {
+              console.log('Error sending email reminder', error?.toString());
+            }
+          }),
+        );
+      }),
+    );
+
+    // To update the renewal date of the subscriptions for each user on the day of renewal
     await Promise.allSettled(
       users?.map(async (user: User) => {
         const { data: subscriptions, error } = await supabaseAdmin
@@ -93,9 +159,7 @@ export async function GET(request: NextRequest) {
       }),
     );
 
-    return NextResponse.json({
-      message: 'Renewal dates are updated successfully!',
-    });
+    return NextResponse.json('Done');
   } catch (error: any) {
     return NextResponse.json({ error: error.message });
   }

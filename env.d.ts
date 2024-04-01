@@ -7,5 +7,6 @@ namespace NodeJS {
     SUPABASE_SERVICE_ROLE_KEY: string;
     GA4_ANALYTICS_ID: string;
     CRON_SECRET: string;
+    RESEND_API_KEY: string;
   }
 }

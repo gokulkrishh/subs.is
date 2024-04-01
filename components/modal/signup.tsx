@@ -22,7 +22,7 @@ const Button = ({ loading, onClick }: ButtonProps) => {
   return (
     <button
       className={cn(
-        `items-center gap-2 mt-4 max-w-sm justify-center text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 hover:bg-primary/90 active:scale-[0.98] rounded-xl bg-primary px-6 py-4 text-secondary font-medium flex space-x-2 h-[40px] w-full`,
+        `items-center gap-2 mt-4 max-w-sm justify-center text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 hover:bg-primary/90 active:scale-[0.98] rounded-xl bg-primary px-6 py-4 text-secondary font-medium flex space-x-2 h-[42px] w-full`,
         {
           'bg-primary/80 cursor-default': loading,
         },
@@ -77,7 +77,7 @@ export default function SignupModal({ open, onHide }: SignupModalProps) {
           </DialogTitle>
         </DialogHeader>
         <Button loading={loading} onClick={onClickHandler} />
-        <p className="text-muted-foreground font-medium mt-1.5 text-xs max-w-sm w-full leading-5 text-left">
+        <p className="text-muted-foreground font-medium mt-1 text-xs max-w-sm w-full leading-5 text-center">
           By clicking continue, you acknowledge that you have read and agree to{' '}
           <Link
             className="underline hover:text-primary active:text-primary transition-colors"
