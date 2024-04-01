@@ -3,7 +3,6 @@
 import { navFilter, summaryFilter } from 'config/data';
 import { motion } from 'framer-motion';
 import { cn } from 'lib/utils';
-import { ListFilter } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 type NavFilterProps = {
@@ -21,7 +20,6 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
       <h2 className="text-lg font-semibold">
         Subscriptions <span className="text-sm">({count})</span>
       </h2>
-
       <div className="flex border max-sm:self-end border-input max-w-fit bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }) => {
           const isDisabled = filterBy === summaryFilter.all.key && key !== navFilter.all.key;
