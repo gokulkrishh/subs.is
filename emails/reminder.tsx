@@ -27,7 +27,7 @@ const ReminderEmail = ({
           <Heading className="font-extrabold gap-2 text-pink-600 text-2xl" style={h1}>
             <Img
               style={imgStyle}
-              src={`${urls.home}/images/icons/logo-pink.svg`}
+              src={`https://subs.is/images/icons/logo-pink.svg`}
               width="24"
               height="24"
               alt="Subs Tracker"
