@@ -4,8 +4,6 @@ import { SummaryNumber } from 'components/summary-number';
 import { getCurrencySymbol } from 'lib/numbers';
 import { Subscriptions, User } from 'types/data';
 
-import SummaryDropdown from './summary-dropdown';
-
 type SummaryProps = {
   subscriptions: Subscriptions[];
   user: User | null;
