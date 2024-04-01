@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { Body, Container, Head, Heading, Html, Link, Preview, Text } from '@react-email/components';
+import { Body, Container, Head, Heading, Html, Img, Link, Preview, Text } from '@react-email/components';
 import { Icon } from 'components/icons';
+import { urls } from 'config/urls';
 
 interface ReminderEmailProps {
   name: string;
@@ -22,9 +23,18 @@ const ReminderEmail = ({
 
     <Body style={main}>
       <Container style={container}>
-        <Heading className="font-black gap-2 text-pink-600 text-2xl" style={h1}>
-          <Icon style={logo} /> <span>Subs Tracker</span>
-        </Heading>
+        <Link href="https://subs.is" target="_blank">
+          <Heading className="font-extrabold gap-2 text-pink-600 text-2xl" style={h1}>
+            <Img
+              style={imgStyle}
+              src={`${urls.home}/images/icons/logo-pink.svg`}
+              width="24"
+              height="24"
+              alt="Subs Tracker"
+            />{' '}
+            <span>Subs Tracker</span>
+          </Heading>
+        </Link>
         <Text style={{ ...text, marginBottom: '5px' }}>
           Hi <b>{fullName}</b>,
         </Text>
@@ -74,13 +84,14 @@ const h1 = {
   fontSize: '24px',
   fontWeight: 'bold',
   margin: '40px 0',
+  marginBottom: '20px',
   padding: '0',
+  display: 'flex',
+  alignItems: 'center',
 };
 
-const logo = {
-  position: 'relative',
-  top: '3px',
-  marginRight: '3px',
+const imgStyle = {
+  marginRight: '8px',
 };
 
 const link = {
