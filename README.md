@@ -1,5 +1,5 @@
 <a href="https://subs.is">
-<p align="center"><img alt="Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle" width="100" height="100" src="./public/icons/icon.svg"></p>
+<p align="center"><img alt="Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle" width="100" height="100" src="./public/images/icons/logo.svg"></p>
   <h1 align="center">Subs Tracker</h1>
 </a>
 
@@ -35,7 +35,7 @@ Subs Tracker is an open-source application to track and organise all your subscr
 
 ### Implementation
 
-- Subs Tracker built using [NextJs](https://nextjs.org) v14 from scratch.
+- Subs Tracker built using [NextJs](https://nextjs.org) from scratch.
 - [Supabase](https://supabase.com/) is an open-source Firebase alternative, the data is stored in the Postgres database and uses google OAuth for authentication provided by supabase.
 - [Resend](https://resend.com) to send email reminders via React.
 
