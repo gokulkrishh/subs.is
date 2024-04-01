@@ -11,9 +11,6 @@ import { User } from 'types/data';
 
 import { GithubIcon } from './icons';
 
-// https://stackoverflow.com/a/33919020/266535
-const blurDataURL = `data:image/gif;base64,R0lGODlhAQABAPAAABsbG////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
-
 export default function Profile({ user }: { user: User | null }) {
   if (!user?.email) return null;
 
