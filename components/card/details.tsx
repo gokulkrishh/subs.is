@@ -31,16 +31,12 @@ export default function CardDetails(props: CardDetailsProps) {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const share = async () => {
-    try {
-      const shareData = {
-        text: `${getCurrencySymbol()} ${subscription} per ${subscription.payment_cycle}`,
-        title: subscription.name,
-        url: subscription.url || undefined,
-      };
-      await navigator?.share(shareData);
-    } catch (error) {
-      toast.error(error?.toString() || messages.share.error);
-    }
+    const shareData = {
+      text: `${getCurrencySymbol()} ${subscription} per ${subscription.payment_cycle}`,
+      title: subscription.name,
+      url: subscription.url || undefined,
+    };
+    await navigator?.share(shareData);
   };
 
   const onSubmit = async (subs: Subscriptions) => {
