@@ -293,7 +293,7 @@ function Form({ subscription, onSubmit, loading }: FormProps) {
         <textarea
           value={state.notes ?? ''}
           inputMode="text"
-          className="flex w-full read-only:bg-accent/30 rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 mt-3 h-24"
+          className="flex w-full read-only:bg-accent/30 transition-all rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 mt-3 h-24"
           maxLength={60}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setState({ ...state, notes: e.target.value })}
         />
