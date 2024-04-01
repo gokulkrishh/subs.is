@@ -26,7 +26,7 @@ export default async function Loader() {
               <Skeleton className="rounded-md text-sm mt-2 text-muted-foreground h-[20px] w-48 bg-accent border border-input" />
             </div>
             <div className="flex w-full justify-end border-t mt-4 border-border rounded-bl-lg rounded-br-lg p-2 px-3.5">
-              <Skeleton className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-accent hover:bg-accent hover:text-accent-foreground h-10 py-2 w-[78px] px-3 gap-2 text-ellipsis justify-start overflow-hidden" />
+              <Skeleton className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 border border-input bg-accent hover:bg-accent hover:text-accent-foreground h-10 py-2 w-[78px] px-3 gap-2 text-ellipsis justify-start overflow-hidden" />
             </div>
           </SettingsCard>
           <SettingsCard className="flex h-[155px] md:h-[135px] flex-col !p-0">
@@ -35,7 +35,7 @@ export default async function Loader() {
               <Skeleton className="rounded-md text-sm mt-2 text-muted-foreground h-[20px] w-56 bg-accent border border-input" />
             </div>
             <div className="flex w-full justify-end border-t mt-4 border-border rounded-bl-lg rounded-br-lg p-2 px-3.5">
-              <Skeleton className="inline-flex w-[91px] items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-accent hover:bg-accent hover:text-accent-foreground h-10 py-2 px-3 gap-2 text-ellipsis justify-start overflow-hidden" />
+              <Skeleton className="inline-flex w-[91px] items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 border border-input bg-accent hover:bg-accent hover:text-accent-foreground h-10 py-2 px-3 gap-2 text-ellipsis justify-start overflow-hidden" />
             </div>
           </SettingsCard>
         </div>
@@ -48,7 +48,7 @@ export default async function Loader() {
                 <Skeleton className="rounded-md text-sm mt-2 text-muted-foreground h-[20px] w-56 bg-accent border border-input" />
               </div>
               <div className="flex w-full bg-red-700/10 justify-end border-t mt-4 border-red-300 dark:border-red-500/30  rounded-bl-lg rounded-br-lg p-2 px-3.5">
-                <Skeleton className="inline-flex w-[88px] items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 p-3 font-normal" />
+                <Skeleton className="inline-flex w-[88px] items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 p-3 font-normal" />
               </div>
             </SettingsCard>
           </div>
