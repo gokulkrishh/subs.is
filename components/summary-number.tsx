@@ -17,7 +17,8 @@ export function SummaryNumber({ from, to, duration = 0.2 }: NumberProps) {
   const rounded = useTransform(count, (latest) => latest.toFixed(2));
 
   useEffect(() => {
-    animate(count, to, { duration });
+    const controls = animate(count, to, { duration });
+    return () => controls.stop();
   }, [duration, count, to]);
 
   return <motion.span className="font-black">{rounded}</motion.span>;

@@ -7,16 +7,13 @@ export default function CardSkeleton({ className = '' }: { className?: string })
     >
       <div className="flex gap-3 items-center">
         <Skeleton className="rounded-full border bg-accent border-input w-[44px] h-[44px]" />
-
         <div className="flex gap-2 flex-col items-start">
           <Skeleton className="w-20 h-4" />
           <Skeleton className="w-28 h-3" />
         </div>
       </div>
-      <div className="flex flex-col items-end w-fit">
-        <span className="text-sm text-muted-foreground">
-          <Skeleton className="w-20 h-4 !rounded-md" />
-        </span>
+      <div className="flex mt-1.5 flex-col items-end w-fit">
+        <Skeleton className="w-20 h-4 !rounded-md" />
         <Skeleton className="w-16 h-3 mt-2 !rounded-md" />
       </div>
     </div>
