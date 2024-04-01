@@ -15,7 +15,7 @@ export default function BottomBar() {
 
   return (
     <>
-      <div className="flex items-center backdrop-blur-xl mx-auto w-48 md:w-44 h-fit rounded-full border border-input bg-card-background px-2 py-1.5 md:py-1 md:px-1.5 fixed bottom-[18px] left-0 right-0">
+      <div className="flex items-center backdrop-blur-lg mx-auto w-48 md:w-44 h-fit rounded-full border border-input bg-card-background px-2 py-1.5 md:py-1 md:px-1.5 fixed bottom-[18px] left-0 right-0">
         <div className="flex gap-3 md:gap-2 items-center w-fit">
           <NavLink shortcut="h" title="Home" href="/" className="rounded-full p-2.5 md:p-2">
             <Home className="w-6 h-6 text-primary" />

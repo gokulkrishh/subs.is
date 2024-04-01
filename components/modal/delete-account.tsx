@@ -5,7 +5,7 @@ import { Button } from 'components/ui/button';
 import { Dialog, DialogContent } from 'components/ui/dialog';
 import { Input } from 'components/ui/input';
 
-type AddBookmarkProps = {
+type DeleteAccountModalProps = {
   open: boolean;
   loading: boolean;
   setOpen: (open: boolean) => void;
@@ -13,7 +13,7 @@ type AddBookmarkProps = {
   emailId: string;
 };
 
-export default function DeleteAccountModal({ open, setOpen, onSubmit, loading, emailId }: AddBookmarkProps) {
+export default function DeleteAccountModal({ open, setOpen, onSubmit, loading, emailId }: DeleteAccountModalProps) {
   const [email, setEmail] = useState('');
   return (
     <Dialog open={open} onOpenChange={() => setOpen(false)}>
