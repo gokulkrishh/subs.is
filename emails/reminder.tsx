@@ -25,13 +25,13 @@ const ReminderEmail = ({
       <Container style={container}>
         <Link href="https://subs.is" target="_blank">
           <Heading className="font-extrabold gap-2 text-pink-600 text-2xl" style={h1}>
-            <Img
+            {/* <Img
               style={imgStyle}
               src={`https://subs.is/images/icons/logo-pink.svg`}
               width="24"
               height="24"
               alt="Subs Tracker"
-            />{' '}
+            />{' '} */}
             <span>Subs Tracker</span>
           </Heading>
         </Link>
