@@ -64,7 +64,7 @@ export default function Card(props: CardProps) {
             data.map((subscription) => <CardInfo user={user} key={subscription.id} subscription={subscription} />)
           ) : (
             <div className="text-center mt-10 text-muted-foreground">
-              No {selected !== navFilter.all.key ? selected : ''} subscriptions.
+              No {selected !== navFilter.all.key ? selected : ''} subscriptions{search.length ? ' found.' : '.'}
             </div>
           )}
         </div>

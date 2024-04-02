@@ -101,14 +101,14 @@ export default function CardInfo(props: InfoProps) {
           )}
 
           <div className="flex flex-col items-start justify-center">
-            <h3 className="font-medium">{subscription.name}</h3>
+            <h3 className="font-medium truncate max-w-[200px] sm:max-w-[300px]">{subscription.name}</h3>
             <span
               title={`${isDue ? 'Due on ' : 'Renewal date '}${formatDate(subscription?.renewal_date ?? '')}`}
               className={cn(`text-[13px] mt-0.5 text-muted-foreground`, {
                 'text-red-500': isDue,
               })}
             >
-              {formatDate(subscription?.renewal_date ?? '')}
+              Due: {formatDate(subscription?.renewal_date ?? '')}
             </span>
           </div>
         </div>

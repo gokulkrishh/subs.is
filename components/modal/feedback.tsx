@@ -64,7 +64,7 @@ export default function FeedbackModal() {
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant={'outline'} className="h-8 text-xs px-2 rounded-md">
+        <Button variant={'outline'} className="h-8 text-xs px-2 tracking-wide rounded-md">
           Feedback
         </Button>
       </PopoverTrigger>
