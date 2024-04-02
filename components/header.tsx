@@ -19,11 +19,11 @@ export default async function Header({ user }: { user: User | null }) {
         <h1 className="font-black flex items-center gap-2 text-pink-600 text-2xl">
           <Icon /> <span>Subs Tracker</span>
         </h1>
-        {!user?.email ? (
+        {/* {!user?.email ? (
           <div className={'absolute text-white top-0 font-medium text-[11px] p-0.5 px-1 rounded -right-11 bg-blue-600'}>
             demo
           </div>
-        ) : null}
+        ) : null} */}
       </Link>
       <div className="flex items-center gap-4">
         <FeedbackModal />
