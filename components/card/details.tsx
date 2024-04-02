@@ -14,7 +14,7 @@ import messages from 'config/messages';
 import { calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
-import { Bell, BellOff, Share, Trash2Icon } from 'lucide-react';
+import { Bell, BellOff, BellRing, Share, Trash2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Subscriptions } from 'types/data';
 
@@ -118,7 +118,7 @@ export default function CardDetails(props: CardDetailsProps) {
                         })}
                       />
                     ) : subscription.notify ? (
-                      <Bell className="h-4 w-4" />
+                      <BellRing className="h-4 w-4" />
                     ) : (
                       <BellOff className="h-4 w-4" />
                     )}
