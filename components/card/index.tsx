@@ -10,12 +10,14 @@ import { filterDataByNav, filterDataBySearch } from 'lib/data';
 import { Subscriptions, User } from 'types/data';
 
 import CardInfo from './info';
+import CardSkeleton from './skeleton';
 
 type CardProps = { subscriptions: Subscriptions[]; user: User | null };
 
 export default function Card(props: CardProps) {
   const { subscriptions, user } = props;
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
   const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.monthly.key);
   const filterData = useCallback(
     (selected: keyof typeof navFilter, searchText: string) => {
@@ -28,6 +30,7 @@ export default function Card(props: CardProps) {
 
   useEffect(() => {
     setData(filterData(selected, search));
+    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subscriptions]);
 
@@ -59,7 +62,14 @@ export default function Card(props: CardProps) {
           onChange={onNavChangeHandler}
         />
         <div className="flex mt-6 mb-10 flex-col gap-3">
-          {data.length ? (
+          {loading ? (
+            <>
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+            </>
+          ) : data.length ? (
             data.map((subscription) => <CardInfo user={user} key={subscription.id} subscription={subscription} />)
           ) : (
             <div className="text-center mt-10 text-muted-foreground">
