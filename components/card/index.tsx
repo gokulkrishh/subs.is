@@ -6,7 +6,6 @@ import NavFilter from 'components/nav-filter';
 import Summary from 'components/summary';
 import { SearchInput } from 'components/ui/search-input';
 import { navFilter, summaryFilter } from 'config/data';
-import demoData from 'data/demo.json';
 import { filterDataByNav, filterDataBySearch } from 'lib/data';
 import { Subscriptions, User } from 'types/data';
 
@@ -20,10 +19,10 @@ export default function Card(props: CardProps) {
   const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.monthly.key);
   const filterData = useCallback(
     (selected: keyof typeof navFilter, searchText: string) => {
-      const filtered = filterDataByNav(user?.email ? subscriptions : demoData, selected);
+      const filtered = filterDataByNav(subscriptions, selected);
       return filterDataBySearch(filtered, searchText);
     },
-    [subscriptions, user?.email],
+    [subscriptions],
   );
   const [data, setData] = useState<Subscriptions[]>(filterData(selected, search));
 
