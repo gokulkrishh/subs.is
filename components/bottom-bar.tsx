@@ -20,18 +20,7 @@ export default function BottomBar() {
           <NavLink shortcut="h" title="Home" href="/" className="rounded-full p-2.5 md:p-2">
             <Home className="w-6 h-6 text-primary" />
           </NavLink>
-          <NavLink
-            shortcut="s"
-            title="Settings"
-            onClick={(event: React.SyntheticEvent) => {
-              if (!user?.email) {
-                event?.preventDefault();
-                setOpen(true);
-              }
-            }}
-            href="/settings"
-            className="rounded-full p-2.5"
-          >
+          <NavLink shortcut="s" title="Settings" href="/settings" className="rounded-full p-2.5">
             <Settings className="w-6 h-6 text-primary" />
           </NavLink>
         </div>
