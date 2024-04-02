@@ -1,5 +1,6 @@
 import { getUser } from 'app/actions/user';
 import AccountCard from 'components/settings/account-card';
+import Appearance from 'components/settings/appearance-card';
 import CurrencyCard from 'components/settings/currency-card';
 import DeleteCard from 'components/settings/delete-card';
 import ExportCard from 'components/settings/export-card';
@@ -13,6 +14,7 @@ export default async function Page() {
         <h2 className="font-medium mb-2">General</h2>
         <div className="flex gap-4 flex-col">
           <AccountCard user={user} />
+          <Appearance />
           <CurrencyCard user={user} />
           <ExportCard user={user} />
         </div>

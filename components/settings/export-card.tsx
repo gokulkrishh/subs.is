@@ -31,7 +31,7 @@ export default function ExportCard({ user }: { user: User | null }) {
   };
 
   return (
-    <SettingsCard className="h-fi flex flex-col !p-0">
+    <SettingsCard className="flex flex-col !p-0">
       <div className="flex flex-col pb-0 w-full p-3 px-4">
         <h3 className="font-medium relative">Export data</h3>
         <div className="text-sm mt-1 text-muted-foreground">

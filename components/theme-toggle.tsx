@@ -5,17 +5,19 @@ import { cn } from 'lib/utils';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
+import { Button } from './ui/button';
+
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="inline-flex bg-neutral-50 dark:bg-neutral-800/30 transition-colors border border-input p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <Button variant={'outline'} className="p-2 px-3">
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem className={cn({ 'bg-accent': theme === 'light' })} onClick={() => setTheme('light')}>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { createClient } from '@supabase/supabase-js';
 import { paymentCycle } from 'config/data';
-import { reminder } from 'config/urls';
+import { email } from 'config/urls';
 import { format, sub } from 'date-fns';
 import ReminderEmail from 'emails/reminder';
 import { calculateRenewalDate } from 'lib/data';
@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
             const { name, renewal_date, cost } = sub;
             try {
               await resend.emails.send({
-                from: reminder.from,
+                from: email.from,
                 to: user.email,
                 subject: `🔔 Reminder: ${name} subscription will renew soon`,
                 react: ReminderEmail({

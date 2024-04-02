@@ -43,6 +43,10 @@ const messages = {
   share: {
     error: 'Failed to share subscription',
   },
+  feedback: {
+    success: 'Feedback sent successfully',
+    error: 'Unable to send feedback, try again',
+  },
 };
 
 export default messages;

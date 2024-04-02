@@ -23,7 +23,7 @@ export default function Profile({ user }: { user: User | null }) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <DropdownMenuTrigger className="rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Image
             priority
             className="h-9 w-9 rounded-full border border-input"

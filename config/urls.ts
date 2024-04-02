@@ -21,6 +21,6 @@ export const socialUrls = {
   twitter: 'https://twitter.com/gokul_i',
 };
 
-export const reminder = {
+export const email = {
   from: 'support@subs.is',
 };

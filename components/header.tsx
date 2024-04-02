@@ -5,6 +5,7 @@ import { cn } from 'lib/utils';
 import { User } from 'types/data';
 
 import { Icon } from './icons';
+import FeedbackModal from './modal/feedback';
 import Profile from './profile';
 
 export default async function Header({ user }: { user: User | null }) {
@@ -17,18 +18,15 @@ export default async function Header({ user }: { user: User | null }) {
         <h1 className="font-black flex items-center gap-2 text-pink-600 text-2xl">
           <Icon /> <span className="mt-0.5">Subs Tracker</span>
         </h1>
-        <div
-          className={cn('absolute text-white top-0 font-medium text-[11px] p-0.5 px-1 rounded', {
-            '-right-11 bg-blue-600': !user?.email,
-            '-right-10 bg-blue-600': user?.email,
-          })}
-        >
-          {!user?.email ? 'demo' : 'beta'}
-        </div>
+        {!user?.email ? (
+          <div className={'absolute text-white top-0 font-medium text-[11px] p-0.5 px-1 rounded -right-11 bg-blue-600'}>
+            demo
+          </div>
+        ) : null}
       </Link>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
+        <FeedbackModal />
         <Profile user={user} />
-        <ThemeToggle />
       </div>
     </header>
   );
