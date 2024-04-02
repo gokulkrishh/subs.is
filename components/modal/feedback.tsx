@@ -12,7 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from 'components/ui/dialog';
+import { Popover, PopoverContent, PopoverTrigger } from 'components/ui/popover';
 import messages from 'config/messages';
+import { useMediaQuery } from 'hooks/use-media-query';
 import { cn } from 'lib/utils';
 import { toast } from 'sonner';
 
@@ -25,8 +27,11 @@ export default function FeedbackModal() {
   const [feedback, setFeedback] = useState({ emoji: '', message: '' });
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   if (!user) return null;
+
+  const reset = () => setFeedback({ emoji: '', message: '' });
 
   const onSubmit = async () => {
     try {
@@ -42,31 +47,30 @@ export default function FeedbackModal() {
     } catch (error) {
       toast.error(error?.toString() || messages.feedback.error);
     } finally {
-      setFeedback({ emoji: '', message: '' });
+      reset();
       setLoading(false);
       setOpen(false);
     }
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant={'outline'} className="h-8 bg-accent/80 text-xs px-2 rounded-md">
+    <Popover
+      open={open}
+      onOpenChange={(isOpen: boolean) => {
+        if (isOpen) {
+          reset();
+        }
+        setOpen(isOpen);
+      }}
+    >
+      <PopoverTrigger asChild>
+        <Button variant={'outline'} className="h-8 text-xs px-2 rounded-md">
           Feedback
         </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-sm w-[calc(100%-20px)] bg-background rounded-xl">
-        <DialogHeader>
-          <DialogTitle className="tracking-normal items-center flex-col flex">
-            <div className="font-bold flex items-center gap-2 text-primary text-2xl tracking-tight">
-              <span className="mt-0.5">Leave Feedback</span>
-            </div>
-            <DialogDescription className="mt-1.5 text-sm text-muted-foreground">
-              Tell us what you liked or how we can improve!
-            </DialogDescription>
-          </DialogTitle>
-        </DialogHeader>
+      </PopoverTrigger>
+      <PopoverContent className="w-sm mt-1 max-sm:mr-1 p-0 bg-background rounded-lg">
         <form
+          className="mt-2 w-full block px-2"
           onSubmit={async (event) => {
             event.preventDefault();
             await onSubmit();
@@ -75,41 +79,40 @@ export default function FeedbackModal() {
           <textarea
             value={feedback.message}
             inputMode="text"
-            className="flex w-full rounded-md transition-all border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 mt-1.5 h-24"
+            placeholder="how we can improve!"
+            className="flex w-full rounded-md transition-all border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 mt-1.5 h-24"
             maxLength={60}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               setFeedback({ ...feedback, message: e.target.value })
             }
+            required
           />
-          <div className="flex my-4 items-center gap-3">
-            {feedbackEmojis.map((feedbackEmoji) => (
-              <Button
-                type="button"
-                key={feedbackEmoji}
-                onClick={() => setFeedback({ ...feedback, emoji: feedbackEmoji })}
-                className={cn(`text-lg p-1 px-3`, {
-                  'bg-accent': feedback.emoji === feedbackEmoji,
-                })}
-                variant={'outline'}
-              >
-                {feedbackEmoji}
-              </Button>
-            ))}
+          <div className="flex justify-between my-2.5 items-center w-full">
+            <div className="flex items-center gap-1">
+              {feedbackEmojis.map((feedbackEmoji) => (
+                <Button
+                  type="button"
+                  key={feedbackEmoji}
+                  onClick={() => setFeedback({ ...feedback, emoji: feedbackEmoji })}
+                  className={cn(
+                    `text-lg p-0 w-8 h-8 rounded-full border-0 hover:bg-blue-700/20 active:bg-blue-700/20 dark:hover:bg-blue-700/30 dark:active:bg-blue-700/30 `,
+                    {
+                      'bg-blue-700/20 dark:bg-blue-700/30': feedback.emoji === feedbackEmoji,
+                    },
+                  )}
+                  variant={'outline'}
+                >
+                  {feedbackEmoji}
+                </Button>
+              ))}
+            </div>
+            <Button className="min-w-16 h-9 gap-2 p-2 px-3" disabled={loading} type="submit">
+              {loading ? <Loader className="dark:text-black text-white h-3.5 w-3.5" /> : null}
+              Submit
+            </Button>
           </div>
-          <Button
-            variant={'outline'}
-            disabled={loading || feedback.message?.trim()?.length === 0}
-            className={cn(
-              `items-center gap-2 mt-2 max-w-sm justify-center hover:text-black active:text-black text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 hover:bg-primary/90 active:scale-[0.98] rounded-xl bg-primary px-6 py-4 text-secondary font-medium flex space-x-2 h-[42px] w-full`,
-              { 'bg-primary/80 cursor-default': loading },
-            )}
-            type="submit"
-          >
-            {loading ? <Loader className="text-white dark:text-black" /> : null}
-            Submit
-          </Button>
         </form>
-      </DialogContent>
-    </Dialog>
+      </PopoverContent>
+    </Popover>
   );
 }
