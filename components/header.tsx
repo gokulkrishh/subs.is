@@ -7,6 +7,7 @@ import { User } from 'types/data';
 import { Icon } from './icons';
 import FeedbackModal from './modal/feedback';
 import Profile from './profile';
+import SignupButton from './signup-button';
 
 export default async function Header({ user }: { user: User | null }) {
   return (
@@ -27,6 +28,7 @@ export default async function Header({ user }: { user: User | null }) {
       <div className="flex items-center gap-4">
         <FeedbackModal />
         <Profile user={user} />
+        <SignupButton user={user} />
       </div>
     </header>
   );
