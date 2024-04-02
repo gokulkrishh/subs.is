@@ -1,0 +1,13 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/subscriptions/renewal",
+      "schedule": "0 0 * * *"
+    }
+  ],
+  "functions": {
+    "app/api/cron/subscriptions/renewal/*.ts": {
+      "maxDuration": 300
+    }
+  }
+}
