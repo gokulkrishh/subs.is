@@ -11,7 +11,7 @@ import SignupButton from './signup-button';
 
 export default async function Header({ user }: { user: User | null }) {
   return (
-    <header className={cn(`flex mt-1 relative justify-between items-center`)}>
+    <header className={cn(`flex h-9 mt-1 relative justify-between items-center`)}>
       <Link
         className="active:opacity-85 -mt-0.5 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
         href="/"
