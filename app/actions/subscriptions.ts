@@ -3,7 +3,6 @@
 import { revalidateTag } from 'next/cache';
 
 import messages from 'config/messages';
-import demoData from 'data/demo.json';
 import { createClient } from 'lib/supabase/server';
 import { Subscriptions, SubscriptionsInsert, SubscriptionsUpdate } from 'types/data';
 
@@ -12,8 +11,7 @@ import { getAuthUser } from './user';
 export const getSubscriptions = async () => {
   const user = await getAuthUser();
   if (!user) {
-    // Show demo data for when not logged in
-    return demoData;
+    return [];
   }
   const supabase = await createClient();
 

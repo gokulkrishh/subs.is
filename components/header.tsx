@@ -18,9 +18,9 @@ export default async function Header({ user }: { user: User | null }) {
           <Icon /> <span className="mt-0.5">Subs Tracker</span>
         </h1>
         <div
-          className={cn('absolute text-white top-0 font-medium text-[11px] p-0.5 px-1 rounded bg-pink-600', {
-            '-right-11': !user?.email,
-            '-right-10': user?.email,
+          className={cn('absolute text-white top-0 font-medium text-[11px] p-0.5 px-1 rounded', {
+            '-right-11 bg-blue-600': !user?.email,
+            '-right-10 bg-blue-600': user?.email,
           })}
         >
           {!user?.email ? 'demo' : 'beta'}
