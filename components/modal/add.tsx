@@ -19,7 +19,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
 import { SubscriptionsInsert, User } from 'types/data';
 
-type AddProps = { user: User | undefined; showSignup: (show: boolean) => void };
+type AddProps = { user: User | null; showSignup: (show: boolean) => void };
 
 export default function Add({ user, showSignup }: AddProps) {
   const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function Add({ user, showSignup }: AddProps) {
 }
 
 type FormProps = {
-  user: User | undefined;
+  user: User | null;
   loading: boolean;
   onSubmit: (subscription: SubscriptionsInsert) => void;
 };

@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { urls } from 'config/urls';
 import { createClient } from 'lib/supabase/client';
 import { cn } from 'lib/utils';
+import { User } from 'types/data';
 
 import { useAuth } from '../context/auth';
 
@@ -38,13 +39,13 @@ const Button = ({ loading, onClick }: ButtonProps) => {
 type SignupModalProps = {
   open: boolean;
   onHide: (open: boolean) => void;
+  user: User | null;
 };
 
-export default function SignupModal({ open, onHide }: SignupModalProps) {
+export default function SignupModal({ open, onHide, user }: SignupModalProps) {
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
 
-  if (user) return null;
+  if (user?.email) return null;
 
   const onClickHandler = async () => {
     setLoading(true);

@@ -1,4 +1,5 @@
 import Card from 'components/card';
+import demoData from 'data/demo.json';
 
 import { getSubscriptions } from './actions/subscriptions';
 import { getUser } from './actions/user';
@@ -8,7 +9,7 @@ export default async function Page() {
 
   return (
     <main className="flex flex-col mt-10">
-      <Card user={user} subscriptions={subscriptions} />
+      <Card user={user} subscriptions={subscriptions.length ? subscriptions : demoData} />
     </main>
   );
 }

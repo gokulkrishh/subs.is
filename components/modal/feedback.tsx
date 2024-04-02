@@ -4,32 +4,22 @@ import { useState } from 'react';
 
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from 'components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from 'components/ui/popover';
 import messages from 'config/messages';
-import { useMediaQuery } from 'hooks/use-media-query';
 import { cn } from 'lib/utils';
 import { toast } from 'sonner';
+import { User } from 'types/data';
 
 import { useAuth } from '../context/auth';
 
 const feedbackEmojis = ['😞', '🙂', '😁'];
 
-export default function FeedbackModal() {
+export default function FeedbackModal({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
   const [feedback, setFeedback] = useState({ emoji: '', message: '' });
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
-  const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  if (!user) return null;
+  if (!user?.email) return null;
 
   const reset = () => setFeedback({ emoji: '', message: '' });
 

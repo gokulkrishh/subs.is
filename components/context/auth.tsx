@@ -37,7 +37,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
       if (event === 'TOKEN_REFRESHED' || event === 'SIGNED_IN') {
         router.refresh();
       }
-      if (event == 'SIGNED_OUT') {
+      if (event === 'SIGNED_OUT') {
         window.location.href = urls.home;
       }
       if (currentSession?.user) {

@@ -3,15 +3,14 @@
 import { useState } from 'react';
 
 import { Home, Settings } from 'lucide-react';
+import { User } from 'types/data';
 
-import { useUser } from './context/user';
 import Add from './modal/add';
 import SignupModal from './modal/signup';
 import NavLink from './nav-link';
 
-export default function BottomBar() {
+export default function BottomBar({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
-  const { user } = useUser();
 
   return (
     <>
@@ -31,7 +30,7 @@ export default function BottomBar() {
           <Add showSignup={setOpen} user={user} />
         </div>
       </div>
-      {open && !user?.email ? <SignupModal open={open} onHide={setOpen} /> : null}
+      {open ? <SignupModal user={user} open={open} onHide={setOpen} /> : null}
     </>
   );
 }

@@ -15,7 +15,7 @@ import SettingsCard from './settings-card';
 export default function ExportCard({ user }: { user: User | null }) {
   const [loading, setLoading] = useState(false);
 
-  if (!user) return null;
+  if (!user?.email) return null;
 
   const onClickHandler = async () => {
     try {

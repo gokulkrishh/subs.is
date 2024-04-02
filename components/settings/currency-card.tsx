@@ -7,7 +7,7 @@ import { User } from 'types/data';
 import SettingsCard from './settings-card';
 
 export default function CurrencyCard({ user }: { user: User | null }) {
-  if (!user) return null;
+  if (!user?.email) return null;
 
   return (
     <SettingsCard className="flex flex-col !p-0">

@@ -88,7 +88,7 @@ export default async function RootLayout({
                 <Header user={userData} />
                 {children}
               </div>
-              <BottomBar />
+              <BottomBar user={userData} />
             </UserProvider>
           </AuthProvider>
           <Toaster />

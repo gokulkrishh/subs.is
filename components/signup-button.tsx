@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { User } from 'types/data';
 
@@ -9,15 +9,22 @@ import { Button } from './ui/button';
 
 export default function SignupButton({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [user?.email]);
 
   if (user?.email) return null;
 
   return (
     <>
-      <Button className="font-medium" onClick={() => setOpen(!open)} variant={'default'} size={'sm'}>
-        Sign in
-      </Button>
-      {open && !user?.email ? <SignupModal open={open} onHide={setOpen} /> : null}
+      {!loading ? (
+        <Button className="font-medium" onClick={() => setOpen(!open)} variant={'default'} size={'sm'}>
+          Sign in
+        </Button>
+      ) : null}
+      {open && !user?.email ? <SignupModal user={user} open={open} onHide={setOpen} /> : null}
     </>
   );
 }

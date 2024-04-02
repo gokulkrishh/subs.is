@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 
+import { revalidatePath } from 'next/cache';
+
 import { useAuth } from 'components/context/auth';
 import DeleteAccountModal from 'components/modal/delete-account';
 import { Button } from 'components/ui/button';
 import messages from 'config/messages';
+import { createClient } from 'lib/supabase/client';
 import { Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -14,9 +17,9 @@ import SettingsCard from './settings-card';
 export default function DeleteCard() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { user, supabase } = useAuth();
+  const { user } = useAuth();
 
-  if (!user) return null;
+  if (!user?.email) return null;
 
   const onSubmit = async (email: string) => {
     try {
@@ -28,6 +31,7 @@ export default function DeleteCard() {
       if (!response.ok) {
         throw new Error(messages.account.delete.error);
       }
+      const supabase = createClient();
       await supabase.auth.signOut();
       window.location.href = '/';
     } catch (error) {
