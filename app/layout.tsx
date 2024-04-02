@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: [
       {
         type: 'image/jpeg',
-        url: '/images/og.jpg',
+        url: '/images/og.png',
         width: 1920,
         height: 1080,
         alt: 'Subs Tracker',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     images: [
       {
         type: 'image/jpeg',
-        url: '/images/og.jpg',
+        url: '/images/og.png',
         width: 1200,
         height: 630,
         alt: 'Subs Tracker',
