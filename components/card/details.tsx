@@ -32,7 +32,7 @@ export default function CardDetails(props: CardDetailsProps) {
 
   const share = async () => {
     const shareData = {
-      text: `${getCurrencySymbol()} ${subscription.cost} per ${subscription.payment_cycle}`,
+      text: `${getCurrencySymbol()} ${subscription.cost} ${subscription.payment_cycle}`,
       title: subscription.name,
       url: subscription.url || undefined,
     };
