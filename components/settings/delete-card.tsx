@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 
-import { revalidatePath } from 'next/cache';
-
 import { useAuth } from 'components/context/auth';
+import { DeleteIcon } from 'components/icons';
 import DeleteAccountModal from 'components/modal/delete-account';
 import { Button } from 'components/ui/button';
 import messages from 'config/messages';
 import { createClient } from 'lib/supabase/client';
-import { Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import SettingsCard from './settings-card';
@@ -51,7 +49,7 @@ export default function DeleteCard() {
       </div>
       <div className="flex w-full bg-red-700/10 justify-end border-t mt-4 border-red-300 dark:border-red-500/30  rounded-bl-lg rounded-br-lg p-2 px-3.5">
         <Button className="p-3 font-normal" variant="destructive" onClick={() => setOpen(!open)}>
-          <Trash2 className="w-3.5 h-3.5 mr-2" />
+          <DeleteIcon className="w-4 h-4 mr-2" />
           Delete
         </Button>
       </div>

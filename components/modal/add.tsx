@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import { createSubscription } from 'app/actions/subscriptions';
+import { AddIcon } from 'components/icons';
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
 import { Drawer, DrawerContent } from 'components/ui/drawer';
@@ -62,7 +63,7 @@ export default function Add({ user, showSignup }: AddProps) {
             onClick={onClick}
             className="rounded-full transition-colors p-2.5 md:p-2 bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring components/theme-toggle.tsx"
           >
-            <Plus className="w-6 h-6 text-white" />
+            <AddIcon className="w-6 h-6 text-white" />
           </button>
         </TooltipTrigger>
         <TooltipContent side="top" className="mb-2 px-2">

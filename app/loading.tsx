@@ -1,5 +1,4 @@
 import CardSkeleton from 'components/card/skeleton';
-import { ArrowDownIcon } from 'components/icons';
 import NavSkeleton from 'components/nav-skeleton';
 import { SearchInput } from 'components/ui/search-input';
 import { Skeleton } from 'components/ui/skeleton';

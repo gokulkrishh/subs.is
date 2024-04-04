@@ -14,7 +14,7 @@ import { Check } from 'lucide-react';
 import { toast } from 'sonner';
 import { Currency, User } from 'types/data';
 
-import { ArrowDownIcon } from './icons';
+import { DownArrowIcon } from './icons';
 import Loader from './loader';
 
 const data = currencyData as { [key: string]: Currency };
@@ -51,7 +51,7 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
             variant="outline"
             className="w-[78px] font-normal px-3 gap-2 text-ellipsis justify-start overflow-hidden"
           >
-            {loading ? <Loader className="w-3.5 h-3.5" /> : <ArrowDownIcon className="w-3.5 h-3.5" />}
+            {loading ? <Loader className="w-4 h-4" /> : <DownArrowIcon className="w-4 h-4" />}
             {selected ? <>{selected.code}</> : <>Select currency</>}
           </Button>
         </PopoverTrigger>
@@ -66,7 +66,7 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="outline" className="w-[78px] px-3 gap-2 text-ellipsis justify-start overflow-hidden">
-          {loading ? <Loader className="w-3.5 h-3.5" /> : <ArrowDownIcon className="w-3.5 h-3.5" />}
+          {loading ? <Loader className="w-4 h-4" /> : <DownArrowIcon className="w-4 h-4" />}
           {selected ? <>{selected.code}</> : <>Select currency</>}
         </Button>
       </DrawerTrigger>

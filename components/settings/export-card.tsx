@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 import { exportSubscriptions } from 'app/actions/subscriptions';
+import { ExportIcon } from 'components/icons';
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
 import { exportAsCSV } from 'lib/export';
-import { Download } from 'lucide-react';
 import { toast } from 'sonner';
 import { User } from 'types/data';
 
@@ -40,7 +40,7 @@ export default function ExportCard({ user }: { user: User | null }) {
       </div>
       <div className="flex w-full justify-end border-t mt-4 border-border p-2 px-3.5">
         <Button className="px-3 gap-2 font-normal" variant="outline" onClick={onClickHandler}>
-          {loading ? <Loader className="w-3.5 h-3.5" /> : <Download className="w-3.5 h-3.5" />} Export
+          {loading ? <Loader className="w-4 h-4" /> : <ExportIcon className="w-4 h-4" />} Export
         </Button>
       </div>
     </SettingsCard>

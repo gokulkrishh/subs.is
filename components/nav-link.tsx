@@ -10,16 +10,20 @@ import { useTheme } from 'next-themes';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 type NavLinkProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   href: string;
   onClick?: (event: any) => void;
   className?: string;
   title: string;
   shortcut: string;
+  Icon: React.ComponentType<{
+    isActive?: boolean;
+    className: string;
+  }>;
 };
 
 export default function NavLink(props: NavLinkProps) {
-  const { children, title, href, shortcut, className = '', ...otherProps } = props;
+  const { children, title, href, shortcut, className = '', Icon, ...otherProps } = props;
   const pathname = usePathname();
   const router = useRouter();
   const { resolvedTheme: theme } = useTheme();
@@ -44,7 +48,7 @@ export default function NavLink(props: NavLinkProps) {
             )}
             {...otherProps}
           >
-            {children}
+            {children ? children : <Icon className="w-6 h-6 text-primary" isActive={pathname === href} />}
             {pathname === href && (
               <motion.div
                 layoutId={`nav-link`}

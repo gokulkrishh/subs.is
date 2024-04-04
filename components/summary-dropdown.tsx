@@ -8,7 +8,7 @@ import { cn } from 'lib/utils';
 import { toast } from 'sonner';
 import { User } from 'types/data';
 
-import { ArrowDownIcon } from './icons';
+import { DownArrowIcon } from './icons';
 
 export default function SummaryDropdown({ user }: { user: User | null }) {
   const [filterBy, setFilterBy] = useState<keyof typeof summaryFilter>(
@@ -50,7 +50,7 @@ export default function SummaryDropdown({ user }: { user: User | null }) {
             </option>
           ))}
         </select>
-        <ArrowDownIcon className="ml-0.5 absolute -right-5 h-4 w-4 text-primary" />
+        <DownArrowIcon className="ml-0.5 absolute -right-5 h-4 w-4 text-primary" />
       </div>
     </h2>
   );
