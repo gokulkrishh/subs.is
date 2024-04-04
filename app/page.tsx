@@ -9,7 +9,7 @@ export default async function Page() {
 
   return (
     <main className="flex flex-col mt-10">
-      <Card user={user} subscriptions={subscriptions.length ? subscriptions : demoData} />
+      <Card user={user} subscriptions={user?.email ? subscriptions : demoData} />
     </main>
   );
 }
