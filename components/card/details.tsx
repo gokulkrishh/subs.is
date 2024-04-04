@@ -85,7 +85,7 @@ export default function CardDetails(props: CardDetailsProps) {
       <DrawerContent className="px-4 min-h-[500px] pb-6">
         <div className="flex relative flex-col mt-2 w-full md:max-w-sm mx-auto items-center gap-3">
           <div className="flex w-full gap-3 justify-end absolute -top-0.5">
-            {true ? (
+            {typeof window !== 'undefined' && navigator && !!navigator?.share ? (
               <Button
                 variant={'outline'}
                 size={'icon'}
