@@ -67,9 +67,7 @@ export default function CardInfo(props: InfoProps) {
               {subscription.notify ? (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger>
-                      <span className="rounded-full bg-blue-500 h-2 w-2 absolute -right-0 -top-0" />
-                    </TooltipTrigger>
+                    <TooltipTrigger className="absolute -right-0 -top-0 rounded-full bg-blue-500 h-2 w-2" />
                     <TooltipContent>
                       <p className="text-xs">Email reminder is enabled</p>
                     </TooltipContent>
