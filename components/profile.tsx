@@ -6,10 +6,9 @@ import Link from 'next/link';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'components/ui/dropdown-menu';
 import { socialUrls } from 'config/urls';
 import { createClient } from 'lib/supabase/client';
-import { HelpCircleIcon, LogOut } from 'lucide-react';
 import { User } from 'types/data';
 
-import { GithubIcon } from './icons';
+import { GithubIcon, HelpIcon, LogoutIcon } from './icons';
 
 export default function Profile({ user }: { user: User | null }) {
   if (!user?.email) return null;
@@ -37,18 +36,18 @@ export default function Profile({ user }: { user: User | null }) {
         <DropdownMenuContent align="end">
           <DropdownMenuItem>
             <Link className="flex items-center" target="_blank" href={socialUrls.github}>
-              <GithubIcon />
+              <GithubIcon className="h-4 w-4 mr-2" />
               Github
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link className="flex items-center" target="_blank" href={socialUrls.help}>
-              <HelpCircleIcon className="h-4 w-4 mr-2" />
+              <HelpIcon className="h-4 w-4 mr-2" />
               Help
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={logout}>
-            <LogOut className="h-4 w-4 mr-2" />
+            <LogoutIcon className="h-4 w-4 mr-2" />
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>

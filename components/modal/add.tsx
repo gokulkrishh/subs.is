@@ -15,7 +15,6 @@ import { paymentCycle } from 'config/data';
 import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
-import { Plus } from 'lucide-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
 import { SubscriptionsInsert, User } from 'types/data';

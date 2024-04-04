@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { deleteSubscription, updateSubscription } from 'app/actions/subscriptions';
 import { useUser } from 'components/context/user';
+import { BellOffIcon, BellOnIcon, DeleteIcon, ShareIcon } from 'components/icons';
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
 import { Drawer, DrawerContent } from 'components/ui/drawer';
@@ -14,7 +15,6 @@ import messages from 'config/messages';
 import { calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
-import { Bell, BellOff, BellRing, Share, Trash2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Subscriptions } from 'types/data';
 
@@ -85,7 +85,7 @@ export default function CardDetails(props: CardDetailsProps) {
       <DrawerContent className="px-4 min-h-[500px] pb-6">
         <div className="flex relative flex-col mt-2 w-full md:max-w-sm mx-auto items-center gap-3">
           <div className="flex w-full gap-3 justify-end absolute -top-0.5">
-            {typeof window !== 'undefined' && navigator && !!navigator?.share ? (
+            {true ? (
               <Button
                 variant={'outline'}
                 size={'icon'}
@@ -94,7 +94,7 @@ export default function CardDetails(props: CardDetailsProps) {
                 }}
                 className="h-9 w-9 rounded-full"
               >
-                <Share className="h-4 w-4" />
+                <ShareIcon className="h-4 w-4" />
               </Button>
             ) : null}
             <TooltipProvider>
@@ -118,9 +118,9 @@ export default function CardDetails(props: CardDetailsProps) {
                         })}
                       />
                     ) : subscription.notify ? (
-                      <BellRing className="h-4 w-4" />
+                      <BellOnIcon className="h-4 w-4" />
                     ) : (
-                      <BellOff className="h-4 w-4" />
+                      <BellOffIcon className="h-4 w-4" />
                     )}
                   </Button>
                 </TooltipTrigger>
@@ -137,7 +137,7 @@ export default function CardDetails(props: CardDetailsProps) {
               }}
               className="h-9 w-9 rounded-full"
             >
-              {deleteLoading ? <Loader className={'w-4 h-4 text-white'} /> : <Trash2Icon className="h-4 w-4" />}
+              {deleteLoading ? <Loader className={'w-4 h-4 text-white'} /> : <DeleteIcon className="h-4 w-4" />}
             </Button>
           </div>
           <div className="flex flex-col w-full">

@@ -10,11 +10,10 @@ import messages from 'config/messages';
 import currencyData from 'data/currency.json';
 import { useMediaQuery } from 'hooks/use-media-query';
 import { cn } from 'lib/utils';
-import { Check } from 'lucide-react';
 import { toast } from 'sonner';
 import { Currency, User } from 'types/data';
 
-import { DownArrowIcon } from './icons';
+import { CheckIcon, DownArrowIcon } from './icons';
 import Loader from './loader';
 
 const data = currencyData as { [key: string]: Currency };
@@ -110,7 +109,7 @@ function CountryList({
                 setOpen(false);
               }}
             >
-              <Check className={cn('mr-2 h-3.5 w-3.5', datum.code === selected ? 'opacity-100' : 'opacity-0')} />
+              <CheckIcon className={cn('mr-2 h-3.5 w-3.5', datum.code === selected ? 'opacity-100' : 'opacity-0')} />
               {datum.name} ({datum.code})
             </CommandItem>
           ))}
