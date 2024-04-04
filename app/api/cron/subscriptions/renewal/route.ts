@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { paymentCycle } from 'config/data';
 import { email } from 'config/urls';
-import { format, sub } from 'date-fns';
+import { format, isToday, sub } from 'date-fns';
 import ReminderEmail from 'emails/reminder';
 import { calculateRenewalDate } from 'lib/data';
 import { formatNumber } from 'lib/numbers';
@@ -38,6 +38,7 @@ export async function GET(request: NextRequest) {
     }
 
     const today = new Date();
+    const formattedToday = format(today, 'yyyy-MM-dd');
 
     // To send email reminders to users for their subscriptions renewal
     await Promise.allSettled(
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
 
         const isRenewalToday = (subscription: Subscriptions) => {
           const renewal_date = new Date(subscription.renewal_date ?? '');
-          return format(sub(renewal_date, { days: 1 }), 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
+          return isToday(sub(renewal_date, { days: 1 }));
         };
 
         const yearlySubscriptions = subscriptions
@@ -70,7 +71,7 @@ export async function GET(request: NextRequest) {
           throw new Error(`Unable to get subscriptions for email reminder: ${error.message}`);
         }
 
-        const subscriptionsRenewals = [...yearlySubscriptions, ...quarterlySubscriptions, ...monthlySubscriptions];
+        const subscriptionsRenewals = [...monthlySubscriptions, ...quarterlySubscriptions, ...yearlySubscriptions];
 
         await Promise.allSettled(
           subscriptionsRenewals.map(async (sub: Subscriptions) => {
@@ -109,7 +110,7 @@ export async function GET(request: NextRequest) {
 
         const isBelowTodayDate = (subscription: Subscriptions) => {
           const renewal_date = new Date(subscription.renewal_date ?? subscription.billing_date);
-          return format(renewal_date, 'yyyy-MM-dd') < format(today, 'yyyy-MM-dd');
+          return format(renewal_date, 'yyyy-MM-dd') < formattedToday;
         };
 
         const yearlySubscriptions = subscriptions
@@ -133,14 +134,14 @@ export async function GET(request: NextRequest) {
           return { ...subscription, renewal_date };
         };
 
-        const calculatedYearlyRenewalDate = yearlySubscriptions.map(calculateSubsRenewalDate);
         const calculatedMonthlySubscriptions = monthlySubscriptions.map(calculateSubsRenewalDate);
         const calculatedQuarterlySubscriptions = quarterlySubscriptions.map(calculateSubsRenewalDate);
+        const calculatedYearlyRenewalDate = yearlySubscriptions.map(calculateSubsRenewalDate);
 
         const updateSubsRenewalDate = [
-          ...calculatedYearlyRenewalDate,
-          ...calculatedQuarterlySubscriptions,
           ...calculatedMonthlySubscriptions,
+          ...calculatedQuarterlySubscriptions,
+          ...calculatedYearlyRenewalDate,
         ];
 
         await Promise.allSettled(
