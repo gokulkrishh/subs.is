@@ -17,13 +17,13 @@ export default function DeleteAccountModal({ open, setOpen, onSubmit, loading, e
   const [email, setEmail] = useState('');
   return (
     <Dialog open={open} onOpenChange={() => setOpen(false)}>
-      <DialogContent className="sm:max-w-md p-4 max-sm:w-[calc(100%-30px)]">
+      <DialogContent className="sm:max-w-md p-4 max-sm:w-[calc(100%-30px)] !gap-1">
         <h3 className="font-medium !space-y-0">Delete Your Account</h3>
         <div className="text-sm text-muted-foreground !space-y-0">
           Type this account email to delete your account and its data.
         </div>
         <form
-          className="mt-1.5"
+          className="mt-2"
           onSubmit={(event: SyntheticEvent<HTMLFormElement>) => {
             event.preventDefault();
             if (email === emailId) {
