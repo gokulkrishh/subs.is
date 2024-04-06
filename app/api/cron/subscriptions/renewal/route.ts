@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
               await resend.emails.send({
                 from: email.from,
                 to: user.email,
-                subject: `🔔 Reminder: ${name} subscription will renew soon`,
+                subject: `Reminder: ${name} subscription will renew soon`,
                 react: ReminderEmail({
                   name,
                   cost: `${formatNumber({
