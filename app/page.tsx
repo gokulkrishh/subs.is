@@ -1,5 +1,5 @@
 import Card from 'components/card';
-import demoData from 'data/demo.json';
+import demoData from 'data/demo';
 
 import { getSubscriptions } from './actions/subscriptions';
 import { getUser } from './actions/user';
