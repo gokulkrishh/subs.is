@@ -19,14 +19,12 @@ export default async function Page() {
           <ExportCard user={user} />
         </div>
       </div>
-      {user ? (
-        <div className="border-border mt-5 pb-24 flex flex-col">
-          <h2 className="font-medium mb-2">Danger Zone</h2>
-          <div className="flex gap-4 flex-col">
-            <DeleteCard />
-          </div>
+      <div className="border-border mt-5 pb-24 flex flex-col">
+        <h2 className="font-medium mb-2">Danger Zone</h2>
+        <div className="flex gap-4 flex-col">
+          <DeleteCard />
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }

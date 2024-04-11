@@ -19,14 +19,14 @@ import Loader from './loader';
 const data = currencyData as { [key: string]: Currency };
 
 type CurrencyComboBoxProps = {
-  user: User;
+  user: User | null;
   onSelect: (currency: Currency['code']) => void;
 };
 
 export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState<Currency>(data[user?.currency_code] || data.INR);
+  const [selected, setSelected] = useState<Currency>(data[user?.currency_code ?? 'INR']);
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const handleSelect = async (value: Currency['code']) => {

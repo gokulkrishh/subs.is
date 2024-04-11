@@ -25,8 +25,8 @@ export default async function AccountCard({ user }: { user: User | null }) {
           <div className="font-medium truncate pr-4" title={user?.full_name ?? 'Demo account'}>
             {user?.full_name ?? 'Demo account'}
           </div>
-          <div className="text-sm truncate pr-4 text-muted-foreground" title={user?.email ?? 'demo@subs.is'}>
-            {user?.email ?? 'demo@subs.is'}
+          <div className="text-sm truncate pr-4 text-muted-foreground" title={user?.email ?? 'support@subs.is'}>
+            {user?.email ?? 'support@subs.is'}
           </div>
         </div>
       </div>

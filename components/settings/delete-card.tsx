@@ -17,8 +17,6 @@ export default function DeleteCard() {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  if (!user?.email) return null;
-
   const onSubmit = async (email: string) => {
     try {
       setLoading(true);
@@ -58,7 +56,7 @@ export default function DeleteCard() {
           loading={loading}
           open={true}
           setOpen={setOpen}
-          emailId={user.user_metadata?.email}
+          emailId={user?.user_metadata?.email ?? undefined}
           onSubmit={onSubmit}
         />
       ) : null}

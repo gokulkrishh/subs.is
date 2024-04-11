@@ -10,11 +10,12 @@ type DeleteAccountModalProps = {
   loading: boolean;
   setOpen: (open: boolean) => void;
   onSubmit: (emailId: string) => void;
-  emailId: string;
+  emailId: string | undefined;
 };
 
 export default function DeleteAccountModal({ open, setOpen, onSubmit, loading, emailId }: DeleteAccountModalProps) {
   const [email, setEmail] = useState('');
+
   return (
     <Dialog open={open} onOpenChange={() => setOpen(false)}>
       <DialogContent className="sm:max-w-md p-4 max-sm:w-[calc(100%-30px)] !gap-1">

@@ -41,7 +41,7 @@ export const updateUserCurrency = async (currency_code: User['currency_code']) =
   try {
     const userData = await getUser();
     if (!userData) {
-      throw new Error('User not found');
+      throw 'User not found';
     }
     const supabase = await createClient();
     const { error } = await supabase.from('users').update({ currency_code }).eq('id', userData.id);
