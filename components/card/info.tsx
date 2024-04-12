@@ -5,8 +5,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { CalendarEndIcon, CalendarIcon } from 'components/icons';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { navFilter, summaryFilter } from 'config/data';
+import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
@@ -41,6 +43,7 @@ export default function CardInfo(props: InfoProps) {
   return (
     <>
       <motion.button
+        suppressHydrationWarning
         layout
         key={subscription.id}
         variants={itemVariants}
@@ -52,7 +55,13 @@ export default function CardInfo(props: InfoProps) {
         }}
         whileTap={{ scale: 1.02 }}
         whileHover={{ scale: 1.01 }}
-        className="flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between bg-card-background p-3 px-4 rounded-xl border border-input"
+        className={cn(
+          `flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between p-3 px-4 rounded-xl border border-input`,
+          {
+            '!opacity-60': !subscription.active,
+          },
+        )}
+        title={subscription.active ? 'Click to edit' : 'Subscription is inactive'}
       >
         <div className="flex gap-3">
           {subscription.url?.length ? (
@@ -67,7 +76,9 @@ export default function CardInfo(props: InfoProps) {
               {subscription.notify ? (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="absolute -right-0 -top-0 rounded-full bg-blue-500 h-2 w-2" />
+                    <TooltipTrigger asChild>
+                      <span className="absolute inline-block -right-0 -top-0 rounded-full bg-blue-500 h-2 w-2" />
+                    </TooltipTrigger>
                     <TooltipContent>
                       <p className="text-xs">Email reminder is enabled</p>
                     </TooltipContent>
@@ -100,20 +111,31 @@ export default function CardInfo(props: InfoProps) {
 
           <div className="flex flex-col items-start justify-center">
             <h3 className="font-medium truncate max-w-[200px] sm:max-w-[300px]">{subscription.name}</h3>
-            <span
-              title={`${isDue ? 'Due on ' : 'Renewal date '}${formatDate(subscription?.renewal_date ?? '')}`}
-              className={cn(`text-[13px] mt-0.5 text-muted-foreground`, {
-                'text-red-500': isDue,
-              })}
-            >
-              Due: {formatDate(subscription?.renewal_date ?? '')}
-            </span>
+            {subscription.active ? (
+              <span
+                title={`${isDue ? 'Due on ' : "Renew's at "}${formatDate(subscription?.renewal_date ?? '')}`}
+                className={cn(`text-[13px] inline-flex items-center mt-0.5 text-muted-foreground`, {
+                  'text-red-500': isDue,
+                })}
+              >
+                {formatDate(subscription?.renewal_date ?? '')}
+              </span>
+            ) : (
+              <span
+                title={formatDate(subscription.billing_end_date ?? '')}
+                className={cn(`text-[13px] inline-flex items-center mt-0.5 text-muted-foreground h-5`)}
+              >
+                Ended {formatDate(subscription.billing_end_date ?? '')}
+              </span>
+            )}
           </div>
         </div>
 
         <div className="flex flex-col items-end w-fit">
           <p className="w-fit flex flex-col items-end">
-            <span className="text-sm text-muted-foreground">{subscription.payment_cycle}</span>
+            <span className="text-sm text-muted-foreground">
+              {subscription.active ? subscription.payment_cycle : 'not active'}
+            </span>
             <span className="inline-flex mt-0.5 items-center">
               <span className="mr-0.5 font-sans">{getCurrencySymbol(user?.currency_code)}</span>
               <span className="font-semibold">{parseFloat(subscription.cost)}</span>

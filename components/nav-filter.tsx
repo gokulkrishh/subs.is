@@ -9,7 +9,7 @@ type NavFilterProps = {
   onChange: (key: keyof typeof navFilter) => void;
   selected: keyof typeof navFilter;
   filterBy: keyof typeof summaryFilter;
-  count: number;
+  count: string;
 };
 
 export default function NavFilter({ onChange, selected, count, filterBy }: NavFilterProps) {
@@ -18,7 +18,10 @@ export default function NavFilter({ onChange, selected, count, filterBy }: NavFi
   return (
     <div className="flex justify-between sm:items-center flex-col gap-4 sm:flex-row">
       <h2 className="text-lg font-semibold">
-        Subscriptions <span className="text-sm">({count})</span>
+        Subscriptions{' '}
+        <span className="text-sm" title="Active + Inactive subscriptions count">
+          ({count})
+        </span>
       </h2>
       <div className="flex border max-sm:self-end border-input max-w-fit bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }) => {

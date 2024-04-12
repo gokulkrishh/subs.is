@@ -6,7 +6,7 @@ import NavFilter from 'components/nav-filter';
 import Summary from 'components/summary';
 import { SearchInput } from 'components/ui/search-input';
 import { navFilter, summaryFilter } from 'config/data';
-import { filterDataByNav, filterDataBySearch } from 'lib/data';
+import { activeFilter, filterDataByNav, filterDataBySearch, inActiveFilter } from 'lib/data';
 import { Subscriptions, User } from 'types/data';
 
 import CardInfo from './info';
@@ -50,14 +50,18 @@ export default function Card(props: CardProps) {
     [filterData, search],
   );
 
+  const activeData = data.filter(activeFilter);
+  const inActiveData = data.filter(inActiveFilter);
+  const count = inActiveData.length ? `${activeData.length} + ${inActiveData.length}` : `${activeData.length}`;
+
   return (
     <>
-      <Summary user={user} subscriptions={data} />
+      <Summary user={user} subscriptions={activeData} />
       <div className="flex flex-col my-8 mb-12">
         <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
         <NavFilter
           filterBy={user?.filter_by as keyof typeof summaryFilter}
-          count={data.length}
+          count={count}
           selected={selected}
           onChange={onNavChangeHandler}
         />
@@ -69,12 +73,23 @@ export default function Card(props: CardProps) {
               <CardSkeleton />
               <CardSkeleton />
             </>
-          ) : data.length ? (
-            data.map((subscription) => <CardInfo user={user} key={subscription.id} subscription={subscription} />)
           ) : (
-            <div className="text-center mt-10 text-muted-foreground">
-              No {selected !== navFilter.all.key ? selected : ''} subscriptions{search.length ? ' found.' : '.'}
-            </div>
+            <>
+              {data.length ? (
+                <>
+                  {activeData.map((subscription) => (
+                    <CardInfo user={user} key={subscription.id} subscription={subscription} />
+                  ))}
+                  {inActiveData.map((subscription) => (
+                    <CardInfo user={user} key={subscription.id} subscription={subscription} />
+                  ))}
+                </>
+              ) : (
+                <p className="text-center mt-10 text-muted-foreground">
+                  No {selected !== navFilter.all.key ? selected : ''} subscriptions{search.length ? ' found.' : '.'}
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>

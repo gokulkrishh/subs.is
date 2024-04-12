@@ -1,4 +1,4 @@
-import { navFilter, paymentCycle, summaryFilter } from 'config/data';
+import { paymentCycle, summaryFilter } from 'config/data';
 import { endOfMonth, endOfYear, format, isToday, startOfMonth, startOfYear } from 'date-fns';
 
 export const formatDate = (date: string): string => {

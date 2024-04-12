@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { deleteSubscription, updateSubscription } from 'app/actions/subscriptions';
 import { useUser } from 'components/context/user';
-import { BellOffIcon, BellOnIcon, DeleteIcon, ShareIcon } from 'components/icons';
+import { ActiveIcon, BellOffIcon, BellOnIcon, DeleteIcon, InActiveIcon, ShareIcon } from 'components/icons';
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
 import { Drawer, DrawerContent } from 'components/ui/drawer';
@@ -16,7 +16,7 @@ import { calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
 import { toast } from 'sonner';
-import { Subscriptions } from 'types/data';
+import { Subscriptions, SubscriptionsUpdate } from 'types/data';
 
 type CardDetailsProps = {
   subscription: Subscriptions;
@@ -29,6 +29,7 @@ export default function CardDetails(props: CardDetailsProps) {
   const [loading, setLoading] = useState(false);
   const [notifyLoading, setNotifyLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [activeLoading, setActiveLoading] = useState(false);
 
   const share = async () => {
     const shareData = {
@@ -67,6 +68,25 @@ export default function CardDetails(props: CardDetailsProps) {
     }
   };
 
+  const toggleActive = async () => {
+    try {
+      setActiveLoading(true);
+      const payload = { active: !subscription.active, id: subscription.id, notify: false } as SubscriptionsUpdate;
+      if (!subscription.active) {
+        payload.billing_end_date = null;
+      } else {
+        payload.billing_end_date = new Date().toISOString().split('T')[0];
+      }
+
+      await updateSubscription(payload);
+      toast.success(messages.subscriptions.active(subscription.notify, subscription.name));
+    } catch (error: any) {
+      toast.error(error.toString() || messages.subscriptions.activeError(subscription.notify));
+    } finally {
+      setActiveLoading(false);
+    }
+  };
+
   const onDelete = async (subs: Subscriptions) => {
     try {
       setDeleteLoading(true);
@@ -84,7 +104,7 @@ export default function CardDetails(props: CardDetailsProps) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent className="px-4 min-h-[500px] pb-6">
         <div className="flex relative flex-col mt-2 w-full md:max-w-sm mx-auto items-center gap-3">
-          <div className="flex w-full gap-3 justify-end absolute -top-0.5">
+          <div className="flex w-full gap-2 justify-end absolute -top-0.5">
             {typeof window !== 'undefined' && navigator && !!navigator?.share ? (
               <Button
                 variant={'outline'}
@@ -104,7 +124,11 @@ export default function CardDetails(props: CardDetailsProps) {
                     variant={'outline'}
                     size={'icon'}
                     onClick={async () => {
-                      await notifyMe();
+                      if (subscription.active) {
+                        await notifyMe();
+                      } else {
+                        toast.warning(messages.subscriptions.makeActiveError);
+                      }
                     }}
                     className={cn(`h-9 w-9 rounded-full text-primary transition-all`, {
                       'bg-blue-600 !text-white border-blue-600 hover:bg-blue-700 active:bg-blue-700 hover:border-blue-700 active:border-blue-700':
@@ -124,8 +148,38 @@ export default function CardDetails(props: CardDetailsProps) {
                     )}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" className="mb-2 px-2">
-                  {subscription.notify ? 'Disable email reminder' : 'Receive a email reminder the one day in advance.'}
+                <TooltipContent side="bottom" className="mt-2 px-2">
+                  {subscription.notify ? 'Disable email reminder' : 'Get email reminder, one day before renewal.'}
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant={'outline'}
+                    size={'icon'}
+                    onClick={async () => {
+                      await toggleActive();
+                    }}
+                    className={cn(`h-9 w-9 rounded-full text-primary transition-all`, {
+                      'bg-blue-600 !text-white border-blue-600 hover:bg-blue-700 active:bg-blue-700 hover:border-blue-700 active:border-blue-700':
+                        subscription.active,
+                    })}
+                  >
+                    {activeLoading ? (
+                      <Loader
+                        className={cn('w-4 h-4 text-primary', {
+                          'text-white': subscription.active,
+                        })}
+                      />
+                    ) : !subscription.active ? (
+                      <InActiveIcon className="h-4 w-4 -ml-[1px]" />
+                    ) : (
+                      <ActiveIcon className="h-4 w-4 -ml-[1px]" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="mt-2 px-2">
+                  {subscription.active ? 'Mark as in-active' : 'Mark as active'}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

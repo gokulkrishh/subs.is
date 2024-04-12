@@ -80,3 +80,6 @@ export const calculatePrevRenewalDate = (billing_date: string, renewal_date: str
 
   return format(prevRenewalDate, 'yyyy-MM-dd');
 };
+
+export const activeFilter = (subscription: Subscriptions) => subscription.active;
+export const inActiveFilter = (subscription: Subscriptions) => !subscription.active;

@@ -44,6 +44,7 @@ CREATE TABLE subscriptions (
   name text not null,
   cost text not null,
   billing_date date not null,
+  billing_end_date date,
   url text,
   payment_cycle text not null,
   active boolean not null default true,

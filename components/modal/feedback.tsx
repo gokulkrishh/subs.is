@@ -11,8 +11,6 @@ import { cn } from 'lib/utils';
 import { toast } from 'sonner';
 import { User } from 'types/data';
 
-import { useAuth } from '../context/auth';
-
 const feedbackEmojis = ['😞', '🙂', '😁'];
 
 export default function FeedbackModal({ user }: { user: User | null }) {
@@ -55,7 +53,10 @@ export default function FeedbackModal({ user }: { user: User | null }) {
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant={'outline'} className="h-8 text-xs px-2 tracking-wide bg-accent/80 rounded-md">
+        <Button
+          variant={'outline'}
+          className="h-8 text-xs px-2 tracking-wide bg-accent/50 dark:bg-accent/60 rounded-md"
+        >
           <FeedbackIcon className="h-4 w-4 mr-1.5" /> Feedback
         </Button>
       </PopoverTrigger>
@@ -79,18 +80,15 @@ export default function FeedbackModal({ user }: { user: User | null }) {
             required
           />
           <div className="flex justify-between my-2.5 items-center w-full">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               {feedbackEmojis.map((feedbackEmoji) => (
                 <Button
                   type="button"
                   key={feedbackEmoji}
                   onClick={() => setFeedback({ ...feedback, emoji: feedbackEmoji })}
-                  className={cn(
-                    `text-lg p-0 w-8 transition-all h-8 bg-accent/40 rounded-full border-0 hover:bg-neutral-700/20 active:bg-neutral-700/20 dark:hover:bg-blue-700/30 dark:active:bg-blue-700/30 `,
-                    {
-                      'bg-neutral-700/20 dark:bg-neutral-700/30': feedback.emoji === feedbackEmoji,
-                    },
-                  )}
+                  className={cn(`text-lg grayscale p-0 w-8 transition-all h-8 bg-accent/50 rounded-full border-0`, {
+                    'bg-accent grayscale-0': feedback.emoji === feedbackEmoji,
+                  })}
                   variant={'outline'}
                 >
                   {feedbackEmoji}

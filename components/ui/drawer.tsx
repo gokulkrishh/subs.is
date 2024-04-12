@@ -6,7 +6,7 @@ import { cn } from 'lib/utils';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
 const Drawer = ({ shouldScaleBackground = true, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
+  <DrawerPrimitive.Root shouldScaleBackground={false} {...props} />
 );
 Drawer.displayName = 'Drawer';
 
@@ -20,11 +20,7 @@ const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
-  <DrawerPrimitive.Overlay
-    ref={ref}
-    className={cn('fixed inset-0 z-50 bg-black/30 backdrop-blur-sm', className)}
-    {...props}
-  />
+  <DrawerPrimitive.Overlay ref={ref} className={cn('fixed inset-0 z-50 bg-black/80', className)} {...props} />
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
@@ -37,12 +33,12 @@ const DrawerContent = React.forwardRef<
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
+        'fixed after:hidden !pb-4 inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-tl-xl rounded-tr-xl border mx-auto bg-popover',
         className,
       )}
       {...props}
     >
-      <div className="mx-auto mt-2 h-1 w-[40px] rounded-full bg-stone-500/50" />
+      <div className="mx-auto mt-2 h-1 w-[40px] rounded-full bg-accent" />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

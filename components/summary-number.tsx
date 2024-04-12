@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 
 import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 
-import { useUser } from './context/user';
-
 type NumberProps = {
   from: number;
   to: number;

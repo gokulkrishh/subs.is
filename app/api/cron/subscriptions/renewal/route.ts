@@ -48,6 +48,7 @@ export async function GET(request: NextRequest) {
           .select('user_id,id,name,cost,billing_date,payment_cycle,renewal_date')
           .eq('user_id', user.id)
           .eq('notify', true)
+          .eq('active', true)
           .returns<Subscriptions[]>();
 
         const isRenewalToday = (subscription: Subscriptions) => {
@@ -106,6 +107,7 @@ export async function GET(request: NextRequest) {
           .from('subscriptions')
           .select('user_id,id,name,billing_date,payment_cycle,renewal_date')
           .eq('user_id', user.id)
+          .eq('active', true)
           .returns<Subscriptions[]>();
 
         const isBelowTodayDate = (subscription: Subscriptions) => {
