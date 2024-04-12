@@ -14,7 +14,7 @@ export default function Summary({ subscriptions, user }: SummaryProps) {
       <h2 className="font-semibold text-lg tracking-wide flex items-center gap-1">Total cost for subscriptions</h2>
       <div className="text-5xl mt-2">
         <span className="mr-1 font-sans font-bold">{getCurrencySymbol(user?.currency_code)}</span>
-        <SummaryNumber from={totalCost} to={totalCost} />
+        <SummaryNumber from={0} to={totalCost} />
       </div>
     </div>
   );
