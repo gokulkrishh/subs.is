@@ -1,6 +1,7 @@
 const demoData = [
   {
     id: '8f2b-d0a486e6d41c',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Apple TV',
     cost: '99',
@@ -17,6 +18,7 @@ const demoData = [
   },
   {
     id: 'b1d1-907ae52436d4',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Netflix',
     cost: '0',
@@ -33,6 +35,7 @@ const demoData = [
   },
   {
     id: '9720-70d4bf2e1e15',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Airtel',
     cost: '5100',
@@ -51,6 +54,7 @@ const demoData = [
   },
   {
     id: '9c45-982bddf46e5e',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Youtube',
     cost: '169',
@@ -86,6 +90,7 @@ const demoData = [
   },
   {
     id: '92ad-1f2e77c7fc2c',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Vercel',
     cost: '1725',
@@ -102,6 +107,7 @@ const demoData = [
   },
   {
     id: 'b037-a3acb49becf9',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Amazon Prime',
     cost: '1499',
@@ -118,6 +124,7 @@ const demoData = [
   },
   {
     id: '963b-d60ab15f9c2b',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Spotify',
     cost: '1189',
@@ -134,6 +141,7 @@ const demoData = [
   },
   {
     id: 'a777-01fbf99fbde0',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Hotstar',
     cost: '1499',
@@ -150,6 +158,7 @@ const demoData = [
   },
   {
     id: '811c-bc6ae2dd657c',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: '1Password',
     cost: '4903',
@@ -166,6 +175,7 @@ const demoData = [
   },
   {
     id: 'a098-5dca19c124a6',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Leetcode',
     cost: '10606.36',
@@ -182,6 +192,7 @@ const demoData = [
   },
   {
     id: '902f-61cd8db4fdc9',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Twitter',
     cost: '6800',
@@ -198,6 +209,7 @@ const demoData = [
   },
   {
     id: '8f47-d6b55c3a9cdd',
+    billing_end_date: null,
     user_id: 'a28ea69b01fb',
     name: 'Bookmark It.',
     cost: '2350.36',

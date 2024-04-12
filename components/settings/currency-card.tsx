@@ -6,7 +6,7 @@ import { User } from 'types/data';
 
 import SettingsCard from './settings-card';
 
-export default async function CurrencyCard({ user }: { user: User | null }) {
+export default function CurrencyCard({ user }: { user: User | null }) {
   return (
     <SettingsCard className="flex flex-col !p-0">
       <div className="flex flex-col pb-0 w-full p-3 px-4">

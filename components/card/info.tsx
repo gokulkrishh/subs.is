@@ -122,7 +122,7 @@ export default function CardInfo(props: InfoProps) {
               </span>
             ) : (
               <span
-                title={format(new Date(subscription.billing_end_date ?? ''), 'dd MMM yyyy')}
+                title={formatDate(subscription.billing_end_date ?? '')}
                 className={cn(`text-[13px] inline-flex items-center mt-0.5 text-muted-foreground h-5`)}
               >
                 Ended {formatDate(subscription.billing_end_date ?? '')}
