@@ -55,7 +55,6 @@ const demoData = [
     name: 'Youtube',
     cost: '169',
     billing_date: '2024-03-14',
-    end_billing_date: new Date().toISOString(),
     url: 'https://youtube.com',
     payment_cycle: 'monthly',
     active: true,
@@ -72,6 +71,9 @@ const demoData = [
     name: 'Apple iCloud',
     cost: '219',
     billing_date: '2023-05-19',
+    billing_end_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`)
+      .toISOString()
+      .split('T')[0],
     url: 'https://icloud.com',
     payment_cycle: 'monthly',
     active: false,
