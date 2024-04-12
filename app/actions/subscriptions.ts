@@ -56,7 +56,7 @@ export const exportSubscriptions = async () => {
     .from('subscriptions')
     .select(`name,cost,payment_cycle,renewal_date,billing_date,url,notes,active,notify,color,created_at,updated_at`)
     .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
+    .order('payment_cycle', { ascending: false })
     .returns<string>()
     .csv();
 

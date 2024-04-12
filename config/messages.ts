@@ -17,6 +17,13 @@ const messages = {
     reminderError: (notify: boolean) => {
       return `Unable to ${!notify ? 'enable' : 'disable'} reminder`;
     },
+    active: (active: boolean, name: string) => {
+      return `${name} subsciption is ${active ? 'in-active' : 'active'}`;
+    },
+    makeActiveError: `Make the subscription active to enable reminder`,
+    activeError: (active: boolean) => {
+      return `Unable to mark it ${active ? 'in-active' : 'active'}`;
+    },
     delete: {
       success: 'Subscription deleted successfully',
       error: 'Unable to delete, try again',

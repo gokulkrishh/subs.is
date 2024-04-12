@@ -13,6 +13,8 @@ export type Database = {
         Row: {
           active: boolean
           billing_date: string
+          billing_end_date: string | null
+          category: string
           color: string | null
           cost: string
           created_at: string | null
@@ -29,6 +31,8 @@ export type Database = {
         Insert: {
           active?: boolean
           billing_date: string
+          billing_end_date?: string | null
+          category?: string
           color?: string | null
           cost: string
           created_at?: string | null
@@ -45,6 +49,8 @@ export type Database = {
         Update: {
           active?: boolean
           billing_date?: string
+          billing_end_date?: string | null
+          category?: string
           color?: string | null
           cost?: string
           created_at?: string | null

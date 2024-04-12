@@ -6,7 +6,7 @@ import NavFilter from 'components/nav-filter';
 import Summary from 'components/summary';
 import { SearchInput } from 'components/ui/search-input';
 import { navFilter, summaryFilter } from 'config/data';
-import { filterDataByNav, filterDataBySearch } from 'lib/data';
+import { activeFilter, filterDataByNav, filterDataBySearch, inActiveFilter } from 'lib/data';
 import { Subscriptions, User } from 'types/data';
 
 import CardInfo from './info';
@@ -18,6 +18,7 @@ export default function Card(props: CardProps) {
   const { subscriptions, user } = props;
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [includeInActive, setIncludeInActive] = useState(true);
   const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.monthly.key);
   const filterData = useCallback(
     (selected: keyof typeof navFilter, searchText: string) => {
@@ -50,14 +51,24 @@ export default function Card(props: CardProps) {
     [filterData, search],
   );
 
+  const activeData = data.filter(activeFilter);
+  const inActiveData = data.filter(inActiveFilter);
+  const count =
+    includeInActive && inActiveData.length ? `${activeData.length} + ${inActiveData.length}` : `${activeData.length}`;
+
   return (
     <>
-      <Summary user={user} subscriptions={data} />
+      <Summary
+        includeInActive={includeInActive}
+        setIncludeInactive={setIncludeInActive}
+        user={user}
+        subscriptions={includeInActive ? data : activeData}
+      />
       <div className="flex flex-col my-8 mb-12">
         <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
         <NavFilter
           filterBy={user?.filter_by as keyof typeof summaryFilter}
-          count={data.length}
+          count={count}
           selected={selected}
           onChange={onNavChangeHandler}
         />
@@ -69,12 +80,28 @@ export default function Card(props: CardProps) {
               <CardSkeleton />
               <CardSkeleton />
             </>
-          ) : data.length ? (
-            data.map((subscription) => <CardInfo user={user} key={subscription.id} subscription={subscription} />)
           ) : (
-            <div className="text-center mt-10 text-muted-foreground">
-              No {selected !== navFilter.all.key ? selected : ''} subscriptions{search.length ? ' found.' : '.'}
-            </div>
+            <>
+              {activeData.length ? (
+                <>
+                  {activeData.map((subscription) => (
+                    <CardInfo user={user} key={subscription.id} subscription={subscription} />
+                  ))}
+                </>
+              ) : (
+                <div className="text-center mt-10 text-muted-foreground">
+                  No {selected !== navFilter.all.key ? selected : ''} subscriptions{search.length ? ' found.' : '.'}
+                </div>
+              )}
+              {inActiveData.length ? (
+                <>
+                  <h3 className="font-semibold mt-2">In Active</h3>
+                  {inActiveData.map((subscription) => (
+                    <CardInfo user={user} key={subscription.id} subscription={subscription} />
+                  ))}
+                </>
+              ) : null}
+            </>
           )}
         </div>
       </div>
