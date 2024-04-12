@@ -56,8 +56,12 @@ export default function CardInfo(props: InfoProps) {
         whileTap={{ scale: 1.02 }}
         whileHover={{ scale: 1.01 }}
         className={cn(
-          `flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between  p-3 px-4 rounded-xl border border-input`,
+          `flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between p-3 px-4 rounded-xl border border-input`,
+          {
+            '!opacity-60': !subscription.active,
+          },
         )}
+        title={subscription.active ? 'Click to edit' : 'Subscription is inactive'}
       >
         <div className="flex gap-3">
           {subscription.url?.length ? (
@@ -129,7 +133,9 @@ export default function CardInfo(props: InfoProps) {
 
         <div className="flex flex-col items-end w-fit">
           <p className="w-fit flex flex-col items-end">
-            <span className="text-sm text-muted-foreground">{subscription.payment_cycle}</span>
+            <span className="text-sm text-muted-foreground">
+              {subscription.active ? subscription.payment_cycle : 'not active'}
+            </span>
             <span className="inline-flex mt-0.5 items-center">
               <span className="mr-0.5 font-sans">{getCurrencySymbol(user?.currency_code)}</span>
               <span className="font-semibold">{parseFloat(subscription.cost)}</span>

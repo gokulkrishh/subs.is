@@ -148,8 +148,8 @@ export default function CardDetails(props: CardDetailsProps) {
                     )}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" className="mb-2 px-2">
-                  {subscription.notify ? 'Disable email reminder' : 'Receive a email reminder the one day in advance.'}
+                <TooltipContent side="bottom" className="mt-2 px-2">
+                  {subscription.notify ? 'Disable email reminder' : 'Get email reminder, one day before renewal.'}
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
@@ -178,7 +178,7 @@ export default function CardDetails(props: CardDetailsProps) {
                     )}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="bottom" className="mb-2 px-2">
+                <TooltipContent side="bottom" className="mt-2 px-2">
                   {subscription.active ? 'Mark as in-active' : 'Mark as active'}
                 </TooltipContent>
               </Tooltip>
