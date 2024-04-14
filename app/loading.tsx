@@ -9,7 +9,7 @@ export default function Loader() {
       <div className="flex flex-col">
         <h2 className="font-semibold text-lg tracking-wide flex items-center gap-1">Total cost for subscriptions</h2>
         <div className="text-5xl mt-2 font-extrabold tabular-nums">
-          <Skeleton className="w-48 h-[50px] bg-accent" />
+          <Skeleton className="w-48 h-[48px] bg-accent" />
         </div>
       </div>
       <div className="flex flex-col my-8 mb-12">
