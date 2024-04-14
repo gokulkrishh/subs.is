@@ -10,18 +10,21 @@ type NavFilterProps = {
   selected: keyof typeof navFilter;
   filterBy: keyof typeof summaryFilter;
   count: string;
+  loading?: boolean;
 };
 
-export default function NavFilter({ onChange, selected, count, filterBy }: NavFilterProps) {
+export default function NavFilter({ onChange, loading, selected, count, filterBy }: NavFilterProps) {
   const { resolvedTheme: theme } = useTheme();
 
   return (
     <div className="flex justify-between sm:items-center flex-col gap-4 sm:flex-row">
       <h2 className="text-lg font-semibold">
         Subscriptions{' '}
-        <span className="text-sm" title="Active + Inactive subscriptions count">
-          ({count})
-        </span>
+        {!loading ? (
+          <span className="text-sm" title="Active + Inactive subscriptions count">
+            ({count})
+          </span>
+        ) : null}
       </h2>
       <div className="flex border max-sm:self-end border-input max-w-fit bg-neutral-50 dark:bg-neutral-800/30 rounded-md">
         {Object.values(navFilter).map(({ key, label }) => {

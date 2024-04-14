@@ -60,6 +60,7 @@ export default function Card(props: CardProps) {
       <div className="flex flex-col my-8 mb-12">
         <SearchInput type="text" value={search} placeholder="Search here" onChange={onSearchHandler} />
         <NavFilter
+          loading={loading}
           filterBy={user?.filter_by as keyof typeof summaryFilter}
           count={count}
           selected={selected}
