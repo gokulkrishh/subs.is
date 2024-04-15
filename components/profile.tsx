@@ -37,7 +37,7 @@ export default function Profile({ user }: { user: User | null }) {
           <DropdownMenuItem>
             <Link className="flex items-center" target="_blank" href={socialUrls.github}>
               <GithubIcon className="h-4 w-4 mr-2" />
-              Github
+              Source
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
