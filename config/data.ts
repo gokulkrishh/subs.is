@@ -14,9 +14,9 @@ export const summaryFilter = {
 } as const;
 
 export const navFilter = {
+  upcoming: { key: 'upcoming', label: 'Upcoming' },
   monthly: { key: 'monthly', label: 'Monthly' },
   yearly: { key: 'yearly', label: 'Yearly' },
-  quarterly: { key: 'quarterly', label: 'Quarterly' },
   all: { key: 'all', label: 'All' },
 } as const;
 

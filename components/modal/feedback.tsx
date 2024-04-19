@@ -15,12 +15,13 @@ const feedbackEmojis = ['😞', '🙂', '😁'];
 
 export default function FeedbackModal({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
-  const [feedback, setFeedback] = useState({ emoji: '', message: '' });
+  const initial = { emoji: '😁', message: '' };
+  const [feedback, setFeedback] = useState(initial);
   const [loading, setLoading] = useState(false);
 
   if (!user?.email) return null;
 
-  const reset = () => setFeedback({ emoji: '', message: '' });
+  const reset = () => setFeedback(initial);
 
   const onSubmit = async () => {
     try {
@@ -86,12 +87,15 @@ export default function FeedbackModal({ user }: { user: User | null }) {
                   type="button"
                   key={feedbackEmoji}
                   onClick={() => setFeedback({ ...feedback, emoji: feedbackEmoji })}
-                  className={cn(`text-lg grayscale p-0 w-8 transition-all h-8 bg-accent/50 rounded-full border-0`, {
-                    'bg-accent grayscale-0': feedback.emoji === feedbackEmoji,
-                  })}
+                  className={cn(
+                    `text-lg inline-flex items-center justify-center grayscale p-0 w-8 transition-all h-8 bg-accent/50 rounded-full border-0`,
+                    {
+                      'bg-accent grayscale-0': feedback.emoji === feedbackEmoji,
+                    },
+                  )}
                   variant={'outline'}
                 >
-                  {feedbackEmoji}
+                  <span>{feedbackEmoji}</span>
                 </Button>
               ))}
             </div>

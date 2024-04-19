@@ -18,7 +18,7 @@ export default function Card(props: CardProps) {
   const { subscriptions, user } = props;
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.monthly.key);
+  const [selected, setSelection] = useState<keyof typeof navFilter>(navFilter.upcoming.key);
   const filterData = useCallback(
     (selected: keyof typeof navFilter, searchText: string) => {
       const filtered = filterDataByNav(subscriptions, selected);
@@ -31,8 +31,7 @@ export default function Card(props: CardProps) {
   useEffect(() => {
     setData(filterData(selected, search));
     setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subscriptions]);
+  }, [filterData, search, selected, subscriptions]);
 
   const onSearchHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,11 +2,14 @@ import { navFilter, paymentCycle } from 'config/data';
 import {
   addMonths,
   addQuarters,
+  addWeeks,
   addYears,
   format,
+  isAfter,
   isBefore,
   isSameDay,
   set,
+  subDays,
   subMonths,
   subQuarters,
   subYears,
@@ -19,6 +22,15 @@ export const filterDataBySearch = (data: Subscriptions[], searchText: string) =>
 };
 
 export const filterDataByNav = (data: Subscriptions[], filterBy: keyof typeof navFilter) => {
+  if (filterBy === navFilter.upcoming.key) {
+    const today = subDays(new Date(), 1);
+    const twoWeeks = addWeeks(today, 2);
+    return data.filter((sub) => {
+      const renewalDate = new Date(sub.renewal_date ?? '');
+      return isAfter(renewalDate, today) && isBefore(renewalDate, twoWeeks);
+    });
+  }
+
   return data
     .filter((sub) => filterBy === navFilter.all.key || sub.payment_cycle === filterBy)
     .sort((a, b) => {
