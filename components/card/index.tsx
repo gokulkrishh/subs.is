@@ -49,9 +49,11 @@ export default function Card(props: CardProps) {
     [filterData, search],
   );
 
+  const isUpcoming = selected === navFilter.upcoming.key;
   const activeData = data.filter(activeFilter);
   const inActiveData = data.filter(inActiveFilter);
-  const count = inActiveData.length ? `${activeData.length} + ${inActiveData.length}` : `${activeData.length}`;
+  const count =
+    !isUpcoming && inActiveData.length ? `${activeData.length} + ${inActiveData.length}` : `${activeData.length}`;
 
   return (
     <>
@@ -80,9 +82,10 @@ export default function Card(props: CardProps) {
                   {activeData.map((subscription) => (
                     <CardInfo user={user} key={subscription.id} subscription={subscription} />
                   ))}
-                  {inActiveData.map((subscription) => (
-                    <CardInfo user={user} key={subscription.id} subscription={subscription} />
-                  ))}
+                  {!isUpcoming &&
+                    inActiveData.map((subscription) => (
+                      <CardInfo user={user} key={subscription.id} subscription={subscription} />
+                    ))}
                 </>
               ) : (
                 <p className="text-center mt-10 text-muted-foreground">
