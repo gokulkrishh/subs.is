@@ -5,10 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { CalendarEndIcon, CalendarIcon } from 'components/icons';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
-import { navFilter, summaryFilter } from 'config/data';
-import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import { formatDate, isWithInSevenDays } from 'lib/date';
 import { getCurrencySymbol } from 'lib/numbers';
@@ -136,7 +133,7 @@ export default function CardInfo(props: InfoProps) {
             <span className="text-sm text-muted-foreground">
               {subscription.active ? subscription.payment_cycle : 'not active'}
             </span>
-            <span className="inline-flex mt-0.5 items-center">
+            <span className="inline-flex text-lg items-center">
               <span className="mr-0.5 font-sans">{getCurrencySymbol(user?.currency_code)}</span>
               <span className="font-semibold">{parseFloat(subscription.cost)}</span>
             </span>
