@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import { ThemeToggle } from 'components/theme-toggle';
 import { cn } from 'lib/utils';
 import { User } from 'types/data';
 
+import GithubStarButton from './github-star-button';
 import { Icon } from './icons';
 import FeedbackModal from './modal/feedback';
 import Profile from './profile';
@@ -20,8 +20,9 @@ export default async function Header({ user }: { user: User | null }) {
           <Icon /> <span>Subs Tracker</span>
         </h1>
       </Link>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <FeedbackModal user={user} />
+        <GithubStarButton />
         <Profile user={user} />
         <SignupButton user={user} />
       </div>

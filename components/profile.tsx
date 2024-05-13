@@ -34,7 +34,7 @@ export default function Profile({ user }: { user: User | null }) {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hidden max-sm:block">
             <Link className="flex items-center" target="_blank" href={socialUrls.github}>
               <GithubIcon className="h-4 w-4 mr-2" />
               Source
