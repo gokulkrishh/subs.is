@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext } from 'react';
 
 import { User } from 'types/data';
 
@@ -18,11 +18,7 @@ type UserProviderProps = {
 export const UserProvider = (props: UserProviderProps) => {
   const { user, children } = props;
 
-  const value = useMemo(() => {
-    return { user };
-  }, [user]);
-
-  return <UserContext.Provider value={value as UserContextType}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user } as UserContextType}>{children}</UserContext.Provider>;
 };
 
 export const useUser = () => {

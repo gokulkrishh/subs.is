@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+
   logging: {
     fetches: {
       fullUrl: true,
@@ -17,6 +17,7 @@ const nextConfig = {
   },
   experimental: {
     ppr: true,
+    reactCompiler: true,
   },
   async headers() {
     return [
