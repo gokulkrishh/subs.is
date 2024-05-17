@@ -1,8 +1,8 @@
 'use client';
 
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { Subscriptions } from 'types/data';
+import { Subscriptions, User } from 'types/data';
 
 type DataContextType = {
   subscriptions: Subscriptions[];
@@ -30,11 +30,11 @@ export const DataProvider = (props: DataProviderProps) => {
     [data],
   );
 
-  return (
-    <DataContext.Provider value={{ subscriptions, setSubscriptions: setData } as DataContextType}>
-      {children}
-    </DataContext.Provider>
-  );
+  const value = useMemo(() => {
+    return { subscriptions, setSubscriptions: setData };
+  }, [subscriptions, setData]);
+
+  return <DataContext.Provider value={value as DataContextType}>{children}</DataContext.Provider>;
 };
 
 export const useData = () => {
