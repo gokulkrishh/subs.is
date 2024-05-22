@@ -21,8 +21,8 @@ export default async function Header({ user }: { user: User | null }) {
         </h1>
       </Link>
       <div className="flex items-center gap-3">
-        <FeedbackModal user={user} />
         <GithubStarButton />
+        <FeedbackModal user={user} />
         <Profile user={user} />
         <SignupButton user={user} />
       </div>
