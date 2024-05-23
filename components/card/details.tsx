@@ -109,7 +109,8 @@ export default function CardDetails(props: CardDetailsProps) {
               <Button
                 variant={'outline'}
                 size={'icon'}
-                onClick={async () => {
+                onClick={async (event) => {
+                  event.preventDefault();
                   await share();
                 }}
                 className="h-9 w-9 rounded-full"

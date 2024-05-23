@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -51,9 +51,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const value = useMemo(() => {
-    return { user, supabase };
-  }, [user, supabase]);
+  const value = { user, supabase };
 
   return <AuthContext.Provider value={value as AuthContextType}>{children}</AuthContext.Provider>;
 };

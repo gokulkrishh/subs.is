@@ -16,7 +16,7 @@ export function SummaryNumber({ from, to, duration = 0.25 }: NumberProps) {
 
   useEffect(() => {
     const controls = animate(count, to, { duration });
-    return () => controls.stop();
+    return controls.stop;
   }, [duration, count, to]);
 
   return <motion.span className="font-black tabular-nums">{rounded}</motion.span>;
