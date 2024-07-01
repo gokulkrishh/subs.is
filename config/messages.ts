@@ -18,7 +18,7 @@ const messages = {
       return `Unable to ${!notify ? 'enable' : 'disable'} reminder`;
     },
     active: (active: boolean, name: string) => {
-      return `${name} subsciption is ${active ? 'in-active' : 'active'}`;
+      return `${name} subscription is ${active ? 'in-active' : 'active'}`;
     },
     makeActiveError: `Make the subscription active to enable reminder`,
     activeError: (active: boolean) => {
