@@ -48,9 +48,7 @@ const demoData = [
     notify: false,
     created_at: '2024-03-30T09:46:26.325229+00:00',
     updated_at: '2024-03-31T03:53:45.434143+00:00',
-    renewal_date: new Date(
-      `${new Date().getFullYear()}-${((new Date().getMonth() + 1) % 12) + 1}-${new Date().getDate() - 1}`,
-    ).toISOString(),
+    renewal_date: new Date().toISOString(),
   },
   {
     id: '9c45-982bddf46e5e',
