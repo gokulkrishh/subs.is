@@ -24,7 +24,7 @@ export default function InfoTooltip({ className }: { className?: string }) {
           <InfoIcon className="w-3 h-3 text-muted-foreground" />
         </TooltipTrigger>
         <TooltipContent side="top" className="text-xs font-normal">
-          Active subscriptions only
+          Price shown for active subscriptions.
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

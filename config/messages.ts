@@ -1,3 +1,5 @@
+import { paymentCycle } from './data';
+
 const messages = {
   account: {
     delete: {
@@ -21,6 +23,7 @@ const messages = {
       return `${name} subscription is ${active ? 'in-active' : 'active'}`;
     },
     makeActiveError: `Make the subscription active to enable reminder`,
+    makeLifetimeError: `Cannot enable reminder for ${paymentCycle.lifetime.label} subscription.`,
     activeError: (active: boolean) => {
       return `Unable to mark it ${active ? 'in-active' : 'active'}`;
     },

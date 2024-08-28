@@ -61,6 +61,9 @@ export const calculateRenewalDate = (start_date: string, payment_cycle: string):
         renewalDate = addQuarters(renewalDate, 1);
       }
       break;
+    case paymentCycle.lifetime.key:
+      renewalDate = startDate;
+      break;
     default:
       throw new Error('Unsupported payment cycle');
   }

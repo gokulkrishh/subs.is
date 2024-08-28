@@ -23,7 +23,7 @@ const Button = ({ loading, onClick }: ButtonProps) => {
   return (
     <button
       className={cn(
-        `items-center gap-2 mt-4 max-w-sm justify-center text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 hover:bg-primary/90 active:scale-[0.98] rounded-xl bg-primary px-6 py-4 text-secondary font-medium flex space-x-2 h-[42px] w-full`,
+        `items-center gap-2 mt-4 max-w-sm justify-center text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 hover:bg-primary/90 active:scale-[0.98] rounded-md bg-primary px-6 py-4 text-secondary font-medium flex space-x-2 h-[42px] w-full`,
         {
           'bg-primary/80 cursor-default': loading,
         },
@@ -63,7 +63,7 @@ export default function SignupModal({ open, onHide, user }: SignupModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onHide}>
-      <DialogContent className="max-w-sm w-[calc(100%-20px)] bg-background rounded-xl">
+      <DialogContent className="max-w-sm w-[calc(100%-20px)] bg-background rounded-md">
         <DialogHeader>
           <DialogTitle className="tracking-normal items-center flex-col justify-center flex">
             <div className="rounded-full bg-pink-100 dark:bg-pink-700/30 mb-2 w-14 h-14 flex items-center justify-center">

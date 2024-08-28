@@ -102,7 +102,7 @@ export default function CardDetails(props: CardDetailsProps) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerContent className="px-4 min-h-[500px] pb-6">
+      <DrawerContent className="px-4 min-h-[500px] pb-6 max-w-md">
         <div className="flex relative flex-col mt-2 w-full md:max-w-sm mx-auto items-center gap-3">
           <div className="flex w-full gap-2 justify-end absolute -top-0.5">
             {typeof window !== 'undefined' && navigator && !!navigator?.share ? (
@@ -125,8 +125,10 @@ export default function CardDetails(props: CardDetailsProps) {
                     variant={'outline'}
                     size={'icon'}
                     onClick={async () => {
-                      if (subscription.active) {
+                      if (subscription.active && subscription.payment_cycle !== paymentCycle.lifetime.key) {
                         await notifyMe();
+                      } else if (subscription.active && subscription.payment_cycle === paymentCycle.lifetime.key) {
+                        toast.warning(messages.subscriptions.makeLifetimeError);
                       } else {
                         toast.warning(messages.subscriptions.makeActiveError);
                       }

@@ -61,7 +61,7 @@ export default function FeedbackModal({ user }: { user: User | null }) {
           <FeedbackIcon className="h-4 w-4 mr-1.5" /> Feedback
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-sm mt-1 max-sm:mr-1 p-0 bg-background rounded-lg">
+      <PopoverContent className="w-sm mt-1 max-sm:mr-1 p-0 bg-background rounded-md">
         <form
           className="mt-2 w-full block px-2"
           onSubmit={async (event) => {

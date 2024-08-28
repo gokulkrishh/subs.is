@@ -39,26 +39,19 @@ export default function CardInfo(props: InfoProps) {
 
   return (
     <>
-      <motion.button
+      <button
         suppressHydrationWarning
-        layout
         key={subscription.id}
-        variants={itemVariants}
-        initial={['hidden', 'visible']}
-        animate={['hidden', 'visible']}
-        transition={{ type: 'easeInOut', duration: 0.2 }}
         onClick={() => {
           setOpen(!open);
         }}
-        whileTap={{ scale: 1.02 }}
-        whileHover={{ scale: 1.01 }}
         className={cn(
           `flex select-none shadow-sm items-center relative w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between p-3 px-4 rounded-xl border border-input`,
           {
             '!opacity-60': !subscription.active,
           },
         )}
-        title={subscription.active ? 'Click to edit' : 'Subscription is inactive'}
+        title={subscription.active ? 'Click to edit' : 'Subscription is in-active'}
       >
         <div className="flex gap-3">
           {subscription.url?.length ? (
@@ -107,7 +100,7 @@ export default function CardInfo(props: InfoProps) {
           )}
 
           <div className="flex flex-col items-start justify-center">
-            <h3 className="font-medium truncate max-w-[200px] sm:max-w-[300px]">{subscription.name}</h3>
+            <h3 className="font-medium truncate max-w-[200px] sm:max-w-[300px] tracking-wide">{subscription.name}</h3>
             {subscription.active ? (
               <span
                 title={`${isDue ? 'Due on ' : "Renew's at "}${formatDate(subscription?.renewal_date ?? '')}`}
@@ -139,7 +132,7 @@ export default function CardInfo(props: InfoProps) {
             </span>
           </p>
         </div>
-      </motion.button>
+      </button>
       {open ? <CardDetails open={open} setOpen={setOpen} subscription={subscription} /> : null}
     </>
   );

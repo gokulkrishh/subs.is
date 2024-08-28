@@ -43,7 +43,7 @@ export default function NavLink(props: NavLinkProps) {
             prefetch
             href={href}
             className={cn(
-              `p-2.5 inline-block transition-all relative max-md:p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl group text-center text-primary/50 hover:text-primary`,
+              `p-2.5 inline-block transition-all relative max-md:p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md group text-center text-primary/50 hover:text-primary`,
               className,
             )}
             {...otherProps}

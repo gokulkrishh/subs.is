@@ -33,4 +33,8 @@ export const paymentCycle = {
     key: 'yearly',
     label: 'year',
   },
+  lifetime: {
+    key: 'lifetime',
+    label: 'lifetime',
+  },
 } as const;

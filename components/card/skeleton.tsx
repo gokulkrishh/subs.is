@@ -3,7 +3,7 @@ import { Skeleton } from 'components/ui/skeleton';
 export default function CardSkeleton({ className = '' }: { className?: string }) {
   return (
     <div
-      className={`flex h-[74px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between  p-3 px-4 rounded-xl border border-input ${className}`}
+      className={`flex h-[74px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring justify-between  p-3 px-4 rounded-md border border-input ${className}`}
     >
       <div className="flex gap-3 items-center">
         <Skeleton className="rounded-full border bg-accent border-input w-[44px] h-[44px]" />
