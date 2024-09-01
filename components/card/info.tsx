@@ -12,6 +12,7 @@ import { getCurrencySymbol } from 'lib/numbers';
 import { cn, contrastColor, getFirstLetters } from 'lib/utils';
 import { Subscriptions, User } from 'types/data';
 
+import CardActions from './actions';
 import CardDetails from './details';
 
 export const itemVariants = {

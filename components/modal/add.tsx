@@ -12,7 +12,7 @@ import { Drawer, DrawerContent } from 'components/ui/drawer';
 import { Input } from 'components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'components/ui/tooltip';
 import { paymentCycle } from 'config/data';
-import { calculatePrevRenewalDate, calculateRenewalDate } from 'lib/data';
+import { calculateRenewalDate } from 'lib/data';
 import { getCurrencySymbol } from 'lib/numbers';
 import { contrastColor, getFirstLetters, isValidUrl, randomColor } from 'lib/utils';
 import { useHotkeys } from 'react-hotkeys-hook';

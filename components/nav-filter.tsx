@@ -17,7 +17,7 @@ export default function NavFilter({ onChange, loading, selected, count, filterBy
   const { resolvedTheme: theme } = useTheme();
 
   return (
-    <div className="flex justify-between sm:items-center flex-col gap-4 sm:flex-row tabular-nums">
+    <div className="flex justify-between sm:items-center flex-col gap-2 sm:flex-row tabular-nums">
       <h2 className="text-lg font-semibold">
         Subscriptions{' '}
         {!loading ? (
@@ -37,7 +37,7 @@ export default function NavFilter({ onChange, loading, selected, count, filterBy
               disabled={isDisabled}
               key={key}
               className={cn(
-                `py-2 sm:py-1.5 m-0.5 font-medium disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-2.5 capitalize min-w-10 text-[13px] tracking-wide relative rounded-full`,
+                `py-2 sm:py-1.5 m-0.5 font-medium disabled:opacity-45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring px-2.5 capitalize min-w-12 text-[13px] tracking-wide relative rounded-full`,
               )}
             >
               {label}

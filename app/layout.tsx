@@ -91,7 +91,7 @@ export default async function RootLayout({
               <BottomBar user={userData} />
             </UserProvider>
           </AuthProvider>
-          <Toaster />
+          <Toaster position="top-center" />
         </ThemeProvider>
 
         {/* <!-- Google tag (gtag.js) --> */}
