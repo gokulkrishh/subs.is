@@ -6,7 +6,7 @@ import { updateSubscription } from 'app/actions/subscriptions';
 import { useUser } from 'components/context/user';
 import Loader from 'components/loader';
 import { Button } from 'components/ui/button';
-import { Drawer, DrawerContent } from 'components/ui/drawer';
+import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from 'components/ui/drawer';
 import { Input } from 'components/ui/input';
 import { paymentCycle } from 'config/data';
 import messages from 'config/messages';
@@ -46,6 +46,8 @@ export default function CardDetails(props: CardDetailsProps) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTitle className="hidden" />
+      <DrawerDescription className="hidden" />
       <DrawerContent className="px-4 min-h-[500px] pb-6">
         <div className="flex relative flex-col mt-2 w-full md:max-w-sm mx-auto items-center gap-3">
           <CardActions subscription={subscription} setOpen={setOpen} />

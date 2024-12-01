@@ -65,7 +65,7 @@ const demoData = [
     notify: false,
     created_at: '2024-03-31T02:30:07.060881+00:00',
     updated_at: '2024-03-31T03:54:25.013592+00:00',
-    renewal_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-14`).toISOString(),
+    renewal_date: new Date(`${new Date().getFullYear()}-10-14`).toISOString(),
   },
   {
     id: '9a3a-b928582fa091',
@@ -73,9 +73,7 @@ const demoData = [
     name: 'Apple iCloud',
     cost: '219',
     billing_date: '2023-05-19',
-    billing_end_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`)
-      .toISOString()
-      .split('T')[0],
+    billing_end_date: new Date(`${new Date().getFullYear()}-11-${new Date().getDate()}`).toISOString().split('T')[0],
     url: 'https://icloud.com',
     payment_cycle: 'monthly',
     active: false,
@@ -84,7 +82,7 @@ const demoData = [
     notify: false,
     created_at: '2024-03-30T09:47:46.199135+00:00',
     updated_at: '2024-03-31T03:54:29.257785+00:00',
-    renewal_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-19`).toISOString(),
+    renewal_date: new Date(`${new Date().getFullYear()}-10-19`).toISOString(),
   },
   {
     id: '92ad-1f2e77c7fc2c',
@@ -101,7 +99,7 @@ const demoData = [
     notify: true,
     created_at: '2024-03-30T09:48:14.455039+00:00',
     updated_at: '2024-03-31T03:54:34.096089+00:00',
-    renewal_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-22`).toISOString(),
+    renewal_date: new Date(`${new Date().getFullYear()}-10-22`).toISOString(),
   },
   {
     id: 'b037-a3acb49becf9',
@@ -118,7 +116,7 @@ const demoData = [
     notify: false,
     created_at: '2024-03-30T09:48:48.033617+00:00',
     updated_at: '2024-03-31T03:53:57.407636+00:00',
-    renewal_date: new Date(`${new Date().getFullYear()}-${new Date().getMonth() + 2}-15`).toISOString(),
+    renewal_date: new Date(`${new Date().getFullYear()}-10-15`).toISOString(),
   },
   {
     id: '963b-d60ab15f9c2b',
