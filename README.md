@@ -1,59 +1,36 @@
-<a href="https://subs.is">
-<p align="center"><img alt="Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle" width="100" height="100" src="./public/images/icons/logo.svg"></p>
-  <h1 align="center">Subs Tracker</h1>
-</a>
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-<p align="center">
-  Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle.
-</p>
+## Getting Started
 
-<p align="center">
-  <a href="https://github.com/gokulkrishh/subs.is/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/gokulkrishh/subs.is?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
-  </a>
-</p>
+First, run the development server:
 
-<p align="center">
-  <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
-  <a href="#implementation"><strong>Implementation</strong></a> ·
-  <a href="#contributions"><strong>Contributions</strong></a>
-</p>
-<br/>
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Introduction
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Tech Stack
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- [Next.js](https://nextjs.org/) – framework
-- [Components](https://ui.shadcn.com/) – ui-components
-- [Tailwind](https://tailwindcss.com/) – CSS
-- [Supabase](https://supabase.com/) – database
-- [Vercel](https://vercel.com/) – hosting
+## Learn More
 
-### Implementation
+To learn more about Next.js, take a look at the following resources:
 
-- Subs Tracker built using [NextJs](https://nextjs.org) from scratch.
-- [Supabase](https://supabase.com/) is an open-source Firebase alternative, the data is stored in the Postgres database and uses google OAuth for authentication provided by supabase.
-- [Resend](https://resend.com) to send email reminders via React. Currently on free tier, might introduce a pro plan once free limit is over.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Contributions
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Here's how you can contribute:
+## Deploy on Vercel
 
-- [Open an issue](https://github.com/gokulkrishh/subs.is/issues) if you believe you've encountered a bug.
-- Make a [pull request](https://github.com/gokulkrishh/subs.is/pull) to add new features/make quality-of-life improvements/fix bugs.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-<a href="https://github.com/gokulkrishh/subs.is/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=gokulkrishh/subs.is" alt="contributors" />
-</a>
-
-### Author
-
-- Gokulakrishnan Kalaikovan ([@gokul_i](https://twitter.com/gokul_i))
-
-### License
-
-Subs Tracker is an open source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it here](https://github.com/gokulkrishh/subs.is/blob/main/LICENSE).
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
