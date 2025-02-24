@@ -75,7 +75,7 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
           {selected ? <>{selected.code}</> : <>Select currency</>}
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="border-t">
         <DialogTitle className="sr-only">Select currency</DialogTitle>
         <div className="mt-4 border-t">
           <CountryList selected={selected.code} setOpen={setOpen} setSelected={handleSelect} />
