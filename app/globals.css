@@ -148,6 +148,6 @@
 }
 
 ::selection {
-  background-color: var(--color-blue-800);
+  background-color: var(--color-blue-600);
   color: #fff;
 }
