@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import { motion } from 'motion/react'
@@ -26,7 +28,7 @@ export default function NavFilter() {
         {menu.map(({ name }) => (
           <Button
             className={cn(
-              'relative min-w-14 shrink-0 cursor-pointer rounded-full text-sm capitalize transition-all select-none',
+              'relative h-10! min-w-14 shrink-0 cursor-pointer rounded-full text-xs font-semibold uppercase transition-all select-none md:h-9!',
               {
                 'font-bold': selected === name,
               },
@@ -55,7 +57,7 @@ export default function NavFilter() {
           </Button>
         ))}
       </div>
-      <div className="pointer-events-none absolute top-0 right-0 h-full w-14 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute top-0 right-0 h-full w-14 bg-gradient-to-l from-white to-transparent dark:from-black" />
     </div>
   )
 }

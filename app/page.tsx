@@ -1,5 +1,3 @@
-'use client'
-
 import AnimateNumber from '@/components/animate-number'
 import { SearchIcon } from '@/components/icons'
 import NavFilter from '@/components/nav'
@@ -8,8 +6,8 @@ import { Input } from '@/components/ui/input'
 export default function Home() {
   return (
     <main vaul-drawer-wrapper="" className="my-8 flex w-full flex-col gap-8">
-      <div className="flex w-full flex-col gap-2 px-4">
-        <h2 className="text-xl font-black tracking-tight">Total subscriptions cost</h2>
+      <div className="flex w-full flex-col gap-3 px-4">
+        <h2 className="text-xl font-bold tracking-tight">Total subscriptions cost</h2>
         <AnimateNumber unit="₹" value={5100.2} />
       </div>
 
@@ -20,7 +18,7 @@ export default function Home() {
         </div>
 
         <div className="flex w-full flex-col gap-2">
-          <h3 className="px-4 text-2xl font-black">Subscriptions</h3>
+          <h3 className="px-4 text-2xl font-bold">Subscriptions</h3>
           <NavFilter />
         </div>
       </div>

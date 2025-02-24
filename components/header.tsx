@@ -10,11 +10,8 @@ export default async function Header() {
           <LogoSvg className="size-8" /> <span>Subs Tracker</span>
         </h1>
       </Link>
-      <Link
-        className="bg-background inline-flex size-10 items-center justify-center rounded-full border p-1.5"
-        href="/profile"
-      >
-        <UserIcon className="text-accent-foreground dark:text-foreground size-5 shrink-0" />
+      <Link className="inline-flex size-12 items-center justify-center rounded-full p-1.5" href="/profile">
+        <UserIcon className="text-foreground size-5 shrink-0" />
       </Link>
     </header>
   )

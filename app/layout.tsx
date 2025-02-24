@@ -1,11 +1,13 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 
 import NextTopLoader from 'nextjs-toploader'
 
 import { AuthProvider } from '@/components/context/auth'
+import { ThemeProvider } from '@/components/context/theme'
 import Header from '@/components/header'
+import { Toaster } from '@/components/ui/sonner'
 
 import './globals.css'
 
@@ -55,6 +57,15 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '',
+  userScalable: false,
+  viewportFit: 'cover',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,12 +75,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}antialiased`}>
         <NextTopLoader height={2} shadow={false} color="#db2777" showSpinner={false} />
-        <AuthProvider>
-          <div className="m-auto h-dvh w-full max-w-lg">
-            <Header />
-            {children}
-          </div>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AuthProvider>
+            <div className="m-auto h-dvh w-full max-w-lg">
+              <Header />
+              {children}
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
+
+        <Toaster />
 
         {/* <!-- Google tag (gtag.js) --> */}
         <Script
