@@ -13,6 +13,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<null>(null)
   const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    setUser(null)
+    setLoading(false)
+  }, [])
+
   return <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>
 }
 
