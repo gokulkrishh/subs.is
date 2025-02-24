@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { motion } from 'motion/react'
+import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 
@@ -20,6 +21,7 @@ const menu: MenuItem[] = [
 ]
 
 export default function NavFilter() {
+  const { resolvedTheme: theme } = useTheme()
   const [selected, setSelected] = useState<MenuItem['name']>(menu[0].name)
 
   return (
@@ -28,9 +30,9 @@ export default function NavFilter() {
         {menu.map(({ name }) => (
           <Button
             className={cn(
-              'relative h-10! min-w-14 shrink-0 cursor-pointer rounded-full text-xs font-semibold uppercase transition-all select-none md:h-9!',
+              'relative h-10! min-w-14 shrink-0 cursor-pointer rounded-full text-sm capitalize transition-all select-none md:h-9!',
               {
-                'font-bold': selected === name,
+                'font-medium': selected === name,
               },
             )}
             variant="secondary"
@@ -44,10 +46,10 @@ export default function NavFilter() {
                 <motion.div
                   layoutId="selected"
                   initial={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
                   }}
                   animate={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
                   }}
                   transition={{ type: 'spring', duration: 0.3 }}
                   className="border-input/50 absolute top-0 left-0 h-full w-full rounded-full border"
