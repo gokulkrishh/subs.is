@@ -37,7 +37,7 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
       setLoading(true)
       setSelected(data[value])
       await onSelect(value)
-      toast.success('Currency updated successfully')
+      toast('Currency updated successfully')
     } catch (error) {
       toast.error(error?.toString())
     } finally {
