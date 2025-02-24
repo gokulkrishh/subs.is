@@ -7,19 +7,19 @@ import { Input } from '@/components/ui/input'
 
 export default function Home() {
   return (
-    <main className="my-8 flex flex-col gap-8">
-      <div className="flex flex-col gap-2 px-4">
+    <main vaul-drawer-wrapper="" className="my-8 flex w-full flex-col gap-8">
+      <div className="flex w-full flex-col gap-2 px-4">
         <h2 className="text-xl font-black tracking-tight">Total subscriptions cost</h2>
         <AnimateNumber unit="₹" value={5100.2} />
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div className="flex w-full flex-col gap-8">
         <div className="relative px-4">
-          <SearchIcon className="absolute top-3.5 left-7.5 size-4 text-gray-400" />
+          <SearchIcon className="absolute top-4 left-7.5 size-4 text-neutral-400" />
           <Input className="pl-10" placeholder="Search subscription" />
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex w-full flex-col gap-2">
           <h3 className="px-4 text-2xl font-black">Subscriptions</h3>
           <NavFilter />
         </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Lexend } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 
 import NextTopLoader from 'nextjs-toploader'
@@ -9,7 +9,8 @@ import Header from '@/components/header'
 
 import './globals.css'
 
-const lexend = Lexend({ variable: '--font-lexend', subsets: ['latin'] })
+const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
+const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
 const title = 'Subs Tracker'
 const description = 'Track and organise all your subscriptions from one app, without any hassle.'
@@ -61,11 +62,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${lexend.className} m-auto h-dvh w-full max-w-lg antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}antialiased`}>
         <NextTopLoader height={2} shadow={false} color="#db2777" showSpinner={false} />
         <AuthProvider>
-          <Header />
-          {children}
+          <div className="m-auto h-dvh w-full max-w-lg">
+            <Header />
+            {children}
+          </div>
         </AuthProvider>
 
         {/* <!-- Google tag (gtag.js) --> */}
