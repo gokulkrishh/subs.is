@@ -13,8 +13,8 @@ export default function Home() {
 
       <div className="flex w-full flex-col gap-8">
         <div className="relative px-4">
-          <SearchIcon className="absolute top-4 left-7.5 size-4 text-neutral-400" />
-          <Input className="pl-10" placeholder="Search subscription" />
+          <SearchIcon className="absolute top-5 left-8 size-4 text-neutral-400" />
+          <Input className="h-14 pl-12" placeholder="Search subscription" />
         </div>
 
         <div className="flex w-full flex-col gap-2">

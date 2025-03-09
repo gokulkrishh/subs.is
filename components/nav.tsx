@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 
 import { motion } from 'motion/react'
 import { useTheme } from 'next-themes'
+import { parseAsString, useQueryState } from 'nuqs'
 
 import { Button } from '@/components/ui/button'
 
@@ -12,17 +13,24 @@ import { cn } from '@/lib/utils'
 type MenuItem = { name: string }
 
 const menu: MenuItem[] = [
+  { name: 'all' },
   { name: 'upcoming' },
   { name: 'weekly' },
   { name: 'monthly' },
   { name: 'yearly' },
   { name: 'quaterly' },
-  { name: 'all' },
 ]
 
 export default function NavFilter() {
   const { resolvedTheme: theme } = useTheme()
-  const [selected, setSelected] = useState<MenuItem['name']>(menu[0].name)
+  const [filter, setFilter] = useQueryState('filter', parseAsString.withDefault(menu[1].name))
+
+  useEffect(() => {
+    const element = document.querySelector(`[data-id='${filter}']`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    }
+  }, [filter])
 
   return (
     <div className="relative">
@@ -30,26 +38,24 @@ export default function NavFilter() {
         {menu.map(({ name }) => (
           <Button
             className={cn(
-              'relative h-10! min-w-14 shrink-0 cursor-pointer rounded-full text-sm capitalize transition-all select-none md:h-9!',
-              {
-                'font-medium': selected === name,
-              },
+              'relative min-w-14 shrink-0 cursor-pointer rounded-full text-sm capitalize transition-all duration-300 select-none active:scale-95',
+              { 'font-semibold': filter === name },
             )}
             variant="secondary"
             key={name}
-            onClick={() => setSelected(name)}
+            onClick={() => setFilter(name)}
             asChild
           >
-            <motion.button>
+            <motion.button data-id={name}>
               {name}
-              {selected === name && (
+              {filter === name && (
                 <motion.div
                   layoutId="selected"
                   initial={{
-                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
+                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.1)',
                   }}
                   animate={{
-                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
+                    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.1)',
                   }}
                   transition={{ type: 'spring', duration: 0.3 }}
                   className="border-input/50 absolute top-0 left-0 h-full w-full rounded-full border"
@@ -59,7 +65,6 @@ export default function NavFilter() {
           </Button>
         ))}
       </div>
-      <div className="pointer-events-none absolute top-0 right-0 h-full w-14 bg-gradient-to-l from-white to-transparent dark:from-black" />
     </div>
   )
 }

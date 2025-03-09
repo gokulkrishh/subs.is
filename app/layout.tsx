@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 
 import NextTopLoader from 'nextjs-toploader'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import { AuthProvider } from '@/components/context/auth'
 import { ThemeProvider } from '@/components/context/theme'
@@ -76,12 +77,14 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}antialiased`}>
         <NextTopLoader height={2} shadow={false} color="#db2777" showSpinner={false} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AuthProvider>
-            <div className="m-auto h-dvh w-full max-w-lg">
-              <Header />
-              {children}
-            </div>
-          </AuthProvider>
+          <NuqsAdapter>
+            <AuthProvider>
+              <div className="m-auto h-dvh w-full max-w-lg">
+                <Header />
+                {children}
+              </div>
+            </AuthProvider>
+          </NuqsAdapter>
         </ThemeProvider>
 
         <Toaster />
