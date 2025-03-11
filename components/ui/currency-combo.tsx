@@ -8,8 +8,7 @@ import { toast } from 'sonner'
 
 import { Currency, User } from '@/app/types'
 
-import { CheckIcon, DownArrowIcon } from '@/components/icons'
-import Loader from '@/components/loader'
+import { CheckIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
@@ -28,20 +27,16 @@ type CurrencyComboBoxProps = {
 
 export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
   const [open, setOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState<Currency>(data[user?.currency_code ?? 'INR'])
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const handleSelect = async (value: Currency['code']) => {
     try {
-      setLoading(true)
       setSelected(data[value])
       await onSelect(value)
       toast('Currency updated successfully')
     } catch (error) {
       toast.error(error?.toString())
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -53,7 +48,6 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
             variant="outline"
             className="w-fit justify-start gap-2 overflow-hidden px-3 text-sm font-normal text-ellipsis"
           >
-            {loading ? <Loader className="h-4 w-4" /> : <DownArrowIcon className="h-4 w-4" />}
             {selected ? <>{selected.code}</> : <>Select currency</>}
           </Button>
         </PopoverTrigger>
@@ -69,9 +63,8 @@ export function CurrencyComboBox({ user, onSelect }: CurrencyComboBoxProps) {
       <DrawerTrigger asChild>
         <Button
           variant="outline"
-          className="w-fit justify-start gap-2 overflow-hidden px-3 text-sm font-normal text-ellipsis"
+          className="w-fit justify-start gap-2 overflow-hidden border-transparent px-3 text-sm font-normal text-ellipsis shadow-none"
         >
-          {loading ? <Loader className="h-4 w-4" /> : <DownArrowIcon className="h-4 w-4" />}
           {selected ? <>{selected.code}</> : <>Select currency</>}
         </Button>
       </DrawerTrigger>

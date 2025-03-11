@@ -5,16 +5,15 @@ import { Input } from '@/components/ui/input'
 
 export default function Home() {
   return (
-    <main vaul-drawer-wrapper="" className="my-8 flex w-full flex-col gap-8">
-      <div className="flex w-full flex-col gap-3 px-4">
-        <h2 className="text-xl font-bold tracking-tight">Total subscriptions cost</h2>
-        <AnimateNumber unit="₹" value={5100.2} />
+    <main vaul-drawer-wrapper="" className="my-2 flex w-full flex-col gap-4">
+      <div className="flex w-full flex-col px-4">
+        <AnimateNumber value={5100} />
       </div>
 
-      <div className="flex w-full flex-col gap-8">
+      <div className="flex w-full flex-col gap-6">
         <div className="relative px-4">
-          <SearchIcon className="absolute top-5 left-8 size-4 text-neutral-400" />
-          <Input className="h-14 pl-12" placeholder="Search subscription" />
+          <SearchIcon className="absolute top-4 left-8 size-4 text-neutral-400" />
+          <Input className="h-12 pl-11" placeholder="Search subscription" />
         </div>
 
         <div className="flex w-full flex-col gap-2">
