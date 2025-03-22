@@ -1,59 +1,50 @@
-<a href="https://subs.is">
-<p align="center"><img alt="Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle" width="100" height="100" src="./public/images/icons/logo.svg"></p>
-  <h1 align="center">Subs Tracker</h1>
-</a>
+# Welcome to your Expo app 👋
 
-<p align="center">
-  Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle.
-</p>
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-<p align="center">
-  <a href="https://github.com/gokulkrishh/subs.is/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/gokulkrishh/subs.is?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
-  </a>
-</p>
+## Get started
 
-<p align="center">
-  <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
-  <a href="#implementation"><strong>Implementation</strong></a> ·
-  <a href="#contributions"><strong>Contributions</strong></a>
-</p>
-<br/>
+1. Install dependencies
 
-## Introduction
+   ```bash
+   npm install
+   ```
 
-Subs Tracker is an open-source application to track and organise all your subscriptions from one app, without any hassle.
+2. Start the app
 
-### Tech Stack
+   ```bash
+    npx expo start
+   ```
 
-- [Next.js](https://nextjs.org/) – framework
-- [Components](https://ui.shadcn.com/) – ui-components
-- [Tailwind](https://tailwindcss.com/) – CSS
-- [Supabase](https://supabase.com/) – database
-- [Vercel](https://vercel.com/) – hosting
+In the output, you'll find options to open the app in a
 
-### Implementation
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-- Subs Tracker built using [NextJs](https://nextjs.org) from scratch.
-- [Supabase](https://supabase.com/) is an open-source Firebase alternative, the data is stored in the Postgres database and uses google OAuth for authentication provided by supabase.
-- [Resend](https://resend.com) to send email reminders via React. Currently on free tier, might introduce a pro plan once free limit is over.
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-### Contributions
+## Get a fresh project
 
-Here's how you can contribute:
+When you're ready, run:
 
-- [Open an issue](https://github.com/gokulkrishh/subs.is/issues) if you believe you've encountered a bug.
-- Make a [pull request](https://github.com/gokulkrishh/subs.is/pull) to add new features/make quality-of-life improvements/fix bugs.
+```bash
+npm run reset-project
+```
 
-<a href="https://github.com/gokulkrishh/subs.is/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=gokulkrishh/subs.is" alt="contributors" />
-</a>
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-### Author
+## Learn more
 
-- Gokulakrishnan Kalaikovan ([@gokul_i](https://twitter.com/gokul_i))
+To learn more about developing your project with Expo, look at the following resources:
 
-### License
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-Subs Tracker is an open source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it here](https://github.com/gokulkrishh/subs.is/blob/main/LICENSE).
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
